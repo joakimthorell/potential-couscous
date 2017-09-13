@@ -20,6 +20,6 @@ while(1>0):
         time.sleep(2)
 	drive(0)
         steer(100)
-        sleep(1)
+        time.sleep(1)
         steer(-100)
         time.sleep(2)
