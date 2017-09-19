@@ -1,3 +1,19 @@
+/**
+ *  Main activity for couscousDRIVE application.
+ *  As of version 1.0 the application is not getting
+ *  any data back from the socket. This app only sends data for now.
+ *
+ *  Buttons:
+ *  There are for now 2 buttons.
+ *  <b>LockButton</b> is making the joystick "stiff" and wont move back to origo
+ *  when you release you finger from display.
+ *  <b>ACCButton</b> is coming later.
+ *
+ *  @IMPORTANT:
+ *  The data coming from app is xxx:yyy where x is steering and y speed.
+ *
+ *  @Version: 1.0
+ */
 package potential_couscous.couscousdrive;
 
 import android.content.Intent;
@@ -8,6 +24,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -22,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
     private static Socket mSocket;
     private static PrintWriter out;
 
+    private boolean isConnected;
     private JoystickView mJoystick;
     private Toolbar mToolbar;
-    private boolean isConnected;
+    private Button mLockButton;
+    private Button mAcc_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        // Checks if socket is setup.
         isConnected = mSocket != null && mSocket.isConnected();
 
         // Setting up The joystick
@@ -53,6 +75,21 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolbar);
 
+        mLockButton = (Button) findViewById(R.id.lock_button);
+        mAcc_button = (Button) findViewById(R.id.acc_button);
+
+        mLockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mJoystick.isAutoReCenterButton()) {
+                    mJoystick.setAutoReCenterButton(true);
+                    Toast.makeText(MainActivity.this, "Steering is manual", Toast.LENGTH_SHORT).show();
+                } else {
+                    mJoystick.setAutoReCenterButton(false);
+                    Toast.makeText(MainActivity.this, "Steering is locked", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 
@@ -68,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_connect:
                 if (isConnected) {
-                    // Disconnect instead and show some msg about it
+                    Toast.makeText(this, "You are connected", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent i = new Intent(this, ConnectActivity.class);
                     startActivity(i);
@@ -78,50 +115,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private int calcSteering(int joystickAngle) {
-        // if its less then 180 we dont need to do anything
-        if (joystickAngle < 180) {
-            return joystickAngle;
-        }
-        if (joystickAngle >= 270) {
-            return 360 - joystickAngle;
-        }
-        if (joystickAngle >= 180) {
-            return joystickAngle - 90;
-        }
-
-        return 90;
-    }
-
     private void driveCar(int angle, int str) {
-        int nAngle = calcSteering(angle);
-        str = angle > 180 ? str * -1 : str;
-        String direction;
-        String speed;
-        if (nAngle > 90) {
-            direction = "Left";
-        } else {
-            direction = "Right";
-        }
+        int mopedSteeringValue = AngleCalculator.calcAngle(angle);
 
-        speed = String.valueOf(str);
-        String[] arr = new String[2];
-        arr[0] = direction;
-        arr[1] = speed;
-
-        sendData(arr);
-        // Now we need to send this data to the car.
-
+        sendDrivingToMoped(mopedSteeringValue, str);
     }
 
     /**
-     * This method can be much more pretty.
-     * Fornow it takes a String array of length 2 and sends index 0 and 1
-     * @param data String array with atleast length 2.
+     * Sending data to socket as String. This method converts the values
+     * to readable Strings as the MOPED knows how to decrypt.
+     *
+     * On MOPED read string as xxx:yyy where xxx is steering and yyy speed.
+     * Always divided by : (colon)
+     *
+     * @param steeringValue int value that MOPED can accept. Between -100 to 100
+     * @param speedValue int value that MOPED can accept. Between -100 to 100
      */
-    private void sendData(String[] data) {
+    public void sendDrivingToMoped(int steeringValue, int speedValue) {
+        // making sure both ints not outside of definition value
+        steeringValue = steeringValue < -100 || steeringValue > 100 ? 0 : steeringValue;
+        speedValue = speedValue < -100 || speedValue > 100 ? 0 : speedValue;
+
+
+
+        String data = steeringValue + ":" + speedValue;
+
+        sendData(data);
+
+    }
+
+    private void sendData(String data) {
         if (out != null) {
-            out.println(data[0] + ":" + data[1]);
+            out.println(data);
         }
     }
 
