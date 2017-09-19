@@ -5,6 +5,11 @@
 import socket
 import sys
 from thread import *
+import nav as n
+from nav import *
+from nav1 import whole4, pause, cont
+from driving import stop, drive, steer
+init()
 
 HOST = ''  # Symbolic name meaning all available interfaces
 PORT = 8888  # Arbitrary non-privileged port
@@ -37,6 +42,19 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
         # Receiving from client
         data = conn.recv(1024) # equals java read-func, nums specify maximum byte-size of what could be recv.
         print 'Server received ' + data
+
+        # first part of string(before :) is steering data
+        # second part (after :) is speed data
+        # both is the values between -100 to 100.
+        # If this need changing its need to be changed in MainActivity on mobile app.
+
+        data = data.split(':')
+        steering = data[0]
+        speed = data[1]
+
+        steer(steering)
+        drive(speed)
+
         if not data:
             break
 
