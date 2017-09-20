@@ -6,7 +6,7 @@ goalVelocity = 30
 currentSpeed = goalVelocity
 k1 = 0.5
 k2 = 0.1
-k3 = 0.3
+k3 = 1
 
 timeInterval = 0.01
 
@@ -22,7 +22,7 @@ def integral (_lastIntegralSum, _curDist):
 
 def deriv (_currentDist, _lastErr) :
 	_currentErr = _currentDist - minDist
-	lastDiff = _currentErr
+	currentErr = _currentErr
 	return k3 * (_currentErr - _lastErr) / timeInterval
 
 while True:
@@ -32,14 +32,16 @@ while True:
 
     totIntegral = totIntegral + (currentDist - minDist)/timeInterval
 
-    speed = currentSpeed + output
+    speed = output
 
     if speed > goalVelocity:
         currentSpeed = goalVelocity
     else:
         currentSpeed = speed
 
-    print (currentSpeed)
+    print ("Output " + str(output))
+    print ("Speed " + str(currentSpeed))
+    print ("Dist " + str(currentDist))
 
     currentDist = currentDist - 0.001 * currentSpeed
 
