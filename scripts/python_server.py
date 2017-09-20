@@ -43,17 +43,22 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
         data = conn.recv(1024) # equals java read-func, nums specify maximum byte-size of what could be recv.
         print 'Server received ' + data
 
+        if data == 'test':
+            print 'put script here'
+        else:
+
+
         # first part of string(before :) is steering data
         # second part (after :) is speed data
         # both is the values between -100 to 100.
         # If this need changing its need to be changed in MainActivity on mobile app.
 
-        data = data.split(':')
-        steering = data[0]
-        speed = data[1]
+            data = data.split(':')
+            steering = data[0]
+            speed = data[1]
 
-        steer(steering)
-        drive(speed)
+            steer(steering)
+            drive(speed)
 
         if not data:
             break

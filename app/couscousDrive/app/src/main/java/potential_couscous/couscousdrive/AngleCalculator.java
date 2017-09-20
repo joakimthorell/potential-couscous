@@ -67,6 +67,11 @@ public class AngleCalculator {
         return MIN_VALUE * value / 90;
     }
 
+    /**
+     * Rounding double to int
+     * @param d double
+     * @return int, eg. 2.3 returns 2. eg. 2.9 return 3.
+     */
     public static int roundDoubleToInt(double d) {
         return (int) Math.round(d);
     }

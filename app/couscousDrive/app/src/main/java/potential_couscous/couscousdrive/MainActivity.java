@@ -91,6 +91,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        mAcc_button.setText("TestButton");
+        mAcc_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Using this button as test button for now.
+                sendData("test");
+            }
+        });
+
     }
 
     @Override
@@ -144,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    // Sending string to socket.
     private void sendData(String data) {
         if (out != null) {
             out.println(data);
