@@ -2,13 +2,15 @@ import time
 
 minDist = 0.5
 currentDist = 1.0
-goalVelocity = 30
+goalVelocity = 7
 currentSpeed = goalVelocity
-k1 = 1
-k2 = 1
+k1 = 2
+k2 = 2
 k3 = 1
 
-hostVelocity = 20
+i = 0
+
+hostVelocity = 0
 
 timeInterval = 0.01
 
@@ -39,7 +41,7 @@ while True:
     if speed > goalVelocity:
         currentSpeed = goalVelocity
     elif speed < 0:
-        currentSpeed = 0;
+        currentSpeed = 0
     else:
         currentSpeed = speed
 
@@ -48,6 +50,10 @@ while True:
     print ("Dist " + str(currentDist))
     print ("Diff " +  str(lastErr))
     print ("")
+
+    # i+= 1
+    # if i % 100 == 0:
+    #     hostVelocity += 0.1
 
     currentDist = currentDist - (currentSpeed - hostVelocity)*timeInterval
 
