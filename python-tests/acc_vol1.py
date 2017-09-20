@@ -10,15 +10,15 @@ k3 = 0.3
 
 timeInterval = 0.01
 
-integral = 0.0
-lastDiff = 0.0
+totIntegral = 0.0
+lastErr = 0.0
 
 while True:
-    output = k1 * (currentDist - minDist) + k2 * (integral + (currentDist - minDist)/timeInterval) + k3 * ((currentDist - minDist) - lastDiff) / timeInterval
+    output = p(currentDist) + integral(totIntegral, currentDist) + deriv(currentDist, lastErr)
 
-    lastDiff = currentDist - minDist
+    lastErr = currentDist - minDist
 
-    integral = integral + (currentDist - minDist)/timeInterval
+    totIntegral = totIntegral + (currentDist - minDist)/timeInterval
 
     speed = currentSpeed + output
 
@@ -32,3 +32,15 @@ while True:
     currentDist = currentDist - 0.001 * currentSpeed
 
     time.sleep(timeInterval)
+
+def p(_curDist):
+	return k1 * (_curDist - minDist)
+
+def integral (_lastIntegralSum, _curDist): 
+	totIntegral = _lastIntegralSum + (_curDist - minDist)/timeInterval
+	return k2 * totIntegral
+
+def deriv (_currentDist, _lastErr) :
+	_currentErr = _currentDist - minDist
+	lastDiff = _currentErr
+	return k3 * (_currentErr - _lastErr) / timeInterval
