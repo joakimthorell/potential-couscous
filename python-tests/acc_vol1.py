@@ -13,6 +13,18 @@ timeInterval = 0.01
 totIntegral = 0.0
 lastErr = 0.0
 
+def p ( _curDist ):
+	return k1 * (_curDist - minDist)
+
+def integral (_lastIntegralSum, _curDist): 
+	totIntegral = _lastIntegralSum + (_curDist - minDist)/timeInterval
+	return k2 * totIntegral
+
+def deriv (_currentDist, _lastErr) :
+	_currentErr = _currentDist - minDist
+	lastDiff = _currentErr
+	return k3 * (_currentErr - _lastErr) / timeInterval
+
 while True:
     output = p(currentDist) + integral(totIntegral, currentDist) + deriv(currentDist, lastErr)
 
@@ -27,20 +39,9 @@ while True:
     else:
         currentSpeed = speed
 
-    print currentSpeed
+    print (currentSpeed)
 
     currentDist = currentDist - 0.001 * currentSpeed
 
     time.sleep(timeInterval)
 
-def p(_curDist):
-	return k1 * (_curDist - minDist)
-
-def integral (_lastIntegralSum, _curDist): 
-	totIntegral = _lastIntegralSum + (_curDist - minDist)/timeInterval
-	return k2 * totIntegral
-
-def deriv (_currentDist, _lastErr) :
-	_currentErr = _currentDist - minDist
-	lastDiff = _currentErr
-	return k3 * (_currentErr - _lastErr) / timeInterval
