@@ -8,7 +8,7 @@ k1 = 1
 k2 = 1
 k3 = 1
 
-hostVelocity = 20;
+hostVelocity = 20
 
 timeInterval = 0.01
 
@@ -28,7 +28,7 @@ def deriv (_k3, _currentDist, _lastErr, _minDist, _timeInterval) :
 	return _k3 * (_currentErr - _lastErr) / _timeInterval
 
 while True:
-    output = p(currentDist) + integral(totIntegral, currentDist) + deriv(currentDist, lastErr)
+    output = p(k1, currentDist, minDist) + integral(k2, totIntegral, currentDist, minDist, timeInterval) + deriv(k3, currentDist, lastErr, minDist, timeInterval)
 
     lastErr = currentDist - minDist
 
