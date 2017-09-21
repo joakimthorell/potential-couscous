@@ -50,8 +50,11 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
 	
         data = byteData.decode('utf-8')
 
+
+
         if data == 'test':
             print ('put script here')
+            continue
         else:
 
 
@@ -61,10 +64,14 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
         # If this need changing its need to be changed in MainActivity on mobile app.
 
             data = data.split(':')
-            steering = int(data[0])
-            speed = int(data[1])
-            steer(steering)
-            drive(speed)
+
+            try:
+                steering = int(data[0])
+                steer(steering)
+                speed = int(data[1])
+                drive(speed)
+            except:
+                print ('some data was incorrect. Data: ' + data)
 
         if not data:
             break
