@@ -53,12 +53,14 @@ while True:
         else:
             currentSpeed = speed
 
-        drive(currentSpeed)
+        drive(int(currentSpeed))
 
         print ("Output " + str(output))
         print ("Speed " + str(currentSpeed))
         print ("Dist " + str(currentDist))
         print ("Diff " + str(lastErr))
         print ("")
+    else:
+        drive(goalVelocity)
 
     time.sleep(timeInterval)
