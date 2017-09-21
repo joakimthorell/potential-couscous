@@ -4,7 +4,7 @@
 
 import socket
 import sys
-from thread import *
+from _thread import *
 import nav as n
 from nav import *
 from nav1 import whole4, pause, cont
@@ -21,7 +21,7 @@ print ('Socket created')
 try:
     s.bind((HOST, PORT))
 except socket.error as msg:
-    print ('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+    print(('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]))
     sys.exit()
 
 print ('Socket bind complete')
@@ -41,7 +41,7 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
 
         # Receiving from client
         data = conn.recv(1024) # equals java read-func, nums specify maximum byte-size of what could be recv.
-        print ('Server received ' + data)
+        print(('Server received ' + data))
 
         if data == 'test':
             print ('put script here')
@@ -73,7 +73,7 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
 while 1:
     # wait to accept a connection - blocking call (blocking call means it waits until data is transferd from conn).
     conn, addr = s.accept()
-    print ('Connected with ' + addr[0] + ':' + str(addr[1]))
+    print(('Connected with ' + addr[0] + ':' + str(addr[1])))
 
     # start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the func.
     start_new_thread(clientthread, (conn,))
