@@ -34,17 +34,17 @@ print 'Socket now listening'
 # Function for handling connections. This will be used to create threads
 def clientthread(conn): # shadow-naming s becomes conn from here on.
     # Sending message to connected client
-    print 'Someone connected to server...'
+    print ('Someone connected to server...')
 
     # infinite loop so that function do not terminate and thread do not end.
     while True:
 
         # Receiving from client
         data = conn.recv(1024) # equals java read-func, nums specify maximum byte-size of what could be recv.
-        print 'Server received ' + data
+        print ('Server received ' + data)
 
         if data == 'test':
-            print 'put script here'
+            print ('put script here')
         else:
 
 
@@ -73,7 +73,7 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
 while 1:
     # wait to accept a connection - blocking call (blocking call means it waits until data is transferd from conn).
     conn, addr = s.accept()
-    print 'Connected with ' + addr[0] + ':' + str(addr[1])
+    print ('Connected with ' + addr[0] + ':' + str(addr[1]))
 
     # start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the func.
     start_new_thread(clientthread, (conn,))
