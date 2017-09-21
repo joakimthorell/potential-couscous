@@ -39,6 +39,19 @@ public class AngleCalculator {
 
     }
 
+    /**
+     * Calculates speed depending on Joystick angle.
+     * @param angle angle from joystick
+     * @param speed from joystick
+     * @return -speed or positive speed
+     */
+    public static int calcSpeed(int angle, int speed) {
+        if (angle <= 180) {
+            return speed;
+        }
+        return speed * -1;
+    }
+
     private static int firstQuadrant(int angle) {
         double num = multiplayQuote(90 - angle);
         return roundDoubleToInt(num);

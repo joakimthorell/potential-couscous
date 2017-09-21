@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Using this button as test button for now.
+                // server is catching the test string and calls whatever you want to do from the
+                // server
                 sendData("test");
             }
         });
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     private void driveCar(int angle, int str) {
         int mopedSteeringValue = AngleCalculator.calcAngle(angle);
 
-        sendDrivingToMoped(mopedSteeringValue, str);
+        sendDrivingToMoped(mopedSteeringValue, AngleCalculator.calcSpeed(angle, str));
     }
 
     /**
@@ -147,9 +149,8 @@ public class MainActivity extends AppCompatActivity {
         steeringValue = steeringValue < -100 || steeringValue > 100 ? 0 : steeringValue;
         speedValue = speedValue < -100 || speedValue > 100 ? 0 : speedValue;
 
-
-
         String data = steeringValue + ":" + speedValue;
+        System.out.println("Steering " + steeringValue + ".  Speed " + speedValue);
 
         sendData(data);
 

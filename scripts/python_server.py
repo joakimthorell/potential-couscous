@@ -11,6 +11,11 @@ from nav1 import whole4, pause, cont
 from driving import stop, drive, steer
 init()
 
+time.sleep(1)
+
+g.limitspeed = None
+steer(-40)
+
 HOST = ''  # Symbolic name meaning all available interfaces
 PORT = 8888  # Arbitrary non-privileged port
 
@@ -40,8 +45,10 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
     while True:
 
         # Receiving from client
-        data = conn.recv(1024) # equals java read-func, nums specify maximum byte-size of what could be recv.
-        print(('Server received ' + data))
+        byteData = conn.recv(1024) # equals java read-func, nums specify maximum byte-size of what could be recv.
+        #print(('Server received ' + byteData))
+	
+        data = byteData.decode('utf-8')
 
         if data == 'test':
             print ('put script here')
@@ -54,9 +61,8 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
         # If this need changing its need to be changed in MainActivity on mobile app.
 
             data = data.split(':')
-            steering = data[0]
-            speed = data[1]
-
+            steering = int(data[0])
+            speed = int(data[1])
             steer(steering)
             drive(speed)
 
