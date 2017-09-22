@@ -16,7 +16,7 @@ k3 = 1
 
 i = 0
 
-timeInterval = 0.1
+timeInterval = 0.01
 
 totIntegral = 0.0
 lastErr = 0.0
@@ -32,6 +32,8 @@ def deriv (_k3, _currentDist, _lastErr, _minDist, _timeInterval) :
 	_currentErr = _currentDist - _minDist
 	_lastErr = _lastErr
 	return _k3 * (_currentErr - _lastErr) / _timeInterval
+
+steer(-40)
 
 time.sleep(1)
 g.limitspeed=None
@@ -51,8 +53,8 @@ while True:
 
         if speed > goalVelocity:
             currentSpeed = goalVelocity
-        elif speed < 0:
-            currentSpeed = 0
+        elif speed < (-1 * goalVelocity):
+            currentSpeed = (-1 * goalVelocity)
         else:
             currentSpeed = speed
 
@@ -65,5 +67,6 @@ while True:
         print ("")
     else:
         drive(goalVelocity)
+        totIntegral = 0
 
     time.sleep(timeInterval)
