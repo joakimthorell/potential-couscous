@@ -33,6 +33,9 @@ def deriv (_k3, _currentDist, _lastErr, _minDist, _timeInterval) :
 	_lastErr = _lastErr
 	return _k3 * (_currentErr - _lastErr) / _timeInterval
 
+time.sleep(1)
+g.limitspeed=None
+
 while True:
 
     currentDist = g.can_ultra
