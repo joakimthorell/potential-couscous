@@ -52,6 +52,7 @@ def constantmanualtest(speed, brakingforce, steerdefault, nCommands):
         input('press enter for the car to brake')
         timestamp = time.time()
         print('the car is braking')
+        drive(0)
         for i in range(0,nCommands):
                 drive(brakingforce)
                 time.sleep(0.01)
