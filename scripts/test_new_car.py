@@ -92,3 +92,7 @@ for var in itteration:
     print('running ' + var + ' time')
     teststeering()
     testdriving()
+
+print('Test is now complete!'
+      'if there is any problems check the terminal window and make sure data is printed when it should')
+print('Happy working with this car.')
