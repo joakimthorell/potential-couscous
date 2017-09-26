@@ -4,7 +4,7 @@ class SensorHandler:
     Filters sensor data into something useful and consistent. Usage: Create an instance and provide the max (default)
     value for the sensor and the max accepted value (currently 0.7) using
     "sensor = SensorHandler.SensorHandler(maxValue, maxAccepted)". Collect and store sensor data with the "put(value)"
-    method, then retrieve the filtered data using "get()".
+    method, then retrieve the filtered data using "get()". Recommended frequency of data input is 10hz.
     """
 
     def __init__(self, maxValue, maxAccepted):
@@ -19,25 +19,8 @@ class SensorHandler:
             self.value = value
         else:
             self.numberOfHighValues += 1
-            if self.numberOfHighValues >= 10:
+            if self.numberOfHighValues >= 10:  #Arbitrary number. Sending input at a high frequency will break this.
                 self.value = self.maxValue
 
     def get(self):
         return self.value
-
-    #Unused
-    @staticmethod
-    def minValue(listOfValues):
-        min = listOfValues[0]
-        for x in listOfValues:
-            if(x < min):
-                min = x
-        return min
-
-    #Unused
-    @staticmethod
-    def mean(listOfValues):
-        listSum = 0
-        for x in listOfValues:
-            listSum += x
-        return listSum / len(listOfValues)
