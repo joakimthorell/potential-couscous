@@ -26,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedWriter;
@@ -37,15 +38,17 @@ import java.net.Socket;
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 public class MainActivity extends AppCompatActivity {
-
     private static Socket mSocket;
     private static PrintWriter out;
-
     private boolean isConnected;
     private JoystickView mJoystick;
     private Toolbar mToolbar;
     private Button mLockButton;
     private Button mAcc_button;
+    private Button mIncreaseSteeringButton;
+    private Button mDecreaseSteeringButton;
+    private TextView mSteeringTextView;
+    private int mSteeringValue = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +107,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mSteeringTextView = (TextView) findViewById(R.id.mSteeringTextView);
+        mIncreaseSteeringButton = (Button) findViewById(R.id.mIncreaseSteeringButton);
+        mDecreaseSteeringButton = (Button) findViewById(R.id.mDecreaseSteeringButton);
+        mSteeringTextView.setText(String.valueOf(mSteeringValue));
+
+        setIncreaseSteeringButtonListener();
+        setDecreaseSteeringButtonListener();
+    }
+
+    private void setIncreaseSteeringButtonListener() {
+        mIncreaseSteeringButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSteeringValue+= 1;
+                mSteeringTextView.setText(String.valueOf(mSteeringValue));
+                out.println("steering:" + mSteeringValue);
+            }
+        });
+    }
+
+    private void setDecreaseSteeringButtonListener(){
+        mDecreaseSteeringButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                mSteeringValue-= 1;
+                mSteeringTextView.setText(String.valueOf(mSteeringValue));
+                out.println(mSteeringValue);
+            }
+        } );
     }
 
     @Override
