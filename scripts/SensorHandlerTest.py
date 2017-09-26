@@ -1,18 +1,12 @@
-import time
-import datetime
-from random import random
-from scripts import SensorHandler
+from run import *
+import SensorHandler
 
-valueLog = "Sensor test data from " + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S') + "\n"
-sh = SensorHandler.SensorHandler(3400)
+sh = SensorHandler.SensorHandler(34.00, 0.7)
 
-for x in range(0, 20 * 5):
-    num = random() + 4
-    sh.put(num)
-    valueLog += str(num) + " - " + str(sh.get()) + "\n"
-    time.sleep(0.02)
+while True:
+    sh.put(g.can_ultra)
+    print(str(g.can_ultra) + " - " + str(sh.get()))
+    time.sleep(0.10)
 
-print(valueLog)
-#text_file = open("sensor-output.txt", "w")
-#text_file.write(valueLog)
-#text_file.close()
+
+
