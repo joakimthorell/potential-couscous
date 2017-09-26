@@ -5,6 +5,7 @@
 import socket
 import sys
 from _thread import *
+
 import nav as n
 from nav import *
 from nav1 import whole4, pause, cont
@@ -60,23 +61,22 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
             print(data[0])
             print(data[1])
         else:
+
         # first part of string(before :) is steering data
         # second part (after :) is speed data
         # both is the values between -100 to 100.
         # If this need changing its need to be changed in MainActivity on mobile app.
 
-            data = data.split(':')
-
             try:
+                data = data.split(':')
                 steering = int(data[0])
-                #print("")
-                #steer(steering)
-                #speed = int(data[1])
-                #drive(speed)
+                steer(steering)
+                speed = int(data[1])
+                drive(speed)
             except:
-                print ('some data was incorrect. Data: ' + data)
-
+                print('some data was incorrect. Data: ' + data)
         if not data:
+            stop()
             break
 
     # conn.sendall(reply)
