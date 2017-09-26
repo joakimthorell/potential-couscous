@@ -55,9 +55,11 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
         if data == 'test':
             print ('put script here')
             continue
+        elif "steering" in data:
+            data = data.split(':')
+            print(data[0])
+            print(data[1])
         else:
-
-
         # first part of string(before :) is steering data
         # second part (after :) is speed data
         # both is the values between -100 to 100.
@@ -67,9 +69,10 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
 
             try:
                 steering = int(data[0])
-                steer(steering)
-                speed = int(data[1])
-                drive(speed)
+                #print("")
+                #steer(steering)
+                #speed = int(data[1])
+                #drive(speed)
             except:
                 print ('some data was incorrect. Data: ' + data)
 
