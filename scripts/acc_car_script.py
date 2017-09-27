@@ -5,21 +5,24 @@ from driving import stop, drive, steer
 init()
 
 import time
+import SensorHandler
 
-minDist = 0.5
+minDist = 0.3
 currentDist = 0.0
 goalVelocity = 30
 currentSpeed = goalVelocity
 k1 = 2
-k2 = 2
+k2 = 0
 k3 = 1
 
 i = 0
 
-timeInterval = 0.01
+timeInterval = 0.1
 
 totIntegral = 0.0
 lastErr = 0.0
+
+sh = SensorHandler.SensorHandler(34.00, 0.7)
 
 def p (_k1, _curDist, _minDist):
 	return _k1 * (_curDist - _minDist)
@@ -40,25 +43,25 @@ g.limitspeed=None
 
 while True:
 
-    currentDist = g.can_ultra
+    currentDist = sh.get()
 
-    if currentDist < 2.0:
+    if currentDist < 0.65:
         output = p(k1, currentDist, minDist) + integral(k2, totIntegral, currentDist, minDist, timeInterval) + deriv(k3, currentDist, lastErr, minDist, timeInterval)
 
         lastErr = currentDist - minDist
 
         totIntegral = totIntegral + (currentDist - minDist) * timeInterval
 
-        speed = currentSpeed + output
+        speed = currentSpeed + int(output)
 
         if speed > goalVelocity:
             currentSpeed = goalVelocity
-        elif speed < (-1 * goalVelocity):
-            currentSpeed = (-1 * goalVelocity)
+        elif speed <= 0:
+            currentSpeed = -100
         else:
             currentSpeed = speed
 
-        drive(int(currentSpeed))
+        drive(currentSpeed)
 
         print ("Output " + str(output))
         print ("Speed " + str(currentSpeed))
