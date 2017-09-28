@@ -1,18 +1,16 @@
 /**
- *  Main activity for couscousDRIVE application.
- *  As of version 1.0 the application is not getting
- *  any data back from the socket. This app only sends data for now.
+ * Main activity for couscousDRIVE application.
+ * As of version 1.0 the application is not getting
+ * any data back from the socket. This app only sends data for now.
+ * <p>
+ * Buttons:
+ * There are for now 2 buttons.
+ * <b>LockButton</b> is making the joystick "stiff" and wont move back to origo
+ * when you release you finger from display.
+ * <b>ACCButton</b> is coming later.
  *
- *  Buttons:
- *  There are for now 2 buttons.
- *  <b>LockButton</b> is making the joystick "stiff" and wont move back to origo
- *  when you release you finger from display.
- *  <b>ACCButton</b> is coming later.
- *
- *  @IMPORTANT:
- *  The data coming from app is xxx:yyy where x is steering and y speed.
- *
- *  @Version: 1.0
+ * @IMPORTANT: The data coming from app is xxx:yyy where x is steering and y speed.
+ * @Version: 1.0
  */
 package potential_couscous.couscousdrive;
 
@@ -48,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
     private Button mIncreaseSteeringButton;
     private Button mDecreaseSteeringButton;
     private TextView mSteeringTextView;
-    private int mSteeringValue = 0;
+    private int mSteeringValue;
+    private String mSteerDataKey = "steering:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         // Not the best solution... If there is more time, fix this.
         // This is solving the networks call on main thread problems
@@ -94,12 +92,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         mAcc_button.setText("TestButton");
         mAcc_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // Using this button as test button for now.
                 // server is catching the test string and calls whatever you want to do from the
                 // server
@@ -107,35 +103,64 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mSteeringValue = 0;
+        setSteeringCalibrationWidgets();
+        setSteeringCalibrationListeners();
+        setSteeringTextViewListener();
+    }
+
+    private void updateSteeringValue() {
+        mSteeringTextView.setText(String.valueOf(mSteeringValue));
+    }
+
+    private void setSteeringCalibrationWidgets() {
         mSteeringTextView = (TextView) findViewById(R.id.mSteeringTextView);
         mIncreaseSteeringButton = (Button) findViewById(R.id.mIncreaseSteeringButton);
         mDecreaseSteeringButton = (Button) findViewById(R.id.mDecreaseSteeringButton);
-        mSteeringTextView.setText(String.valueOf(mSteeringValue));
+    }
 
+    private void setSteeringCalibrationListeners() {
         setIncreaseSteeringButtonListener();
         setDecreaseSteeringButtonListener();
+    }
+
+    private void setSteeringTextViewListener() {
+        mSteeringTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSteeringValue = 0;
+                mSteeringTextView.setText("0");
+                out.println(mSteerDataKey + "0");
+            }
+        });
     }
 
     private void setIncreaseSteeringButtonListener() {
         mIncreaseSteeringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mSteeringValue+= 1;
-                mSteeringTextView.setText(String.valueOf(mSteeringValue));
-                out.println("steering:" + mSteeringValue);
+                if (mSteeringValue <= 100) {
+                    mSteeringValue += 1;
+                    updateSteeringValue();
+                    mSteeringTextView.setText(String.valueOf(mSteeringValue));
+                    out.println(mSteerDataKey + String.valueOf(mSteeringValue));
+                }
             }
         });
     }
 
-    private void setDecreaseSteeringButtonListener(){
-        mDecreaseSteeringButton.setOnClickListener(new View.OnClickListener(){
+    private void setDecreaseSteeringButtonListener() {
+        mDecreaseSteeringButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                mSteeringValue-= 1;
-                mSteeringTextView.setText(String.valueOf(mSteeringValue));
-                out.println(mSteeringValue);
+            public void onClick(View view) {
+                if (mSteeringValue >= -100) {
+                    mSteeringValue -= 1;
+                    updateSteeringValue();
+                    mSteeringTextView.setText(String.valueOf(mSteeringValue));
+                    out.println(mSteerDataKey + String.valueOf(mSteeringValue));
+                }
             }
-        } );
+        });
     }
 
     @Override
@@ -162,19 +187,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void driveCar(int angle, int str) {
         int mopedSteeringValue = AngleCalculator.calcAngle(angle);
-
         sendDrivingToMoped(mopedSteeringValue, AngleCalculator.calcSpeed(angle, str));
     }
 
     /**
      * Sending data to socket as String. This method converts the values
      * to readable Strings as the MOPED knows how to decrypt.
-     *
+     * <p>
      * On MOPED read string as xxx:yyy where xxx is steering and yyy speed.
      * Always divided by : (colon)
      *
      * @param steeringValue int value that MOPED can accept. Between -100 to 100
-     * @param speedValue int value that MOPED can accept. Between -100 to 100
+     * @param speedValue    int value that MOPED can accept. Between -100 to 100
      */
     public void sendDrivingToMoped(int steeringValue, int speedValue) {
         // making sure both ints not outside of definition value
@@ -185,9 +209,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Steering " + steeringValue + ".  Speed " + speedValue);
 
         sendData(data);
-
     }
-
 
     // Sending string to socket.
     private void sendData(String data) {

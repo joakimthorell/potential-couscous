@@ -36,8 +36,6 @@ public class ConnectActivity extends AppCompatActivity {
         setDefaultValues(mSharedPrefs);
 
         setupButton(mSharedPrefs, this);
-
-
     }
 
     private void setDefaultValues(SharedPreferences mSharedPrefs) {

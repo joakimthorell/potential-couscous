@@ -6,16 +6,16 @@ import socket
 import sys
 from _thread import *
 
-import nav as n
-from nav import *
-from nav1 import whole4, pause, cont
-from driving import stop, drive, steer
-init()
+#import nav as n
+#from nav import *
+#from nav1 import whole4, pause, cont
+#from driving import stop, drive, steer
+#init()
 
-time.sleep(1)
+#time.sleep(1)
 
-g.limitspeed = None
-steer(-40)
+#g.limitspeed = None
+#steer(-40)
 
 HOST = ''  # Symbolic name meaning all available interfaces
 PORT = 8888  # Arbitrary non-privileged port
@@ -56,10 +56,12 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
         if data == 'test':
             print ('put script here')
             continue
+
         elif "steering" in data:
             data = data.split(':')
             print(data[0])
             print(data[1])
+
         else:
 
         # first part of string(before :) is steering data
@@ -70,9 +72,9 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
             try:
                 data = data.split(':')
                 steering = int(data[0])
-                steer(steering)
-                speed = int(data[1])
-                drive(speed)
+                #steer(steering)
+                #speed = int(data[1])
+                #drive(speed)
             except:
                 print('some data was incorrect. Data: ' + data)
         if not data:
