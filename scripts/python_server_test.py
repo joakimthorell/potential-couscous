@@ -1,21 +1,19 @@
 '''
     Simple socket server using threads
+
+
+
+
+    This script is meant only for testing purposes on a computer.
+    If testing on a MOPED use the python_server script instead.
+    The diffrence is that THIS script not running any car depending scripts like drive and steer etc.
+    Instead it will print drive(50) etc
+
 '''
 
 import socket
 import sys
 from _thread import *
-
-#import nav as n
-#from nav import *
-#from nav1 import whole4, pause, cont
-#from driving import stop, drive, steer
-#init()
-
-#time.sleep(1)
-
-#g.limitspeed = None
-#steer(-40)
 
 HOST = ''  # Symbolic name meaning all available interfaces
 PORT = 8888  # Arbitrary non-privileged port
@@ -54,14 +52,12 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
 
 
         if data == 'test':
-            print ('put script here')
+            print ('Calling test()')
             continue
-
         elif "steering" in data:
             data = data.split(':')
             print(data[0])
             print(data[1])
-
         else:
 
         # first part of string(before :) is steering data
@@ -72,13 +68,13 @@ def clientthread(conn): # shadow-naming s becomes conn from here on.
             try:
                 data = data.split(':')
                 steering = int(data[0])
-                #steer(steering)
-                #speed = int(data[1])
-                #drive(speed)
+                print('Calling steer(' + steering + ')')
+                speed = int(data[1])
+                print('Calling drive(' + speed + ')')
             except:
                 print('some data was incorrect. Data: ' + data)
         if not data:
-            stop()
+            print('Calling stop()')
             break
 
     # conn.sendall(reply)
