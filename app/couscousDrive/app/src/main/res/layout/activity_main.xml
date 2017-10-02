@@ -31,68 +31,36 @@
         custom:JV_fixedCenter="false" />
 
     <Button
-        android:id="@+id/lock_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lock_button_text"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/button"
+        android:layout_width="124dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="16dp"
+        android:text="Manual "
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/joystick"
-        app:layout_constraintVertical_bias="0.063"
-        android:layout_marginRight="8dp"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="530dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="131dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="16dp"
+        android:text="ACC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        tools:layout_editor_absoluteY="530dp"
+        tools:layout_editor_absoluteX="144dp"
+        app:layout_constraintHorizontal_bias="0.501" />
 
     <Button
-        android:id="@+id/acc_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/acc_text"
-        app:layout_constraintBottom_toBottomOf="@+id/lock_button"
-        android:layout_marginBottom="0dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.85" />
-
-    <Button
-        android:id="@+id/mDecreaseSteeringButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/button3"
+        android:layout_width="135dp"
+        android:layout_height="58dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginRight="8dp"
-        android:text="-"
-        android:textSize="24sp"
+        android:layout_marginRight="16dp"
+        android:text="Platooning"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/mSteeringTextView"/>
-
-    <Button
-        android:id="@+id/mIncreaseSteeringButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        android:text="+"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/mSteeringTextView"/>
-
-    <TextView
-        android:id="@+id/mSteeringTextView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        android:text="0"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
