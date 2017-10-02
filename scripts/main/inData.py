@@ -1,0 +1,2 @@
+class inData:
+	pass
