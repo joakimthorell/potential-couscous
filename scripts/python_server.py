@@ -1,99 +1,65 @@
 '''
-    Simple socket server using threads
+    Server class that sends the data to its listeners
 '''
 
 import socket
 import sys
 from _thread import *
 
-#import nav as n
-#from nav import *
-#from nav1 import whole4, pause, cont
-#from driving import stop, drive, steer
-#init()
+class PythonServer:
 
-#time.sleep(1)
+    HOST = '' #this will be device ip
+    PORT = 8888
 
-#g.limitspeed = None
-#steer(-40)
+    def __init__(self, listener):
+        self.listener = listener
+        self.isRunning = False
+        self.serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-HOST = ''  # Symbolic name meaning all available interfaces
-PORT = 8888  # Arbitrary non-privileged port
+    def look_for_clients(self):
+        server = self.serverSocket
+        while self.isRunning:
+            conn, addr = server.accept()
+            print('Someone connected to the server. ' + addr[0])
+            start_new_thread(self._client_thread, self, conn)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print ('Socket created')
+        print('Closing server...')
+        server.close()
 
-# Bind socket to local host and port
-try:
-    s.bind((HOST, PORT))
-except socket.error as msg:
-    print(('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]))
-    sys.exit()
+    def start_server(self):
+        try:
+            serverSocket = self.serverSocket
+            serverSocket.bind((self.HOST, self.PORT))
+            serverSocket.listen(10)
+            self.isRunning = True
+            start_new_thread(self.look_for_clients, (self,))
+        except socket.error as msg:
+            print('Failed to start Socket')
 
-print ('Socket bind complete')
+        print('Socket open')
 
-# Start listening on socket
-s.listen(10)  # the number specifies nums of allowed failed connections before termination
-print ('Socket now listening')
+    @classmethod
+    def _client_thread(self, conn):  # shadow-naming s becomes conn from here on.
+        # Sending message to connected client
+        print('Someone connected to server...')
 
+        # infinite loop so that function do not terminate and thread do not end.
+        while self.isRunning:
 
-# Function for handling connections. This will be used to create threads
-def clientthread(conn): # shadow-naming s becomes conn from here on.
-    # Sending message to connected client
-    print ('Someone connected to server...')
+            # Receiving from client
+            byteData = conn.recv(1024)  # equals java read-func, nums specify maximum byte-size of what could be recv.
+            # print(('Server received ' + byteData))
 
-    # infinite loop so that function do not terminate and thread do not end.
-    while True:
+            data = byteData.decode('utf-8')
 
-        # Receiving from client
-        byteData = conn.recv(1024) # equals java read-func, nums specify maximum byte-size of what could be recv.
-        #print(('Server received ' + byteData))
-	
-        data = byteData.decode('utf-8')
+            self.listener(data)
 
+        # came out of loop
+        print('Closing server...')
+        conn.close()
 
-
-        if data == 'test':
-            print ('put script here')
-            continue
-
-        elif "steering" in data:
-            data = data.split(':')
-            print(data[0])
-            print(data[1])
-
-        else:
-
-        # first part of string(before :) is steering data
-        # second part (after :) is speed data
-        # both is the values between -100 to 100.
-        # If this need changing its need to be changed in MainActivity on mobile app.
-
-            try:
-                data = data.split(':')
-                steering = int(data[0])
-                #steer(steering)
-                #speed = int(data[1])
-                #drive(speed)
-            except:
-                print('some data was incorrect. Data: ' + data)
-        if not data:
-            stop()
-            break
-
-    # conn.sendall(reply)
-
-    # came out of loop
-    conn.close()
-
-
-# now keep talking with the client
-while 1:
-    # wait to accept a connection - blocking call (blocking call means it waits until data is transferd from conn).
-    conn, addr = s.accept()
-    print(('Connected with ' + addr[0] + ':' + str(addr[1])))
-
-    # start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the func.
-    start_new_thread(clientthread, (conn,))
-
-s.close()
+    @classmethod
+    def close_server(self):
+        print('Closing server...')
+        self.isRunning = False
+        PythonServer.isRunning = False
