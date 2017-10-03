@@ -29,14 +29,6 @@ public class ManualController {
         });
     }
 
-    private void setmManualButtonListener(Button manualButton) {
-        manualButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-    }
-
     private void setJoystickViewListener(JoystickView joystickView) {
         joystickView.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
