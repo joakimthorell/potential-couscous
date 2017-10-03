@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
         JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);
         Button manualButton = (Button) findViewById(R.id.manual_button);
         new ManualController(joystickView, manualButton);
-
-        //TODO Build ACC Controller + Platoon Controller.
     }
 
     @Override

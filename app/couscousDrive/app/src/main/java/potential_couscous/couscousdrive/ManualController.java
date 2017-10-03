@@ -1,10 +1,15 @@
 package potential_couscous.couscousdrive;
 
+import android.view.View;
 import android.widget.Button;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 import potential_couscous.couscousdrive.utils.AngleCalculator;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
+
+/**
+ * Controller for Manual steering
+ */
 
 public class ManualController {
     private Button mManualButton;
@@ -32,5 +37,14 @@ public class ManualController {
 
     private int checkData(int value) {
         return value < -100 || value > 100 ? 0 : value;
+    }
+
+    public void setManualListener (Button manualButton) {
+        manualButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //start manual driving method...
+            }
+        });
     }
 }
