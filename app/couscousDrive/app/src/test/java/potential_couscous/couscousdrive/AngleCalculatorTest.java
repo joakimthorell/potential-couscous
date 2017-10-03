@@ -3,6 +3,8 @@ package potential_couscous.couscousdrive;
 import org.junit.Before;
 import org.junit.Test;
 
+import potential_couscous.couscousdrive.utils.AngleCalculator;
+
 import static org.junit.Assert.*;
 
 public class AngleCalculatorTest {

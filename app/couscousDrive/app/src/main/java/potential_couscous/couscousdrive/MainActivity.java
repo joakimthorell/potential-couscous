@@ -22,145 +22,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 public class MainActivity extends AppCompatActivity {
-    private static Socket mSocket;
-    private static PrintWriter out;
-    private boolean isConnected;
-    private JoystickView mJoystick;
     private Toolbar mToolbar;
-    private Button mLockButton;
-    private Button mAcc_button;
-    private Button mIncreaseSteeringButton;
-    private Button mDecreaseSteeringButton;
-    private TextView mSteeringTextView;
-    private int mSteeringValue;
-    private String mSteerDataKey = "steering:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Not the best solution... If there is more time, fix this.
-        // This is solving the networks call on main thread problems
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        // Checks if socket is setup.
-        isConnected = mSocket != null && mSocket.isConnected();
-
-        // Setting up The joystick
-        mJoystick = (JoystickView) findViewById(R.id.joystick);
-        mJoystick.setOnMoveListener(new JoystickView.OnMoveListener() {
-            @Override
-            public void onMove(int angle, int strength) {
-                System.out.println("Angle: " + angle + ".......... Strength: " + strength);
-                driveCar(angle, strength);
-            }
-        });
-
         // Setup the action bar
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolbar);
 
-        mLockButton = (Button) findViewById(R.id.lock_button);
-        mAcc_button = (Button) findViewById(R.id.acc_button);
+        // Not the best solution... Fix this if there is more time.
+        // This is solves the networks call on main thread problems
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
-        mLockButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mJoystick.isAutoReCenterButton()) {
-                    mJoystick.setAutoReCenterButton(true);
-                    Toast.makeText(MainActivity.this, "Steering is manual", Toast.LENGTH_SHORT).show();
-                } else {
-                    mJoystick.setAutoReCenterButton(false);
-                    Toast.makeText(MainActivity.this, "Steering is locked", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        // Setting up The joystick
+        JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);
+        Button manualButton = (Button) findViewById(R.id.manual_button);
+        new ManualController(joystickView, manualButton);
 
-        mAcc_button.setText("TestButton");
-        mAcc_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Using this button as test button for now.
-                // server is catching the test string and calls whatever you want to do from the
-                // server
-                sendData("test");
-            }
-        });
-
-        mSteeringValue = 0;
-        setSteeringCalibrationWidgets();
-        setSteeringCalibrationListeners();
-        setSteeringTextViewListener();
-    }
-
-    private void updateSteeringValue() {
-        mSteeringTextView.setText(String.valueOf(mSteeringValue));
-    }
-
-    private void setSteeringCalibrationWidgets() {
-        mSteeringTextView = (TextView) findViewById(R.id.mSteeringTextView);
-        mIncreaseSteeringButton = (Button) findViewById(R.id.mIncreaseSteeringButton);
-        mDecreaseSteeringButton = (Button) findViewById(R.id.mDecreaseSteeringButton);
-    }
-
-    private void setSteeringCalibrationListeners() {
-        setIncreaseSteeringButtonListener();
-        setDecreaseSteeringButtonListener();
-    }
-
-    private void setSteeringTextViewListener() {
-        mSteeringTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSteeringValue = 0;
-                mSteeringTextView.setText("0");
-                out.println(mSteerDataKey + "0");
-            }
-        });
-    }
-
-    private void setIncreaseSteeringButtonListener() {
-        mIncreaseSteeringButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mSteeringValue <= 100) {
-                    mSteeringValue += 1;
-                    updateSteeringValue();
-                    mSteeringTextView.setText(String.valueOf(mSteeringValue));
-                    out.println(mSteerDataKey + String.valueOf(mSteeringValue));
-                }
-            }
-        });
-    }
-
-    private void setDecreaseSteeringButtonListener() {
-        mDecreaseSteeringButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mSteeringValue >= -100) {
-                    mSteeringValue -= 1;
-                    updateSteeringValue();
-                    mSteeringTextView.setText(String.valueOf(mSteeringValue));
-                    out.println(mSteerDataKey + String.valueOf(mSteeringValue));
-                }
-            }
-        });
+        //TODO Build ACC Controller + Platoon Controller.
     }
 
     @Override
@@ -170,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_connect:
-                if (isConnected) {
+                if (CarCom.isConnected) {
                     Toast.makeText(this, "You are connected", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent i = new Intent(this, ConnectActivity.class);
@@ -184,54 +74,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    private void driveCar(int angle, int str) {
-        int mopedSteeringValue = AngleCalculator.calcAngle(angle);
-        sendDrivingToMoped(mopedSteeringValue, AngleCalculator.calcSpeed(angle, str));
-    }
-
-    /**
-     * Sending data to socket as String. This method converts the values
-     * to readable Strings as the MOPED knows how to decrypt.
-     * <p>
-     * On MOPED read string as xxx:yyy where xxx is steering and yyy speed.
-     * Always divided by : (colon)
-     *
-     * @param steeringValue int value that MOPED can accept. Between -100 to 100
-     * @param speedValue    int value that MOPED can accept. Between -100 to 100
-     */
-    public void sendDrivingToMoped(int steeringValue, int speedValue) {
-        // making sure both ints not outside of definition value
-        steeringValue = steeringValue < -100 || steeringValue > 100 ? 0 : steeringValue;
-        speedValue = speedValue < -100 || speedValue > 100 ? 0 : speedValue;
-
-        String data = steeringValue + ":" + speedValue;
-        System.out.println("Steering " + steeringValue + ".  Speed " + speedValue);
-
-        sendData(data);
-    }
-
-    // Sending string to socket.
-    private void sendData(String data) {
-        if (out != null) {
-            out.println(data);
-        }
-    }
-
-    private static void init() {
-        try {
-            out = new PrintWriter
-                    (new BufferedWriter
-                            (new OutputStreamWriter
-                                    (mSocket.getOutputStream())), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void setSocket(Socket socket) {
-        mSocket = socket;
-        init();
-    }
-
+    */
 }

@@ -87,10 +87,10 @@ public class ConnectActivity extends AppCompatActivity {
                     mSocket.close();
                 }
 
-                    mSocket = new Socket();
-                    mSocket.connect(new InetSocketAddress(params[0],
-                                    Integer.parseInt(params[1])),
-                            CONNECTION_TIMEOUT);
+                mSocket = new Socket();
+                mSocket.connect(new InetSocketAddress(params[0],
+                                Integer.parseInt(params[1])),
+                        CONNECTION_TIMEOUT);
 
 
             } catch (NumberFormatException e) {
@@ -106,6 +106,7 @@ public class ConnectActivity extends AppCompatActivity {
             return null;
         }
 
+        /*
         @Override
         protected void onPostExecute(String s) {
             if (mSocket != null && mSocket.isConnected()) {
@@ -115,6 +116,7 @@ public class ConnectActivity extends AppCompatActivity {
                 Toast.makeText(mContext, "Not able to connect. see: " + msg, Toast.LENGTH_LONG).show();
             }
         }
-    }
+        */
 
+    }
 }
