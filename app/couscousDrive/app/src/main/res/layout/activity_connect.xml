@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="potential_couscous.couscousdrive.ConnectActivity">
+    tools:context="potential_couscous.couscousdrive.activities.ConnectActivity">
 
     <TextView
         android:id="@+id/tv_host"

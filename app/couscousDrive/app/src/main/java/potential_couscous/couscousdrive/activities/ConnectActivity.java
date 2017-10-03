@@ -1,4 +1,4 @@
-package potential_couscous.couscousdrive;
+package potential_couscous.couscousdrive.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.utils.CarCom;
 
 public class ConnectActivity extends AppCompatActivity {
@@ -84,25 +85,22 @@ public class ConnectActivity extends AppCompatActivity {
                 }
 
                 Socket wirelessInoSocket = new Socket();
-                wirelessInoSocket.connect(new InetSocketAddress(ip,
-                        WIRELESSINO_PORT),
-                        CONNECTION_TIMEOUT);
+                wirelessInoSocket.connect(
+                        new InetSocketAddress(ip, WIRELESSINO_PORT), CONNECTION_TIMEOUT);
 
                 Socket couscousSocket = new Socket();
-                couscousSocket.connect(new InetSocketAddress(ip,
-                                COUSCOUS_PORT),
-                        CONNECTION_TIMEOUT);
+                couscousSocket.connect(
+                        new InetSocketAddress(ip, COUSCOUS_PORT), CONNECTION_TIMEOUT);
 
                 mCarCom = new CarCom(wirelessInoSocket, couscousSocket);
 
             } catch (IOException e) {
                 e.printStackTrace();
-                msg = "Can't connect to socket";
+                msg = "Can't connect to socket...";
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
-                msg = "Can't connect to socket";
+                msg = "Can't connect to socket...";
             }
-
             return null;
         }
 
@@ -112,7 +110,7 @@ public class ConnectActivity extends AppCompatActivity {
                 MainActivity.setCarCom(mCarCom);
                 finish();
             } else {
-                Toast.makeText(mContext, "Not able to connect. See: " + msg, Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Not able to connect... See: " + msg, Toast.LENGTH_LONG).show();
             }
         }
     }

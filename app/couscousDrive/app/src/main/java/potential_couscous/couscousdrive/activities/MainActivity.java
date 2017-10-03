@@ -1,21 +1,9 @@
 /**
- * Main activity for couscousDRIVE application.
- * As of version 1.0 the application is not getting
- * any data back from the socket. This app only sends data for now.
- * <p>
- * Buttons:
- * There are for now 2 buttons.
- * <b>LockButton</b> is making the joystick "stiff" and wont move back to origo
- * when you release you finger from display.
- * <b>ACCButton</b> is coming later.
- *
- * @IMPORTANT: The data coming from app is xxx:yyy where x is steering and y speed.
- * @Version: 1.0
+ * Main
  */
-package potential_couscous.couscousdrive;
+package potential_couscous.couscousdrive.activities;
 
 import android.content.Intent;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
+import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.controllers.ACCController;
 import potential_couscous.couscousdrive.controllers.ManualController;
 import potential_couscous.couscousdrive.controllers.PlatoonController;

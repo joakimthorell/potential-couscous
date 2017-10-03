@@ -1,3 +1,6 @@
+/**
+ * This class sends String objects to MOPED.
+ */
 package potential_couscous.couscousdrive.utils;
 
 import java.io.BufferedWriter;
@@ -78,7 +81,7 @@ public class CarCom {
     }
 
     /**
-     * Sending data to diffrent sockets depending on key.
+     * Sending data to different sockets depending on key.
      *
      * @param key  constant values from CarCom
      * @param data String data will be sent to car

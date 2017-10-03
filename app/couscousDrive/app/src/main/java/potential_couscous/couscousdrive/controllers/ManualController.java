@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.Button;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
-import potential_couscous.couscousdrive.MainActivity;
+import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.AngleCalculator;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
@@ -25,6 +25,14 @@ public class ManualController {
                 if (carCom != null && carCom.isConnected()) {
                     carCom.sendData(carCom.MANUAL_KEY, null);
                 }
+            }
+        });
+    }
+
+    private void setmManualButtonListener(Button manualButton) {
+        manualButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
     }

@@ -3,7 +3,7 @@ package potential_couscous.couscousdrive.controllers;
 import android.view.View;
 import android.widget.Button;
 
-import potential_couscous.couscousdrive.MainActivity;
+import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
 
 public class PlatoonController {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="potential_couscous.couscousdrive.MainActivity">
+    tools:context="potential_couscous.couscousdrive.activities.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -55,7 +55,8 @@
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/manual_button"
         app:layout_constraintLeft_toRightOf="@+id/manual_button"
-        app:layout_constraintRight_toLeftOf="@+id/platoon_button"/>
+        app:layout_constraintRight_toLeftOf="@+id/platoon_button"
+        app:layout_constraintHorizontal_bias="0.75" />
 
     <Button
         android:id="@+id/platoon_button"
