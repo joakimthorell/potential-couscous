@@ -86,4 +86,8 @@ public class MainActivity extends AppCompatActivity {
     public static void setCarCom(CarCom carCom) {
         mCarCom = carCom;
     }
+
+    public static CarCom getCarCom() {
+        return mCarCom;
+    }
 }
