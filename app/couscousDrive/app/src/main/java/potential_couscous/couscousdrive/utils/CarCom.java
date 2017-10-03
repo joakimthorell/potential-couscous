@@ -1,4 +1,4 @@
-package potential_couscous.couscousdrive.com;
+package potential_couscous.couscousdrive.utils;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,7 +18,9 @@ public class CarCom {
     private PrintWriter mAutoOut;
 
     /**
-     * 
+     * This Constructor will initiate the Sockets and throws exception
+     * if not able to establish connection.
+     *
      * @param manualSocket
      * @param autoSocket
      * @throws IOException
@@ -35,11 +37,13 @@ public class CarCom {
                 new BufferedWriter(
                         new OutputStreamWriter(
                                 mManualSocket.getOutputStream())), true);
+        System.out.println("manualOut complete!");
 
         mAutoOut = new PrintWriter(
                 new BufferedWriter(
                         new OutputStreamWriter(
                                 mAutoSocket.getOutputStream())), true);
+        System.out.println("autoOut complete!");
     }
 
     /**
@@ -56,8 +60,27 @@ public class CarCom {
     }
 
     /**
+     * Closing connection to all Sockets and Printwriters
+     *
+     * @return true if close was done correct. False if something went wrong.
+     */
+    public boolean close() {
+        try {
+            mManualOut.close();
+            mManualSocket.close();
+            mAutoOut.close();
+            mAutoSocket.close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+
+    }
+
+    /**
      * Sending data to diffrent sockets depending on key.
-     * @param key constant values from CarCom
+     *
+     * @param key  constant values from CarCom
      * @param data String data will be sent to car
      */
     public void sendData(String key, String data) {
@@ -69,7 +92,8 @@ public class CarCom {
     }
 
     /**
-     * Sending static message to car
+     * This method sends String objects to car
+     *
      * @param key constant values from CarCom
      */
     public void sendData(String key) {

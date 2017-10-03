@@ -1,4 +1,4 @@
-package potential_couscous.couscousdrive;
+package potential_couscous.couscousdrive.controllers;
 
 import android.view.View;
 import android.widget.Button;
@@ -7,14 +7,14 @@ import android.widget.Button;
  * Controller for the ACC
  */
 
-public class ACCController implements Interface {
+public class ACCController {
     private Button mACCButton;
 
     public ACCController(Button button) {
         mACCButton = button;
     }
 
-    @Override
+
     public void setACCListener (Button ACCButton) {
         ACCButton.setOnClickListener(new View.OnClickListener() {
             @Override

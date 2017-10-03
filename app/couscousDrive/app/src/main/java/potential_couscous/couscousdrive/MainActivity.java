@@ -26,8 +26,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
+import potential_couscous.couscousdrive.controllers.ManualController;
+import potential_couscous.couscousdrive.utils.CarCom;
 
 public class MainActivity extends AppCompatActivity {
+    private static CarCom mCarCom;
     private Toolbar mToolbar;
 
     @Override
@@ -48,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
         JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);
         Button manualButton = (Button) findViewById(R.id.manual_button);
         new ManualController(joystickView, manualButton);
+
+        //TODO Build listeners for ACC and Platoon Controller.
+
+        //TODO Rebuild buttons.
+        /*
+        Buttons should be ToggleButtons: "GREEN" when active, "GREY" when inactive.
+        ManualButton as default when app starts. Always one button active.
+        */
     }
 
     @Override
@@ -57,13 +68,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_connect:
-                if (CarCom.isConnected) {
-                    Toast.makeText(this, "You are connected", Toast.LENGTH_SHORT).show();
+                if (mCarCom != null && mCarCom.isConnected()) {
+                    Toast.makeText(this, "You are connected...", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent i = new Intent(this, ConnectActivity.class);
                     startActivity(i);
@@ -72,5 +82,12 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    */
+
+    public static void setCarCom(CarCom carCom) {
+        mCarCom = carCom;
+    }
+
+    public static CarCom getCarCom() {
+        return mCarCom;
+    }
 }
