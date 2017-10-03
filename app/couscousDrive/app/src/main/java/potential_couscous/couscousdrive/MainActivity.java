@@ -14,18 +14,16 @@
  */
 package potential_couscous.couscousdrive;
 
-import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Toast;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
+import potential_couscous.couscousdrive.controllers.ManualController;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
@@ -49,7 +47,13 @@ public class MainActivity extends AppCompatActivity {
         Button manualButton = (Button) findViewById(R.id.manual_button);
         new ManualController(joystickView, manualButton);
 
-        //TODO Build ACC Controller + Platoon Controller.
+        //TODO Build listeners for ACC and Platoon Controller.
+
+        //TODO Rebuild buttons.
+        /*
+        Buttons should be ToggleButtons: "GREEN" when active, "GREY" when inactive.
+        ManualButton as default when app starts. Always one button active.
+        */
     }
 
     @Override

@@ -1,4 +1,4 @@
-package potential_couscous.couscousdrive;
+package potential_couscous.couscousdrive.controllers;
 
 import android.widget.Button;
 
