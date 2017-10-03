@@ -50,11 +50,8 @@ public class ConnectActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String host = mEd_host.getText().toString().trim();
-
                 mSharedPrefs.edit().putString("host", host).apply();
-
                 new AsyncConnectionTask(context).execute(host);
             }
         });
@@ -72,13 +69,9 @@ public class ConnectActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 msg = params[0];
-
                 String ip = params[0];
 
-                /*
-                Close any previously used socket
-                (Eg. double clicks on connect.)
-                 */
+                // Close any previously used socket. (Eg. double clicks on connect.)
                 if (mCarCom != null && mCarCom.isConnected()) {
                     mCarCom.close();
                 }
@@ -95,15 +88,12 @@ public class ConnectActivity extends AppCompatActivity {
 
                 mCarCom = new CarCom(wirelessInoSocket, couscousSocket);
 
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                msg = "something went wrong";
             } catch (IOException e) {
                 e.printStackTrace();
-                msg = "something went wrong";
+                msg = "Can't connect to socket";
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
-                msg = "something went wrong";
+                msg = "Can't connect to socket";
             }
 
             return null;
@@ -115,10 +105,8 @@ public class ConnectActivity extends AppCompatActivity {
                 MainActivity.setCarCom(mCarCom);
                 finish();
             } else {
-                Toast.makeText(mContext, "Not able to connect. see: " + msg, Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Not able to connect. See: " + msg, Toast.LENGTH_LONG).show();
             }
         }
-
-
     }
 }

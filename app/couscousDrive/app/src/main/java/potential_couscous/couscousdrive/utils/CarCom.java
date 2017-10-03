@@ -18,8 +18,9 @@ public class CarCom {
     private PrintWriter mAutoOut;
 
     /**
-     * Constructor for CarCom. This Constructor will initiate the sockets and throws exception
+     * This Constructor will initiate the Sockets and throws exception
      * if not able to establish connection.
+     *
      * @param manualSocket
      * @param autoSocket
      * @throws IOException
@@ -59,7 +60,8 @@ public class CarCom {
     }
 
     /**
-     * Closing connection to all sockets and printwriters
+     * Closing connection to all Sockets and Printwriters
+     *
      * @return true if close was done correct. False if something went wrong.
      */
     public boolean close() {
@@ -77,7 +79,8 @@ public class CarCom {
 
     /**
      * Sending data to diffrent sockets depending on key.
-     * @param key constant values from CarCom
+     *
+     * @param key  constant values from CarCom
      * @param data String data will be sent to car
      */
     public void sendData(String key, String data) {
@@ -89,7 +92,8 @@ public class CarCom {
     }
 
     /**
-     * Sending static message to car
+     * This method sends String objects to car
+     *
      * @param key constant values from CarCom
      */
     public void sendData(String key) {

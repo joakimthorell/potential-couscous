@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_connect:
-                if (mCarCom.isConnected()) {
-                    Toast.makeText(this, "You are connected", Toast.LENGTH_SHORT).show();
+                if (mCarCom != null && mCarCom.isConnected()) {
+                    Toast.makeText(this, "You are connected...", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent i = new Intent(this, ConnectActivity.class);
                     startActivity(i);
