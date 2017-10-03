@@ -3,23 +3,24 @@ package potential_couscous.couscousdrive.controllers;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * Controller for Platooning
- */
+import potential_couscous.couscousdrive.MainActivity;
+import potential_couscous.couscousdrive.utils.CarCom;
 
 public class PlatoonController {
-    private Button mPlatoonButton;
 
-    public PlatoonController(Button button) {
-        mPlatoonButton = button;
+    public PlatoonController(Button platoonButton) {
+        setPlatoonButtonListener(platoonButton);
     }
 
-    public void setPlatooningListener(Button platoonButton) {
+    public void setPlatoonButtonListener(Button platoonButton) {
         platoonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //start platooning method or something like that...
+                CarCom carCom = MainActivity.getCarCom();
 
+                if (carCom != null && carCom.isConnected()) {
+                    carCom.sendData(carCom.MANUAL_KEY, null);
+                }
             }
         });
     }

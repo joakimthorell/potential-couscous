@@ -37,13 +37,13 @@ public class CarCom {
                 new BufferedWriter(
                         new OutputStreamWriter(
                                 mManualSocket.getOutputStream())), true);
-        System.out.println("manualOut complete!");
+        System.out.println("manualOut complete");
 
         mAutoOut = new PrintWriter(
                 new BufferedWriter(
                         new OutputStreamWriter(
                                 mAutoSocket.getOutputStream())), true);
-        System.out.println("autoOut complete!");
+        System.out.println("autoOut complete");
     }
 
     /**
@@ -88,7 +88,10 @@ public class CarCom {
             sendData(key);
             return;
         }
-        mManualOut.print(data);
+
+        //TODO println() eller print() ?
+
+        mManualOut.println(data);
     }
 
     /**

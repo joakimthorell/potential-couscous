@@ -2,17 +2,18 @@
  * This class calculates the angle from joystick to an input for moped
  * Constants max & min value are the values for steer on moped.
  */
-
 package potential_couscous.couscousdrive.utils;
 
 public class AngleCalculator {
     public static int MAX_VALUE = 100;
     public static int MIN_VALUE = -100;
 
-    private AngleCalculator() {    }
+    private AngleCalculator() {
+    }
 
     /**
      * Calculates the angle that MOPED can use
+     *
      * @param angle value of joystick from origo.
      * @return <b>int</b> value between MAX_VALUE and MIN_VALUE
      */
@@ -65,6 +66,7 @@ public class AngleCalculator {
 
     /**
      * Calculates speed depending on Joystick angle.
+     *
      * @param angle angle from joystick
      * @param speed from joystick
      * @return -speed or positive speed

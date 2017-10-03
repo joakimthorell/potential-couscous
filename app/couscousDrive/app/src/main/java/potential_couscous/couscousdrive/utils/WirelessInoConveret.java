@@ -6,7 +6,7 @@ public class WirelessInoConveret {
     }
 
     public static String convertData(int steer, int drive) {
-        System.out.println("V" + buildData(steer) + "H" + buildData(drive));
+        //System.out.println("V" + buildData(steer) + "H" + buildData(drive));
         return "V" + buildData(steer) + "H" + buildData(drive);
     }
 

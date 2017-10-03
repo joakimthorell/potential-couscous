@@ -26,7 +26,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
+import potential_couscous.couscousdrive.controllers.ACCController;
 import potential_couscous.couscousdrive.controllers.ManualController;
+import potential_couscous.couscousdrive.controllers.PlatoonController;
 import potential_couscous.couscousdrive.utils.CarCom;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,23 +44,26 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolbar);
 
+        //TODO Behövs detta ?
+        /*
         // Not the best solution... Fix this if there is more time.
         // This is solves the networks call on main thread problems
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        */
 
         // Setting up The joystick
         JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);
         Button manualButton = (Button) findViewById(R.id.manual_button);
         new ManualController(joystickView, manualButton);
 
-        //TODO Build listeners for ACC and Platoon Controller.
+        // Setting up ACC button
+        Button ACCButton = (Button) findViewById(R.id.acc_button);
+        new ACCController(ACCButton);
 
-        //TODO Rebuild buttons.
-        /*
-        Buttons should be ToggleButtons: "GREEN" when active, "GREY" when inactive.
-        ManualButton as default when app starts. Always one button active.
-        */
+        // Setting upp platoon button
+        Button platoonButton = (Button) findViewById(R.id.platoon_button);
+        new PlatoonController(platoonButton);
     }
 
     @Override

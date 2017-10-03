@@ -3,6 +3,7 @@ package potential_couscous.couscousdrive;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,12 @@ public class ConnectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
+
+        //TODO Could this help ?
+        // Not the best solution... Fix this if there is more time.
+        // This is solves the networks call on main thread problems
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         mEd_host = (EditText) findViewById(R.id.ed_host);
         mButton = (Button) findViewById(R.id.btn_connect);
