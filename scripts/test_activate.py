@@ -6,7 +6,7 @@ def doSomething(str):
 
 print('starting test')
 
-start_server(doSomething(str))
+start_server(doSomething)
 
 while True:
     x = 'a'
