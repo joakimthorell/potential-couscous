@@ -14,17 +14,19 @@ import potential_couscous.couscousdrive.utils.WirelessInoConveret;
  */
 
 public class ManualController {
+    //private final String MANUAL_KEY;
 
     public ManualController(JoystickView joystickView, Button manualButton) {
         setmManualButtonListener(manualButton);
         setJoystickViewListener(joystickView);
     }
 
+
     private void setmManualButtonListener(Button manualButton) {
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                //sendData(MANUAL_KEY);
             }
         });
     }
@@ -59,7 +61,7 @@ public class ManualController {
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //start manual driving method...
+                //send info to server
             }
         });
     }

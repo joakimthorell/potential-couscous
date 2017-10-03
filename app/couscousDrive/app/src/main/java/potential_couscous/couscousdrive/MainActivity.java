@@ -26,7 +26,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
+import potential_couscous.couscousdrive.controllers.ACCController;
 import potential_couscous.couscousdrive.controllers.ManualController;
+import potential_couscous.couscousdrive.controllers.PlatoonController;
 import potential_couscous.couscousdrive.utils.CarCom;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         new ManualController(joystickView, manualButton);
 
         //TODO Build listeners for ACC and Platoon Controller.
+        //ACCController accController = new ACCController(mAccButton);
+        //PlatoonController platoonController = new PlatoonController(mPlatoonButton);
 
         //TODO Rebuild buttons.
         /*
