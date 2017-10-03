@@ -1,4 +1,4 @@
-package potential_couscous.couscousdrive.com;
+package potential_couscous.couscousdrive.utils;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,7 +18,8 @@ public class CarCom {
     private PrintWriter mAutoOut;
 
     /**
-     * 
+     * Constructor for CarCom. This Constructor will initiate the sockets and throws exception
+     * if not able to establish connection.
      * @param manualSocket
      * @param autoSocket
      * @throws IOException
@@ -53,6 +54,23 @@ public class CarCom {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Closing connection to all sockets and printwriters
+     * @return true if close was done correct. False if something went wrong.
+     */
+    public boolean close() {
+        try {
+            mManualOut.close();
+            mManualSocket.close();
+            mAutoOut.close();
+            mAutoSocket.close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+
     }
 
     /**

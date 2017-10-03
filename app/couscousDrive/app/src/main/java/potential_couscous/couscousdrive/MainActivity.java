@@ -26,8 +26,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
+import potential_couscous.couscousdrive.utils.CarCom;
 
 public class MainActivity extends AppCompatActivity {
+    private static CarCom mCarCom;
     private Toolbar mToolbar;
 
     @Override
@@ -59,12 +61,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_connect:
-                if (CarCom.isConnected) {
+                if (mCarCom.isConnected()) {
                     Toast.makeText(this, "You are connected", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent i = new Intent(this, ConnectActivity.class);
@@ -74,5 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    */
+
+    public static void setCarCom(CarCom carCom) {
+        mCarCom = carCom;
+    }
 }
