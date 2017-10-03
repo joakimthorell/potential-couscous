@@ -14,14 +14,16 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-public class ConnectActivity extends AppCompatActivity {
+import potential_couscous.couscousdrive.utils.CarCom;
 
+public class ConnectActivity extends AppCompatActivity {
+    private final static int WIRELESSINO_PORT = 9000;
+    private final static int COUSCOUS_PORT = 8888;
     private final static int CONNECTION_TIMEOUT = 3000;
 
-    private EditText mEd_host = null;
-    private EditText mEd_port = null;
-    private Button mButton = null;
-    private Socket mSocket = null;
+    private EditText mEd_host;
+    private Button mButton;
+    private CarCom mCarCom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,6 @@ public class ConnectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connect);
 
         mEd_host = (EditText) findViewById(R.id.ed_host);
-        mEd_port = (EditText) findViewById(R.id.ed_port);
         mButton = (Button) findViewById(R.id.btn_connect);
 
         SharedPreferences mSharedPrefs = getSharedPreferences("list", MODE_PRIVATE);
@@ -43,10 +44,6 @@ public class ConnectActivity extends AppCompatActivity {
         if (oldHost != null) {
             mEd_host.setText(oldHost);
         }
-        String oldPort = mSharedPrefs.getString("port", null);
-        if (oldPort != null) {
-            mEd_port.setText(oldPort);
-        }
     }
 
     private void setupButton(final SharedPreferences mSharedPrefs, final Context context) {
@@ -54,14 +51,11 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 String host = mEd_host.getText().toString().trim();
-                String port = mEd_port.getText().toString().trim();
 
-                mSharedPrefs.edit().putString("host", host).commit();
-                mSharedPrefs.edit().putString("port", port).commit();
+                mSharedPrefs.edit().putString("host", host).apply();
 
-                new AsyncConnectionTask(context).execute(host, port);
+                new AsyncConnectionTask(context).execute(host);
             }
         });
     }
@@ -77,46 +71,54 @@ public class ConnectActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                msg = params[0] + ":" + params[1];
+                msg = params[0];
+
+                String ip = params[0];
 
                 /*
                 Close any previously used socket
                 (Eg. double clicks on connect.)
                  */
-                if (mSocket != null && !mSocket.isClosed()) {
-                    mSocket.close();
+                if (mCarCom != null && mCarCom.isConnected()) {
+                    mCarCom.close();
                 }
 
-                mSocket = new Socket();
-                mSocket.connect(new InetSocketAddress(params[0],
-                                Integer.parseInt(params[1])),
+                Socket wirelessInoSocket = new Socket();
+                wirelessInoSocket.connect(new InetSocketAddress(ip,
+                        WIRELESSINO_PORT),
                         CONNECTION_TIMEOUT);
 
+                Socket couscousSocket = new Socket();
+                couscousSocket.connect(new InetSocketAddress(ip,
+                                COUSCOUS_PORT),
+                        CONNECTION_TIMEOUT);
+
+                mCarCom = new CarCom(wirelessInoSocket, couscousSocket);
 
             } catch (NumberFormatException e) {
                 e.printStackTrace();
-                msg = "Invalid port value (" + params[1] + "), type an integer between 0 and 65535";
+                msg = "something went wrong";
             } catch (IOException e) {
                 e.printStackTrace();
+                msg = "something went wrong";
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
-                msg = "Invalid port value (" + params[1] + "), type an integer between 0 and 65535";
+                msg = "something went wrong";
             }
 
             return null;
         }
 
-        /*
         @Override
         protected void onPostExecute(String s) {
-            if (mSocket != null && mSocket.isConnected()) {
-                MainActivity.setSocket(mSocket);
+            if (mCarCom != null && mCarCom.isConnected()) {
+                MainActivity.setCarCom(mCarCom);
                 finish();
             } else {
                 Toast.makeText(mContext, "Not able to connect. see: " + msg, Toast.LENGTH_LONG).show();
             }
         }
-        */
+
 
     }
 }
