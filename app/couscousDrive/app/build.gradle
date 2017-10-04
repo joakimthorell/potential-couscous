@@ -27,5 +27,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'io.github.controlwear:virtualjoystick:1.6.0'
+    compile 'com.anthonymandra:ToggleButtons:2.0.0'
     testCompile 'junit:junit:4.12'
 }

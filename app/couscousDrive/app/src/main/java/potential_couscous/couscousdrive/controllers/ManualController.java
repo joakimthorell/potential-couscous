@@ -1,5 +1,6 @@
 package potential_couscous.couscousdrive.controllers;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,14 +17,16 @@ public class ManualController {
         setJoystickViewListener(joystickView);
     }
 
-    private void setManualButtonListener(Button manualButton) {
+    private void setManualButtonListener(final Button manualButton) {
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CarCom carCom = MainActivity.getCarCom();
 
                 if (carCom != null && carCom.isConnected()) {
-                    carCom.sendData(carCom.MANUAL_KEY, null);
+                    manualButton.setBackgroundColor(Color.GREEN);
+                    manualButton.setTextColor(Color.BLACK);
+                    carCom.sendData(carCom.MANUAL_KEY);
                 }
             }
         });

@@ -1,5 +1,7 @@
 package potential_couscous.couscousdrive.controllers;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,14 +14,16 @@ public class ACCController {
         setACCListener(ACCButton);
     }
 
-    public void setACCListener (Button ACCButton) {
+    public void setACCListener (final Button ACCButton) {
         ACCButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CarCom carCom = MainActivity.getCarCom();
 
                 if (carCom != null && carCom.isConnected()) {
-                    carCom.sendData(carCom.MANUAL_KEY, null);
+                    ACCButton.setBackgroundColor(Color.GREEN);
+                    ACCButton.setTextColor(Color.BLACK);
+                    carCom.sendData(carCom.ACC_KEY, null);
                 }
             }
         });

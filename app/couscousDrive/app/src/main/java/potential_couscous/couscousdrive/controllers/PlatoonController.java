@@ -1,5 +1,6 @@
 package potential_couscous.couscousdrive.controllers;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,14 +13,16 @@ public class PlatoonController {
         setPlatoonButtonListener(platoonButton);
     }
 
-    public void setPlatoonButtonListener(Button platoonButton) {
+    public void setPlatoonButtonListener(final Button platoonButton) {
         platoonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CarCom carCom = MainActivity.getCarCom();
 
                 if (carCom != null && carCom.isConnected()) {
-                    carCom.sendData(carCom.MANUAL_KEY, null);
+                    platoonButton.setBackgroundColor(Color.GREEN);
+                    platoonButton.setTextColor(Color.BLACK);
+                    carCom.sendData(carCom.PLATOON_KEY);
                 }
             }
         });
