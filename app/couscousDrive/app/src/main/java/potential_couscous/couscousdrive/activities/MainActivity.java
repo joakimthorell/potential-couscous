@@ -67,28 +67,9 @@ public class MainActivity extends AppCompatActivity {
         Button platoonButton = (Button) findViewById(R.id.platoon_button);
         new PlatoonController(platoonButton);
 
-        //Trying out Togglebuttons
+        //Togglebuttons
         ToggleGroup buttons = (ToggleGroup) findViewById(R.id.groupTextAlignment);
         buttons.setAllowUnselected(true);
-
-        /*((ToggleGroup)findViewById(R.id.groupOrientation)).setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
-                int orientation = checkedId[0] == R.id.buttonHorizontal?
-                        LinearLayoutCompat.HORIZONTAL : LinearLayoutCompat.VERTICAL;
-                alignment.setOrientation(orientation);
-                format.setOrientation(orientation);
-            }
-        });
-
-        ((ToggleGroup)findViewById(R.id.groupExclusive)).setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
-                boolean isExclusive = checkedId[0] == R.id.buttonExclusive;
-                alignment.setExclusive(isExclusive);
-                format.setExclusive(isExclusive);
-            }
-        });*/
     }
 
     @Override
