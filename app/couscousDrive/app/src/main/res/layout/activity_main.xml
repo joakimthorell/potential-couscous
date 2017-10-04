@@ -36,8 +36,8 @@
 
     <Button
         android:id="@+id/manual_button"
-        android:layout_width="130dp"
-        android:layout_height="80dp"
+        android:layout_width="127dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:text="Manual "
@@ -47,21 +47,21 @@
 
     <Button
         android:id="@+id/acc_button"
-        android:layout_width="130dp"
-        android:layout_height="80dp"
+        android:layout_width="127dp"
+        android:layout_height="75dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="7dp"
+        android:layout_marginRight="8dp"
         android:text="ACC"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/manual_button"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintLeft_toRightOf="@+id/manual_button"
         app:layout_constraintRight_toLeftOf="@+id/platoon_button" />
 
     <Button
         android:id="@+id/platoon_button"
-        android:layout_width="130dp"
-        android:layout_height="80dp"
+        android:layout_width="127dp"
+        android:layout_height="75dp"
         android:layout_marginRight="16dp"
         android:text="Platoon"
         android:textSize="18sp"

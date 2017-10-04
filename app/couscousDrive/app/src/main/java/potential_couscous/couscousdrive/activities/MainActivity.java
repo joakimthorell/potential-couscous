@@ -4,6 +4,7 @@
 package potential_couscous.couscousdrive.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
