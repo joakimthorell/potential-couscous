@@ -70,13 +70,13 @@ public class JoystickCalculator {
     /**
      * Calculates speed depending on Joystick angle.
      *
-     * @param angle angle from joystick
+     * @param angle    angle from joystick
      * @param velocity from joystick
      * @return -speed or positive speed
      */
     public static int calcSpeed(int angle, int velocity) {
-        //velocity = translateSpeed(velocity);
-        velocity /= 6; // divide velocity to minimize max velocity
+        velocity = translateSpeed(velocity);
+        //velocity /= 6; // divide velocity to minimize max velocity
         if (angle <= 180) {
             return velocity;
         }
@@ -85,21 +85,21 @@ public class JoystickCalculator {
 
     /**
      * Attempt to minimize velocity and send less data to WirelessIno server
+     *
      * @param velocity
      * @return
      */
     private static int translateSpeed(int velocity) {
         if (velocity > 0 && velocity <= 25) {
-            return 9;
-        }
-        else if (velocity > 25 && velocity <= 50) {
             return 11;
+        } else if (velocity > 25 && velocity <= 50) {
+            return 12;
         } else if (velocity > 50 && velocity <= 75) {
-            return 15;
+            return 13;
         } else if (velocity > 75 && velocity < 100) {
-            return 19;
+            return 14;
         } else if (velocity == 100) {
-            return 23;
+            return 15;
         }
         return 0;
     }

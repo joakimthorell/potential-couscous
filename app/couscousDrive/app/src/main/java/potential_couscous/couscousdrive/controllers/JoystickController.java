@@ -19,11 +19,11 @@ public class JoystickController {
         joystickView.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
-                if (toggleGroup.getCheckedId()== R.id.manual_button) {
+                if (toggleGroup.getCheckedId() == R.id.manual_button) {
                     driveCar(angle, strength);
                 }
             }
-        }, 1);
+        });
     }
 
     private void driveCar(int angle, int velocity) {

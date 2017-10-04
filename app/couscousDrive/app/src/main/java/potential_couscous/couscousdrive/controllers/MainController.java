@@ -13,37 +13,37 @@ public class MainController {
     }
 
     public void setToggleButtonListener(final ToggleGroup toggleGroup) {
-            toggleGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
-                    CarCom carCom = MainActivity.getCarCom();
-                    switch (toggleGroup.getCheckedId()) {
-                        case (R.id.manual_button):
-                            if (checkCarCom (carCom)) {
-                                carCom.sendData(carCom.MANUAL_KEY);
-                                System.out.println("Manuell");
-                            }
-                            break;
-                        case(R.id.acc_button):
-                            if (checkCarCom (carCom)) {
-                                carCom.sendData(carCom.ACC_KEY);
-                                System.out.println("ACC");
-                            }
-                            break;
-                        case(R.id.platoon_button):
-                            if (checkCarCom (carCom)) {
-                                carCom.sendData(carCom.PLATOON_KEY);
-                                System.out.println("Kolonn");
-                            }
-                            break;
-                        default:
-                            break;
+        toggleGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
+                CarCom carCom = MainActivity.getCarCom();
+                switch (toggleGroup.getCheckedId()) {
+                    case (R.id.manual_button):
+                        if (checkCarCom(carCom)) {
+                            carCom.sendData(carCom.MANUAL_KEY);
+                            System.out.println("Manuell");
+                        }
+                        break;
+                    case (R.id.acc_button):
+                        if (checkCarCom(carCom)) {
+                            carCom.sendData(carCom.ACC_KEY);
+                            System.out.println("ACC");
+                        }
+                        break;
+                    case (R.id.platoon_button):
+                        if (checkCarCom(carCom)) {
+                            carCom.sendData(carCom.PLATOON_KEY);
+                            System.out.println("Kolonn");
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         });
     }
 
-    private boolean checkCarCom (CarCom carCom) {
+    private boolean checkCarCom(CarCom carCom) {
         return carCom != null && carCom.isConnected();
     }
 }
