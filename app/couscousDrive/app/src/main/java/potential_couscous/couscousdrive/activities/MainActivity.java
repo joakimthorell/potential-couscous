@@ -6,8 +6,11 @@ package potential_couscous.couscousdrive.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.StrictMode;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.ToggleGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +24,15 @@ import potential_couscous.couscousdrive.controllers.ACCController;
 import potential_couscous.couscousdrive.controllers.ManualController;
 import potential_couscous.couscousdrive.controllers.PlatoonController;
 import potential_couscous.couscousdrive.utils.CarCom;
+
+//Imports for Toggle
+import android.support.annotation.IdRes;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.ToggleGroup;
+
+import static android.R.attr.format;
 
 public class MainActivity extends AppCompatActivity {
     private static CarCom mCarCom;
@@ -54,6 +66,29 @@ public class MainActivity extends AppCompatActivity {
         // Setting upp platoon button
         Button platoonButton = (Button) findViewById(R.id.platoon_button);
         new PlatoonController(platoonButton);
+
+        //Trying out Togglebuttons
+        ToggleGroup buttons = (ToggleGroup) findViewById(R.id.groupTextAlignment);
+        buttons.setAllowUnselected(true);
+
+        /*((ToggleGroup)findViewById(R.id.groupOrientation)).setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
+                int orientation = checkedId[0] == R.id.buttonHorizontal?
+                        LinearLayoutCompat.HORIZONTAL : LinearLayoutCompat.VERTICAL;
+                alignment.setOrientation(orientation);
+                format.setOrientation(orientation);
+            }
+        });
+
+        ((ToggleGroup)findViewById(R.id.groupExclusive)).setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
+                boolean isExclusive = checkedId[0] == R.id.buttonExclusive;
+                alignment.setExclusive(isExclusive);
+                format.setExclusive(isExclusive);
+            }
+        });*/
     }
 
     @Override
