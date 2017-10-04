@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setCarCom(CarCom carCom) {
         mCarCom = carCom;
+
+        //Setting manual to default
+        mCarCom.sendData(mCarCom.MANUAL_KEY);
     }
 
     public static CarCom getCarCom() {
