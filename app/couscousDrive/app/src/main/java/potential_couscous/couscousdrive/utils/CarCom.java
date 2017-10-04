@@ -15,7 +15,7 @@ public class CarCom {
     public final String MANUAL_KEY = "manualkey";
 
     private Socket mManualSocket; // WirelessIno socket.
-    private PrintWriter mManualOut;
+    private PrintWriter mManualOut; // Couscous server socket
 
     private Socket mAutoSocket;
     private PrintWriter mAutoOut;
@@ -73,6 +73,12 @@ public class CarCom {
             mManualSocket.close();
             mAutoOut.close();
             mAutoSocket.close();
+
+            mManualSocket = null;
+            mAutoSocket = null;
+            mAutoOut = null;
+            mManualOut = null;
+
             return true;
         } catch (IOException e) {
             return false;
@@ -90,11 +96,9 @@ public class CarCom {
         if (key.equals(ACC_KEY) || key.equals(PLATOON_KEY)) {
             sendData(key);
             return;
+        } if (key.equals(MANUAL_KEY)) {
+            mManualOut.println(data);
         }
-
-        //TODO println() eller print() ?
-
-        mManualOut.println(data);
     }
 
     /**

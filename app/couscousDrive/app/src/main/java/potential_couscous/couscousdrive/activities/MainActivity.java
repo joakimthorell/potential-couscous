@@ -4,6 +4,7 @@
 package potential_couscous.couscousdrive.activities;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -34,12 +35,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         //TODO Behövs detta ?
-        /*
+
         // Not the best solution... Fix this if there is more time.
-        // This is solves the networks call on main thread problems
+        // This solves the networks call on main thread problems
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        */
 
         // Setting up The joystick
         JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);

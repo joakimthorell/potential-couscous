@@ -17,18 +17,18 @@
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text=" host IP"/>
+        tools:text=" host IP" />
 
     <EditText
         android:id="@+id/ed_host"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/default_host_ip"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_host"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_host">
 
         <requestFocus />
     </EditText>
@@ -38,10 +38,10 @@
         android:layout_width="130dp"
         android:layout_height="80dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/connect"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/ed_host"/>
+        app:layout_constraintTop_toBottomOf="@+id/ed_host" />
 
 </android.support.constraint.ConstraintLayout>
