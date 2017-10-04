@@ -4,35 +4,24 @@
 package potential_couscous.couscousdrive.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.StrictMode;
-import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.ToggleGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 import potential_couscous.couscousdrive.R;
-import potential_couscous.couscousdrive.controllers.ACCController;
-import potential_couscous.couscousdrive.controllers.ManualController;
-import potential_couscous.couscousdrive.controllers.PlatoonController;
+import potential_couscous.couscousdrive.controllers.MainController;
+import potential_couscous.couscousdrive.controllers.JoystickController;
 import potential_couscous.couscousdrive.utils.CarCom;
 
 //Imports for Toggle
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.ToggleGroup;
 
-import static android.R.attr.format;
 
 public class MainActivity extends AppCompatActivity {
     private static CarCom mCarCom;
@@ -56,20 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting up The joystick
         JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);
-        Button manualButton = (Button) findViewById(R.id.manual_button);
-        new ManualController(joystickView, manualButton);
-
-        // Setting up ACC button
-        Button ACCButton = (Button) findViewById(R.id.acc_button);
-        new ACCController(ACCButton);
-
-        // Setting upp platoon button
-        Button platoonButton = (Button) findViewById(R.id.platoon_button);
-        new PlatoonController(platoonButton);
+        new JoystickController(joystickView);
 
         //Togglebuttons
-        ToggleGroup buttons = (ToggleGroup) findViewById(R.id.groupTextAlignment);
-        buttons.setAllowUnselected(true);
+        ToggleGroup toggleGroup = (ToggleGroup) findViewById(R.id.groupTextAlignment);
+        new MainController(toggleGroup);
     }
 
     @Override

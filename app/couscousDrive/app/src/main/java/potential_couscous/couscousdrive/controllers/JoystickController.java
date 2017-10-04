@@ -10,27 +10,12 @@ import potential_couscous.couscousdrive.utils.AngleCalculator;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 
-public class ManualController {
+public class JoystickController {
 
-    public ManualController(JoystickView joystickView, Button manualButton) {
-        setManualButtonListener(manualButton);
+    public JoystickController(JoystickView joystickView) {
         setJoystickViewListener(joystickView);
     }
 
-    private void setManualButtonListener(final Button manualButton) {
-        manualButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CarCom carCom = MainActivity.getCarCom();
-
-                if (carCom != null && carCom.isConnected()) {
-                    manualButton.setBackgroundColor(Color.GREEN);
-                    manualButton.setTextColor(Color.BLACK);
-                    carCom.sendData(carCom.MANUAL_KEY);
-                }
-            }
-        });
-    }
 
     private void setJoystickViewListener(JoystickView joystickView) {
         joystickView.setOnMoveListener(new JoystickView.OnMoveListener() {
