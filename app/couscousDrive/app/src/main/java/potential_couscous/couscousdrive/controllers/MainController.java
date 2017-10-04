@@ -14,7 +14,6 @@ import potential_couscous.couscousdrive.utils.CarCom;
  */
 
 public class MainController {
-
     public MainController(ToggleGroup toggleGroup) {
         setToggleButtonListener(toggleGroup);
     }

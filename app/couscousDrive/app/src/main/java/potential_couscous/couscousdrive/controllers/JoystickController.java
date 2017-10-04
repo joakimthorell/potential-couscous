@@ -11,12 +11,10 @@ import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 
 public class JoystickController {
-
     public JoystickController(JoystickView joystickView) {
         setJoystickViewListener(joystickView);
     }
-
-
+    
     private void setJoystickViewListener(JoystickView joystickView) {
         joystickView.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override

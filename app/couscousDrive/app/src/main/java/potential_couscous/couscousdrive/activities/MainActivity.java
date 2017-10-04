@@ -20,9 +20,6 @@ import potential_couscous.couscousdrive.controllers.MainController;
 import potential_couscous.couscousdrive.controllers.JoystickController;
 import potential_couscous.couscousdrive.utils.CarCom;
 
-//Imports for Toggle
-
-
 public class MainActivity extends AppCompatActivity {
     private static CarCom mCarCom;
     private Toolbar mToolbar;
@@ -73,14 +70,12 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
     public static void setCarCom(CarCom carCom) {
         mCarCom = carCom;
 
         //Setting manual to default
         mCarCom.sendData(mCarCom.MANUAL_KEY);
     }
-
     public static CarCom getCarCom() {
         return mCarCom;
     }
