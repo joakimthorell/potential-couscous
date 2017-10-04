@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        // Setting up The joystick
-        JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);
-        new JoystickController(joystickView);
-
         //Togglebuttons
         ToggleGroup toggleGroup = (ToggleGroup) findViewById(R.id.groupTextAlignment);
         new MainController(toggleGroup);
+
+        // Setting up The joystick
+        JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);
+        new JoystickController(joystickView, toggleGroup);
     }
 
     @Override
