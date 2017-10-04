@@ -97,7 +97,9 @@ public class CarCom {
             sendData(key);
             return;
         } if (key.equals(MANUAL_KEY)) {
-            mManualOut.println(data);
+            System.out.println("Nu skickas data till bilen.");
+            System.out.println("Data som skickas är: " + data);
+            //mManualOut.println(data);
         }
     }
 
