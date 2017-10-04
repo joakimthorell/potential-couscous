@@ -5,7 +5,7 @@ import android.support.v7.widget.ToggleGroup;
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.activities.MainActivity;
-import potential_couscous.couscousdrive.utils.AngleCalculator;
+import potential_couscous.couscousdrive.utils.JoystickCalculator;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 
@@ -23,12 +23,12 @@ public class JoystickController {
                     driveCar(angle, strength);
                 }
             }
-        });
+        }, 1);
     }
 
     private void driveCar(int angle, int velocity) {
-        int steer = checkData(AngleCalculator.calcAngle(angle));
-        int drive = checkData(AngleCalculator.calcSpeed(angle, velocity));
+        int steer = checkData(JoystickCalculator.calcAngle(angle) * -1); // multiply with -1 to reverse steering
+        int drive = checkData(JoystickCalculator.calcSpeed(angle, velocity));
         String data = WirelessInoConveret.convertData(steer, drive);
 
         CarCom carCom = MainActivity.getCarCom();

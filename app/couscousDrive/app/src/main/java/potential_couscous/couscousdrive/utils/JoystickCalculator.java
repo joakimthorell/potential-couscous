@@ -4,11 +4,11 @@
  */
 package potential_couscous.couscousdrive.utils;
 
-public class AngleCalculator {
+public class JoystickCalculator {
     public static int MAX_VALUE = 100;
     public static int MIN_VALUE = -100;
 
-    private AngleCalculator() {
+    private JoystickCalculator() {
     }
 
     /**
@@ -33,6 +33,9 @@ public class AngleCalculator {
     }
 
     private static int firstQuadrant(int angle) {
+        if (angle == 0) {
+            angle = 90;
+        }
         double num = multiplyQuote(90 - angle);
         return roundDouble(num);
     }
@@ -68,13 +71,36 @@ public class AngleCalculator {
      * Calculates speed depending on Joystick angle.
      *
      * @param angle angle from joystick
-     * @param speed from joystick
+     * @param velocity from joystick
      * @return -speed or positive speed
      */
-    public static int calcSpeed(int angle, int speed) {
+    public static int calcSpeed(int angle, int velocity) {
+        //velocity = translateSpeed(velocity);
+        velocity /= 6; // divide velocity to minimize max velocity
         if (angle <= 180) {
-            return speed;
+            return velocity;
         }
-        return speed * -1;
+        return velocity * -1;
+    }
+
+    /**
+     * Attempt to minimize velocity and send less data to WirelessIno server
+     * @param velocity
+     * @return
+     */
+    private static int translateSpeed(int velocity) {
+        if (velocity > 0 && velocity <= 25) {
+            return 9;
+        }
+        else if (velocity > 25 && velocity <= 50) {
+            return 11;
+        } else if (velocity > 50 && velocity <= 75) {
+            return 15;
+        } else if (velocity > 75 && velocity < 100) {
+            return 19;
+        } else if (velocity == 100) {
+            return 23;
+        }
+        return 0;
     }
 }

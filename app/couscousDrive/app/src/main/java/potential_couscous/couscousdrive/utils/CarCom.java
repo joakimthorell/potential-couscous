@@ -20,6 +20,8 @@ public class CarCom {
     private Socket mAutoSocket;
     private PrintWriter mAutoOut;
 
+    private String lastData;
+
     /**
      * This Constructor will initiate the Sockets and throws exception
      * if not able to establish connection.
@@ -31,6 +33,7 @@ public class CarCom {
     public CarCom(Socket manualSocket, Socket autoSocket) throws IOException {
         mManualSocket = manualSocket;
         mAutoSocket = autoSocket;
+        lastData = "";
 
         init();
     }
@@ -93,14 +96,17 @@ public class CarCom {
      * @param data String data will be sent to car
      */
     public void sendData(String key, String data) {
-        if (key.equals(ACC_KEY) || key.equals(PLATOON_KEY)) {
-            sendData(key);
-            return;
-        } if (key.equals(MANUAL_KEY)) {
-            System.out.println("Nu skickas data till bilen.");
-            System.out.println("Data som skickas är: " + data);
-            //mManualOut.println(data);
+        if (!lastData.equals(data)) {
+            System.out.println(data);
+            if (key.equals(ACC_KEY) || key.equals(PLATOON_KEY)) {
+                sendData(key);
+                return;
+            }
+            if (key.equals(MANUAL_KEY)) {
+                mManualOut.println(data);
+            }
         }
+        lastData = data;
     }
 
     /**

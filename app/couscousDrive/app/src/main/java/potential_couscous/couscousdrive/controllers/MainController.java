@@ -1,9 +1,7 @@
 package potential_couscous.couscousdrive.controllers;
 
-import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.ToggleGroup;
-import android.view.View;
 
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.activities.MainActivity;
@@ -21,19 +19,19 @@ public class MainController {
                     CarCom carCom = MainActivity.getCarCom();
                     switch (toggleGroup.getCheckedId()) {
                         case (R.id.manual_button):
-                            if (doStuff(carCom)) {
+                            if (checkCarCom (carCom)) {
                                 carCom.sendData(carCom.MANUAL_KEY);
                                 System.out.println("Manuell");
                             }
                             break;
                         case(R.id.acc_button):
-                            if (doStuff(carCom)) {
+                            if (checkCarCom (carCom)) {
                                 carCom.sendData(carCom.ACC_KEY);
                                 System.out.println("ACC");
                             }
                             break;
                         case(R.id.platoon_button):
-                            if (doStuff(carCom)) {
+                            if (checkCarCom (carCom)) {
                                 carCom.sendData(carCom.PLATOON_KEY);
                                 System.out.println("Kolonn");
                             }
@@ -45,7 +43,7 @@ public class MainController {
         });
     }
 
-    private boolean doStuff(CarCom carCom) {
+    private boolean checkCarCom (CarCom carCom) {
         return carCom != null && carCom.isConnected();
     }
 }
