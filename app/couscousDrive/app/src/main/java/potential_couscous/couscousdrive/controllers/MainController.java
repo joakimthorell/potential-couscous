@@ -16,26 +16,36 @@ public class MainController {
 
     public void setToggleButtonListener(final ToggleGroup toggleGroup) {
             toggleGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
-                CarCom carCom = MainActivity.getCarCom();
                 @Override
                 public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
+                    CarCom carCom = MainActivity.getCarCom();
                     switch (toggleGroup.getCheckedId()) {
                         case (R.id.manual_button):
-                            carCom.sendData(carCom.MANUAL_KEY);
-                            System.out.println("Manuell");
+                            if (doStuff(carCom)) {
+                                carCom.sendData(carCom.MANUAL_KEY);
+                                System.out.println("Manuell");
+                            }
                             break;
                         case(R.id.acc_button):
-                            carCom.sendData(carCom.ACC_KEY);
-                            System.out.println("ACC");
+                            if (doStuff(carCom)) {
+                                carCom.sendData(carCom.ACC_KEY);
+                                System.out.println("ACC");
+                            }
                             break;
                         case(R.id.platoon_button):
-                            carCom.sendData(carCom.PLATOON_KEY);
-                            System.out.println("Kolonn");
+                            if (doStuff(carCom)) {
+                                carCom.sendData(carCom.PLATOON_KEY);
+                                System.out.println("Kolonn");
+                            }
                             break;
                         default:
                             break;
                 }
             }
         });
+    }
+
+    private boolean doStuff(CarCom carCom) {
+        return carCom != null && carCom.isConnected();
     }
 }

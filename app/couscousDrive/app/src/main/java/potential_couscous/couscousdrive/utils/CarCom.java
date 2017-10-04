@@ -111,13 +111,13 @@ public class CarCom {
     public void sendData(String key) {
         switch (key) {
             case ACC_KEY:
-                mAutoOut.print(ACC_KEY);
+                mAutoOut.println(ACC_KEY);
                 break;
             case PLATOON_KEY:
-                mAutoOut.print(PLATOON_KEY);
+                mAutoOut.println(PLATOON_KEY);
                 break;
             case MANUAL_KEY:
-                mAutoOut.print(MANUAL_KEY);
+                mAutoOut.println(MANUAL_KEY);
                 break;
             default:
                 // nothing should be done here
