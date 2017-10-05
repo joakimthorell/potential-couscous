@@ -4,48 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="potential_couscous.couscousdrive.ConnectActivity">
+    tools:context="potential_couscous.couscousdrive.activities.ConnectActivity">
 
     <TextView
         android:id="@+id/tv_host"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/host_ip"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text=" host IP"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text=" host IP" />
 
     <EditText
         android:id="@+id/ed_host"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/default_host_ip"
-        app:layout_constraintTop_toBottomOf="@id/tv_host">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_host">
 
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/tv_port"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/host_port"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintTop_toBottomOf="@id/ed_host" />
-
-    <EditText
-        android:id="@+id/ed_port"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/default_host_port"
-        app:layout_constraintTop_toBottomOf="@id/tv_port" />
-
     <Button
         android:id="@+id/btn_connect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/connect"
-        app:layout_constraintTop_toBottomOf="@id/ed_port" />
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_host" />
 
 </android.support.constraint.ConstraintLayout>
