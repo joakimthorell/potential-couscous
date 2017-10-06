@@ -28,13 +28,11 @@ public class MainController {
                     case (R.id.acc_button):
                         if (checkCarCom(carCom)) {
                             carCom.sendData(carCom.ACC_KEY);
-                            toggleGroup.setBackgroundColor(Color.parseColor("FFFF6E40"));
                         }
                         break;
                     case (R.id.platoon_button):
                         if (checkCarCom(carCom)) {
                             carCom.sendData(carCom.PLATOON_KEY);
-                            toggleGroup.setBackgroundColor(Color.parseColor("FFFF6E40"));
                         }
                         break;
                     default:
