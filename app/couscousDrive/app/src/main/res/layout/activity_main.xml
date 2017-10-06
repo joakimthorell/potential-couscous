@@ -27,7 +27,7 @@
             custom:JV_backgroundColor="#009688"
             custom:JV_borderColor="#00796B"
             custom:JV_borderWidth="4dp"
-            custom:JV_buttonColor="#FF6E40"
+            custom:JV_buttonColor="#ff4e2a"
             custom:JV_buttonSizeRatio="15%"
             custom:JV_fixedCenter="false"
             custom:layout_constraintLeft_toLeftOf="parent"
@@ -35,16 +35,6 @@
             custom:layout_constraintTop_toBottomOf="@+id/my_toolbar"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp" />
-
-    //Lägg som togglegroup
-            <TextView
-                android:id="@+id/Alternativ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="@string/Alternativ"
-                app:layout_constraintBottom_toTopOf="parent"/>
 
         <android.support.v7.widget.ToggleGroup
             android:id="@+id/groupTextAlignment"
@@ -55,15 +45,24 @@
             android:layout_margin="5dp"
             app:divider="@drawable/toggle_divider"
             app:exclusive="true"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:orientation="horizontal"
-            app:allowUnselected="false">
+            app:allowUnselected="false"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/joystick"
+            app:layout_constraintHorizontal_bias="0.437"
+            app:layout_constraintVertical_bias="0.285">
 
             <android.support.v7.widget.ToggleButton
                 android:id="@+id/manual_button"
                 style="@style/Widget.Material.ToggleButton"
-                android:layout_width="127dp"
-                android:layout_height="75dp"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:text="Manual"
@@ -72,8 +71,8 @@
             <android.support.v7.widget.ToggleButton
                 android:id="@+id/acc_button"
                 style="@style/Widget.Material.ToggleButton"
-                android:layout_width="127dp"
-                android:layout_height="75dp"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:text="ACC"
@@ -82,8 +81,8 @@
             <android.support.v7.widget.ToggleButton
                 android:id="@+id/platoon_button"
                 style="@style/Widget.Material.ToggleButton"
-                android:layout_width="127dp"
-                android:layout_height="75dp"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="16dp"
                 android:text="Platoon"
                 android:textSize="18sp" />
