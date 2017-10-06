@@ -3,6 +3,8 @@ package potential_couscous.couscousdrive;
 import org.junit.Before;
 import org.junit.Test;
 
+import potential_couscous.couscousdrive.utils.JoystickCalculator;
+
 import static org.junit.Assert.*;
 
 public class AngleCalculatorTest {
@@ -32,27 +34,27 @@ public class AngleCalculatorTest {
     @Test
     public void calcAngle() {
 
-        assertEquals(64, AngleCalculator.calcAngle(angle0To90), DELTA);
-        assertEquals(-30, AngleCalculator.calcAngle(angle90To180), DELTA);
-        assertEquals(-55, AngleCalculator.calcAngle(angle180To270), DELTA);
-        assertEquals(18, AngleCalculator.calcAngle(angle270To360), DELTA);
+        assertEquals(64, JoystickCalculator.calcAngle(angle0To90), DELTA);
+        assertEquals(-30, JoystickCalculator.calcAngle(angle90To180), DELTA);
+        assertEquals(-55, JoystickCalculator.calcAngle(angle180To270), DELTA);
+        assertEquals(18, JoystickCalculator.calcAngle(angle270To360), DELTA);
 
 
         // Trying max/min values in first and second quadrant
-        assertEquals(100, AngleCalculator.calcAngle(0), DELTA);
-        assertEquals(0, AngleCalculator.calcAngle(90), DELTA);
-        assertEquals(0, AngleCalculator.calcAngle(91), DELTA);
-        assertEquals(0, AngleCalculator.calcAngle(89), DELTA);
-        assertEquals(-100, AngleCalculator.calcAngle(180), DELTA);
-        assertEquals(-100, AngleCalculator.calcAngle(179), DELTA);
+        assertEquals(100, JoystickCalculator.calcAngle(0), DELTA);
+        assertEquals(0, JoystickCalculator.calcAngle(90), DELTA);
+        assertEquals(0, JoystickCalculator.calcAngle(91), DELTA);
+        assertEquals(0, JoystickCalculator.calcAngle(89), DELTA);
+        assertEquals(-100, JoystickCalculator.calcAngle(180), DELTA);
+        assertEquals(-100, JoystickCalculator.calcAngle(179), DELTA);
 
         // Trying max/min values in third and fourth quadrant
-        assertEquals(-100, AngleCalculator.calcAngle(181), DELTA);
-        assertEquals(0, AngleCalculator.calcAngle(270), DELTA);
-        assertEquals(100, AngleCalculator.calcAngle(360), DELTA);
+        assertEquals(-100, JoystickCalculator.calcAngle(181), DELTA);
+        assertEquals(0, JoystickCalculator.calcAngle(270), DELTA);
+        assertEquals(100, JoystickCalculator.calcAngle(360), DELTA);
 
-        assertEquals(0, AngleCalculator.calcAngle(-1));
-        assertEquals(0, AngleCalculator.calcAngle(2000));
+        assertEquals(0, JoystickCalculator.calcAngle(-1));
+        assertEquals(0, JoystickCalculator.calcAngle(2000));
 
     }
 

@@ -1,98 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="potential_couscous.couscousdrive.MainActivity">
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="potential_couscous.couscousdrive.activities.MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/joystick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        custom:layout_constraintTop_toTopOf="parent"
-        custom:JV_backgroundColor="#009688"
-        custom:JV_borderColor="#00796B"
-        custom:JV_borderWidth="4dp"
-        custom:JV_buttonColor="#FF6E40"
-        custom:JV_buttonSizeRatio="15%"
-        custom:JV_fixedCenter="false" />
+        <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/joystick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            custom:JV_backgroundColor="#009688"
+            custom:JV_borderColor="#00796B"
+            custom:JV_borderWidth="4dp"
+            custom:JV_buttonColor="#FF6E40"
+            custom:JV_buttonSizeRatio="15%"
+            custom:JV_fixedCenter="false"
+            custom:layout_constraintLeft_toLeftOf="parent"
+            custom:layout_constraintRight_toRightOf="parent"
+            custom:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
 
-    <Button
-        android:id="@+id/lock_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lock_button_text"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/joystick"
-        app:layout_constraintVertical_bias="0.063"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+    //Lägg som togglegroup
+            <TextView
+                android:id="@+id/Alternativ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/Alternativ"
+                app:layout_constraintBottom_toTopOf="parent"/>
 
-    <Button
-        android:id="@+id/acc_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/acc_text"
-        app:layout_constraintBottom_toBottomOf="@+id/lock_button"
-        android:layout_marginBottom="0dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.85" />
+        <android.support.v7.widget.ToggleGroup
+            android:id="@+id/groupTextAlignment"
+            style="@style/Widget.Material.ToggleGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
+            app:divider="@drawable/toggle_divider"
+            app:exclusive="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:orientation="horizontal"
+            app:allowUnselected="false">
 
-    <Button
-        android:id="@+id/mDecreaseSteeringButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="8dp"
-        android:text="-"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/mSteeringTextView"/>
+            <android.support.v7.widget.ToggleButton
+                android:id="@+id/manual_button"
+                style="@style/Widget.Material.ToggleButton"
+                android:layout_width="127dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Manual"
+                android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/mIncreaseSteeringButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        android:text="+"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/mSteeringTextView"/>
+            <android.support.v7.widget.ToggleButton
+                android:id="@+id/acc_button"
+                style="@style/Widget.Material.ToggleButton"
+                android:layout_width="127dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="ACC"
+                android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/mSteeringTextView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        android:text="0"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+            <android.support.v7.widget.ToggleButton
+                android:id="@+id/platoon_button"
+                style="@style/Widget.Material.ToggleButton"
+                android:layout_width="127dp"
+                android:layout_height="75dp"
+                android:layout_marginRight="16dp"
+                android:text="Platoon"
+                android:textSize="18sp" />
 
-</android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.ToggleGroup>
+
+    </android.support.constraint.ConstraintLayout>

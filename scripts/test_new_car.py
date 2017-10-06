@@ -1,7 +1,16 @@
 import nav as n
+import picamera as cam
 from nav import *
 from nav1 import whole4, pause, cont
 from driving import stop, drive, steer
+
+
+camera = cam.PiCamera()
+
+camera.start_preview()
+
+print('Showing camera preview on connected screen....')
+
 init()
 
 time.sleep(1)

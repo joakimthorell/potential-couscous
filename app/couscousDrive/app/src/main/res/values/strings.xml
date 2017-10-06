@@ -7,4 +7,5 @@
     <string name="default_host_port">1337</string>
     <string name="lock_button_text">Lock steering</string>
     <string name="acc_text">ACC</string>
+    <string name="Alternativ"></string>
 </resources>
