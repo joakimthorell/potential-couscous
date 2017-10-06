@@ -1,5 +1,6 @@
 package potential_couscous.couscousdrive.controllers;
 
+import android.graphics.Color;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.ToggleGroup;
 
@@ -21,19 +22,17 @@ public class MainController {
                     case (R.id.manual_button):
                         if (checkCarCom(carCom)) {
                             carCom.sendData(carCom.MANUAL_KEY);
-                            System.out.println("Manuell");
+
                         }
                         break;
                     case (R.id.acc_button):
                         if (checkCarCom(carCom)) {
                             carCom.sendData(carCom.ACC_KEY);
-                            System.out.println("ACC");
                         }
                         break;
                     case (R.id.platoon_button):
                         if (checkCarCom(carCom)) {
                             carCom.sendData(carCom.PLATOON_KEY);
-                            System.out.println("Kolonn");
                         }
                         break;
                     default:
