@@ -9,17 +9,18 @@ import potential_couscous.couscousdrive.utils.JoystickCalculator;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 
-public class JoystickController {
+public class JoystickController implements IJoystick {
+    private ToggleGroup mToggleGroup;
 
-    public JoystickController(JoystickView joystickView, ToggleGroup toggleGroup) {
-        setJoystickViewListener(joystickView, toggleGroup);
+    public JoystickController(ToggleGroup toggleGroup) {
+        mToggleGroup = toggleGroup;
     }
 
-    private void setJoystickViewListener(final JoystickView joystickView, final ToggleGroup toggleGroup) {
+    public void setJoystickViewListener(JoystickView joystickView) {
         joystickView.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
-                if (toggleGroup.getCheckedId() == R.id.manual_button) {
+                if (mToggleGroup.getCheckedId() == R.id.manual_button) {
                     driveCar(angle, strength);
                 }
             }
@@ -33,7 +34,7 @@ public class JoystickController {
 
         CarCom carCom = MainActivity.getCarCom();
         if (carCom != null && carCom.isConnected()) {
-            carCom.sendData(carCom.MANUAL_KEY, data);
+            carCom.sendData(carCom.mMANUAL_KEY, data);
         }
     }
 

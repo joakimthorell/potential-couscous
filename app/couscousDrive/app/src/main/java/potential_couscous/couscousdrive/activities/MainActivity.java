@@ -3,8 +3,9 @@
  */
 package potential_couscous.couscousdrive.activities;
 
+import android.support.v4.app.Fragment;
 import android.content.Intent;
-import android.os.StrictMode;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ToggleGroup;
@@ -12,17 +13,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import io.github.controlwear.virtual.joystick.android.JoystickView;
+import potential_couscous.couscousdrive.controllers.ACCController;
+import potential_couscous.couscousdrive.controllers.JoystickController;
+import potential_couscous.couscousdrive.view.ACCFragment;
+import potential_couscous.couscousdrive.view.IFragmentChanger;
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.controllers.MainController;
-import potential_couscous.couscousdrive.controllers.JoystickController;
 import potential_couscous.couscousdrive.utils.CarCom;
+import potential_couscous.couscousdrive.view.JoystickFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IFragmentChanger {
     private static CarCom mCarCom;
     private Toolbar mToolbar;
+    private TextView mSelectMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +40,39 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolbar);
 
-        //TODO Behövs detta ?
+        mSelectMode = (TextView) findViewById(R.id.select_mode_textview);
 
+        /*
         // Not the best solution... Fix this if there is more time.
         // This solves the networks call on main thread problems
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        */
 
-        //Togglebuttons
+        //Set Togglebuttons
         ToggleGroup toggleGroup = (ToggleGroup) findViewById(R.id.groupTextAlignment);
-        new MainController(toggleGroup);
+        MainController mainController = new MainController();
+        mainController.setToggleButtonListener(toggleGroup);
 
-        // Setting up The joystick
-        JoystickView joystickView = (JoystickView) findViewById(R.id.joystick);
-        new JoystickController(joystickView, toggleGroup);
+        mainController.setFragmentReplacer(this); //Allow togglebuttons to replace fragments.
+
+        //Set JoystickView
+        JoystickFragment joystickFragment = new JoystickFragment();
+        JoystickController joystickController = new JoystickController(toggleGroup);
+        joystickFragment.setIController(joystickController);
+        mainController.setJoystickController(joystickController);
+
+        //Set ACC
+        ACCFragment accFragment = new ACCFragment();
+        ACCController accController = new ACCController();
+        accFragment.setIController(accController);
+        mainController.setmACCController(accController);
+
+        /*
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_fragment_container, joystickFragment);
+        ft.commit();
+        */
     }
 
     @Override
@@ -70,12 +96,23 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void replaceFragment(Fragment fragment) {
+        if (mSelectMode.getVisibility() == View.VISIBLE) {
+            mSelectMode.setVisibility(View.INVISIBLE);
+        }
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_fragment_container, fragment);
+        ft.commit();
+    }
+
     public static void setCarCom(CarCom carCom) {
         mCarCom = carCom;
-
         //Setting manual to default
-        mCarCom.sendData(mCarCom.MANUAL_KEY);
+        mCarCom.sendData(mCarCom.mMANUAL_KEY);
     }
+
     public static CarCom getCarCom() {
         return mCarCom;
     }
