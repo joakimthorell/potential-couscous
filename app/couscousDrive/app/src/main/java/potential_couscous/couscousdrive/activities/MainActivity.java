@@ -1,13 +1,10 @@
-/**
- * Main
- */
 package potential_couscous.couscousdrive.activities;
 
-import android.support.v4.app.Fragment;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.ToggleGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -17,15 +14,18 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.controllers.ACCController;
 import potential_couscous.couscousdrive.controllers.JoystickController;
-import potential_couscous.couscousdrive.view.ACCFragment;
-import potential_couscous.couscousdrive.view.IFragmentChanger;
-import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.controllers.MainController;
 import potential_couscous.couscousdrive.utils.CarCom;
+import potential_couscous.couscousdrive.view.ACCFragment;
+import potential_couscous.couscousdrive.controllers.IFragmentChanger;
 import potential_couscous.couscousdrive.view.JoystickFragment;
 
+/**
+ * Main
+ */
 public class MainActivity extends AppCompatActivity implements IFragmentChanger {
     private static CarCom mCarCom;
     private TextView mSelectMode;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
         ACCFragment accFragment = new ACCFragment();
         ACCController accController = new ACCController();
         accFragment.setIController(accController);
-        mainController.setmACCController(accController);
+        mainController.setACCController(accController);
     }
 
     @Override

@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -66,7 +66,7 @@ public class ConnectActivity extends AppCompatActivity {
         //Limit number of input characters
         InputFilter[] filters = new InputFilter[1];
         filters[0] = new InputFilter.LengthFilter(15); //Filter to 15 characters
-        mHost .setFilters(filters);
+        mHost.setFilters(filters);
         //Set cursor at the end of current ip
         int lenght = mHost.getText().length();
         mHost.setSelection(lenght, lenght);

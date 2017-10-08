@@ -1,9 +1,12 @@
-package potential_couscous.couscousdrive.controllers;
+package potential_couscous.couscousdrive.view;
 
 import com.github.anastr.speedviewlib.TubeSpeedometer;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
+/**
+ * Interface for communication with joyStickController
+ */
 public interface IJoystick {
     void setJoystickViewListener(JoystickView joystickView);
 

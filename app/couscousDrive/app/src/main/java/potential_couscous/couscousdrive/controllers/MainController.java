@@ -1,17 +1,13 @@
 package potential_couscous.couscousdrive.controllers;
 
-import android.support.v4.app.Fragment;
 import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.ToggleGroup;
-import android.widget.TextView;
 
-import potential_couscous.couscousdrive.view.ACCFragment;
-import potential_couscous.couscousdrive.view.FragmentFactory;
-import potential_couscous.couscousdrive.view.IFragmentChanger;
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
-import potential_couscous.couscousdrive.view.JoystickFragment;
+import potential_couscous.couscousdrive.view.FragmentFactory;
 
 public class MainController {
     private IFragmentChanger mFragmentReplacer;
@@ -42,6 +38,8 @@ public class MainController {
                         }
                         break;
                     case (R.id.platoon_button):
+                        //TODO Platoon fragment
+
                         if (isCarCom(carCom)) {
                             carCom.sendData(carCom.mPLATOON_KEY);
                         }
@@ -53,6 +51,10 @@ public class MainController {
         });
     }
 
+    /**
+     * This method tells MainActivity to change fragment
+     * @param fragment is the fragment you want to display.
+     */
     private void replaceFragment(Fragment fragment) {
         if (mFragmentReplacer != null) {
             mFragmentReplacer.replaceFragment(fragment);
@@ -71,7 +73,7 @@ public class MainController {
         mJoystickController = joystickController;
     }
 
-    public void setmACCController(ACCController ACCController) {
+    public void setACCController(ACCController ACCController) {
         mACCController = ACCController;
     }
 }

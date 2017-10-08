@@ -12,7 +12,6 @@ import com.github.anastr.speedviewlib.TubeSpeedometer;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 import potential_couscous.couscousdrive.R;
-import potential_couscous.couscousdrive.controllers.IJoystick;
 
 /**
  * A simple {@link Fragment} subclass.
