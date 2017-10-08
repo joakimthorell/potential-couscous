@@ -16,5 +16,9 @@
         <item name="android:background">@drawable/selector_pink_on_white</item>
     </style>
 
+    <style name="Base_ToolbarStyle">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
 
 </resources>

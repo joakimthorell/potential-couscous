@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.github.anastr.speedviewlib.TubeSpeedometer;
 
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.controllers.IACC;
-import potential_couscous.couscousdrive.controllers.IJoystick;
 
 public class ACCFragment extends Fragment {
     private IACC mController;
@@ -30,6 +32,8 @@ public class ACCFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setACCButtonListeners(view);
+        setACCTextViewListener(view);
+        setACCSpeedMeters(view);
     }
 
     private void setACCButtonListeners(View view) {
@@ -39,7 +43,25 @@ public class ACCFragment extends Fragment {
         ImageButton down = (ImageButton) view.findViewById(R.id.down_button);
 
         if (mController != null) {
-            mController.setACCButtonListeners(left, right, up, down);
+            mController.setACCImageButtonListeners(left, right, up, down);
+        }
+    }
+
+    private void setACCTextViewListener(View view) {
+        TextView textView = (TextView) view.findViewById(R.id.acc_textview);
+
+        if (mController != null) {
+            mController.setACCTextView(textView);
+            mController.setACCTextViewListener();
+        }
+    }
+
+    private void setACCSpeedMeters(View view) {
+        TubeSpeedometer velocityMeter = (TubeSpeedometer) view.findViewById(R.id.velocity_meter);
+        TubeSpeedometer angleMeter = (TubeSpeedometer) view.findViewById(R.id.angle_meter);
+
+        if (mController != null) {
+            mController.setACCTubeSpeedmeterListeners(velocityMeter, angleMeter);
         }
     }
 

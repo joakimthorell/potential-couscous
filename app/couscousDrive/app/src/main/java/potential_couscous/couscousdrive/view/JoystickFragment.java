@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.anastr.speedviewlib.TubeSpeedometer;
+
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.controllers.IJoystick;
@@ -33,6 +35,7 @@ public class JoystickFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setJoystickViewListener(view);
+        setTubeSpeedometerListener(view);
     }
 
     private void setJoystickViewListener(View view) {
@@ -40,6 +43,14 @@ public class JoystickFragment extends Fragment {
 
         if (mController != null) {
             mController.setJoystickViewListener(joystickView);
+        }
+    }
+
+    private void setTubeSpeedometerListener(View view) {
+        TubeSpeedometer velocityMeter = (TubeSpeedometer) view.findViewById(R.id.velocity_manual_meter);
+
+        if (mController != null) {
+            mController.setTubeSpeedometerListener(velocityMeter);
         }
     }
 

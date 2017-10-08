@@ -1,10 +1,15 @@
 package potential_couscous.couscousdrive.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,13 +28,19 @@ public class ConnectActivity extends AppCompatActivity {
     private final static int CONNECTION_TIMEOUT = 3000;
 
     private CarCom mCarCom;
-    private EditText mEd_host;
-    private Button mButton;
+    private EditText mHost;
+    private Button mConnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
+
+        // Setup the action bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.connect_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Back button
+        getSupportActionBar().setTitle(""); // No title
 
         /*
         // Not the best solution... Fix this if there is more time.
@@ -38,35 +49,55 @@ public class ConnectActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         */
 
-        mEd_host = (EditText) findViewById(R.id.ed_host);
-        mButton = (Button) findViewById(R.id.btn_connect);
+        //Setup host ip EditText field
+        mHost = (EditText) findViewById(R.id.ip_address);
+        SharedPreferences sp = getSharedPreferences("list", MODE_PRIVATE);
+        setDefaultValues(sp); //Set last entered ip
+        setupIpEditTextField();
 
-        SharedPreferences mSharedPrefs = getSharedPreferences("list", MODE_PRIVATE);
-        setDefaultValues(mSharedPrefs);
+        mConnect = (Button) findViewById(R.id.connect_to_ip);
 
-        setupButton(mSharedPrefs, this);
+        setConnectButtonListener(sp, this);
     }
 
-    private void setDefaultValues(SharedPreferences mSharedPrefs) {
-        String oldHost = mSharedPrefs.getString("host", null);
+    private void setupIpEditTextField() {
+        mHost.setRawInputType(InputType.TYPE_CLASS_NUMBER); //Numpad
+        mHost.setCursorVisible(true);
+        //Limit number of input characters
+        InputFilter[] filters = new InputFilter[1];
+        filters[0] = new InputFilter.LengthFilter(15); //Filter to 15 characters
+        mHost .setFilters(filters);
+        //Set cursor at the end of current ip
+        int lenght = mHost.getText().length();
+        mHost.setSelection(lenght, lenght);
+    }
+
+    private void setDefaultValues(SharedPreferences sp) {
+        String oldHost = sp.getString("host", null);
         if (oldHost != null) {
-            mEd_host.setText(oldHost);
+            mHost.setText(oldHost);
         }
     }
 
-    private void setupButton(final SharedPreferences mSharedPrefs, final Context context) {
-        mButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setConnectButtonListener(final SharedPreferences sp, final Context context) {
+        mConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String host = mEd_host.getText().toString().trim();
-                mSharedPrefs.edit().putString("host", host).apply();
+                String host = mHost.getText().toString().trim();
+                sp.edit().putString("host", host).apply();
                 new AsyncConnectionTask(context).execute(host);
             }
         });
     }
 
     private class AsyncConnectionTask extends AsyncTask<String, Void, String> {
-        private String message = "def msg";
         private Context mContext;
 
         private AsyncConnectionTask(Context context) {
@@ -76,7 +107,6 @@ public class ConnectActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                message = params[0];
                 String ip = params[0];
 
                 closeSockets();
@@ -86,9 +116,7 @@ public class ConnectActivity extends AppCompatActivity {
                 mCarCom = new CarCom(wirelessInoSocket, couscousSocket);
 
             } catch (IOException e) {
-                message = e.getMessage();
-            } catch (IllegalArgumentException e) {
-                message = e.getMessage();
+                e.printStackTrace();
             }
             return null;
         }
@@ -114,7 +142,7 @@ public class ConnectActivity extends AppCompatActivity {
                 MainActivity.setCarCom(mCarCom);
                 finish();
             } else {
-                Toast.makeText(mContext, "Not able to connect... See: " + message, Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Not able to connect...", Toast.LENGTH_LONG).show();
             }
         }
 

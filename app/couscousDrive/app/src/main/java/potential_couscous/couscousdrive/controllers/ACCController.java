@@ -1,20 +1,36 @@
 package potential_couscous.couscousdrive.controllers;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
-public class ACCController implements IACC{
+import com.github.anastr.speedviewlib.Gauge;
+import com.github.anastr.speedviewlib.TubeSpeedometer;
+import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
+
+public class ACCController implements IACC {
+    private TextView mTextView;
+    private int mCurrentVelocity;
+    private int mCurrentAngle;
 
     public ACCController() {
+        mCurrentVelocity = 5;
+        mCurrentAngle = 100;
+    }
+
+    private void setText(String string) {
+        if (mTextView != null) {
+            mTextView.setText(string);
+        }
     }
 
     private void setLeftButtonListener(ImageButton leftButton) {
         leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(": LEFT :");
-
+                if (mCurrentAngle > 0) {
+                    mCurrentAngle -= 10;
+                }
             }
         });
     }
@@ -23,8 +39,9 @@ public class ACCController implements IACC{
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(": RIGHT :");
-
+                if (mCurrentAngle < 200) {
+                    mCurrentAngle += 10;
+                }
             }
         });
     }
@@ -33,8 +50,9 @@ public class ACCController implements IACC{
         upButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(": UP :");
-
+                if (mCurrentVelocity < 100) {
+                    mCurrentVelocity += 5;
+                }
             }
         });
     }
@@ -43,17 +61,68 @@ public class ACCController implements IACC{
         downButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(": DOWN :");
+                if (mCurrentVelocity > 0) {
+                    mCurrentVelocity -= 5;
+                }
+            }
+        });
+    }
 
+    public void setACCTextViewListener() {
+        if (mTextView != null) {
+            mTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                }
+            });
+        }
+    }
+
+    private void setAngleMeterListener(TubeSpeedometer angleMeter) {
+        angleMeter.setSpeedAt(100);
+        angleMeter.setOnSpeedChangeListener(new OnSpeedChangeListener() {
+            private int lastAngle = 100;
+            @Override
+            public void onSpeedChange(Gauge gauge, boolean isSpeedUp, boolean isByTremble) {
+                if (mCurrentAngle != lastAngle) {
+                    gauge.speedTo(mCurrentAngle, 900);
+                    lastAngle = mCurrentAngle;
+                }
+            }
+        });
+    }
+
+    private void setVelocityMeterListener(final TubeSpeedometer velocityMeter) {
+        velocityMeter.speedTo(mCurrentVelocity);
+        velocityMeter.setOnSpeedChangeListener(new OnSpeedChangeListener() {
+            private int lastVelocity = 100;
+            @Override
+            public void onSpeedChange(Gauge gauge, boolean isSpeedUp, boolean isByTremble) {
+                if (mCurrentVelocity != lastVelocity) {
+                    gauge.speedTo(mCurrentVelocity, 900);
+                    lastVelocity = mCurrentVelocity;
+                    System.out.println("Nu printar vi lite h ä ä ä ä r . . ." + mCurrentVelocity);
+                }
             }
         });
     }
 
     @Override
-    public void setACCButtonListeners(ImageButton left, ImageButton right, ImageButton up, ImageButton down) {
+    public void setACCImageButtonListeners(ImageButton left, ImageButton right, ImageButton up, ImageButton down) {
         setLeftButtonListener(left);
         setRightButtonListener(right);
         setUpButtonListener(up);
         setDownButtonListener(down);
+    }
+
+    @Override
+    public void setACCTextView(TextView textView) {
+        mTextView = textView;
+    }
+
+    @Override
+    public void setACCTubeSpeedmeterListeners(TubeSpeedometer velocityMeter, TubeSpeedometer angleMeter) {
+        setVelocityMeterListener(velocityMeter);
+        setAngleMeterListener(angleMeter);
     }
 }

@@ -2,6 +2,10 @@ package potential_couscous.couscousdrive.controllers;
 
 import android.support.v7.widget.ToggleGroup;
 
+import com.github.anastr.speedviewlib.Gauge;
+import com.github.anastr.speedviewlib.TubeSpeedometer;
+import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
+
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.activities.MainActivity;
@@ -11,17 +15,41 @@ import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 
 public class JoystickController implements IJoystick {
     private ToggleGroup mToggleGroup;
+    private volatile int currentVelocity;
 
     public JoystickController(ToggleGroup toggleGroup) {
         mToggleGroup = toggleGroup;
+        currentVelocity = 1;
     }
 
+    @Override
     public void setJoystickViewListener(JoystickView joystickView) {
         joystickView.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
                 if (mToggleGroup.getCheckedId() == R.id.manual_button) {
+                    currentVelocity = strength;
                     driveCar(angle, strength);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void setTubeSpeedometerListener(TubeSpeedometer velocityMeter) {
+        velocityMeter.setSpeedAt(5);
+        velocityMeter.setOnSpeedChangeListener(new OnSpeedChangeListener() {
+            private int lastVelocity = 100;
+            private boolean once = true;
+            @Override
+            public void onSpeedChange(Gauge gauge, boolean isSpeedUp, boolean isByTremble) {
+                if (currentVelocity == 0 && once) {
+                    gauge.realSpeedTo(5);
+                    once = false;
+                } else if (currentVelocity != lastVelocity && currentVelocity > 0) {
+                    gauge.speedTo(currentVelocity, 900);
+                    lastVelocity = currentVelocity;
+                    once = true;
                 }
             }
         });

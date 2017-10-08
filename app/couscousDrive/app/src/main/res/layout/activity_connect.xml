@@ -10,38 +10,60 @@
         android:id="@+id/tv_host"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="36dp"
         android:text=" host IP"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text=" host IP" />
+        app:layout_constraintTop_toBottomOf="@+id/connect_toolbar"
+        tools:text=" host IP"
+        android:layout_marginStart="36dp" />
 
     <EditText
-        android:id="@+id/ed_host"
-        android:layout_width="0dp"
+        android:id="@+id/ip_address"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@android:color/transparent"
         android:ems="10"
         android:hint="@string/default_host_ip"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_host">
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColor="@color/colorORANDARK"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_host"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/tv_host"
+        app:layout_constraintRight_toRightOf="parent">
 
         <requestFocus />
     </EditText>
 
     <Button
-        android:id="@+id/btn_connect"
-        android:layout_width="130dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/connect"
+        android:id="@+id/connect_to_ip"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/connect_button"
+        android:fontFamily="sans-serif"
+        android:text="Connect"
+        android:textAllCaps="false"
         android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_host"
+        app:layout_constraintTop_toBottomOf="@+id/tv_host" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/connect_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:elevation="3dp"
+        android:minHeight="?attr/actionBarSize"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_host" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
