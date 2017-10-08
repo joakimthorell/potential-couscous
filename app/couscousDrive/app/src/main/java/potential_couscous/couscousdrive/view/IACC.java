@@ -15,5 +15,5 @@ public interface IACC {
 
     void setACCTextViewListener();
 
-    void setACCTubeSpeedmeterListeners(TubeSpeedometer velocityMeter, TubeSpeedometer angleMeter);
+    void setACCTubeSpeedometerListeners(TubeSpeedometer velocityMeter, TubeSpeedometer angleMeter);
 }

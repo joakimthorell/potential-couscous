@@ -16,12 +16,14 @@ import android.widget.Toast;
 
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.controllers.ACCController;
+import potential_couscous.couscousdrive.controllers.IFragmentChanger;
 import potential_couscous.couscousdrive.controllers.JoystickController;
 import potential_couscous.couscousdrive.controllers.MainController;
+import potential_couscous.couscousdrive.controllers.PlatoonController;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.view.ACCFragment;
-import potential_couscous.couscousdrive.controllers.IFragmentChanger;
 import potential_couscous.couscousdrive.view.JoystickFragment;
+import potential_couscous.couscousdrive.view.PlatoonFragment;
 
 /**
  * Main
@@ -29,6 +31,16 @@ import potential_couscous.couscousdrive.view.JoystickFragment;
 public class MainActivity extends AppCompatActivity implements IFragmentChanger {
     private static CarCom mCarCom;
     private TextView mSelectMode;
+
+    public static CarCom getCarCom() {
+        return mCarCom;
+    }
+
+    public static void setCarCom(CarCom carCom) {
+        mCarCom = carCom;
+        //Setting manual to default
+        mCarCom.sendData(mCarCom.mMANUAL_KEY);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +78,12 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
         ACCController accController = new ACCController();
         accFragment.setIController(accController);
         mainController.setACCController(accController);
+
+        //Set Platoon
+        PlatoonFragment platoonFragment = new PlatoonFragment();
+        PlatoonController platoonController = new PlatoonController();
+        platoonFragment.setIController(platoonController);
+        mainController.setPlatoonController(platoonController);
     }
 
     @Override
@@ -102,15 +120,5 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
 
     private boolean isCarCom() {
         return mCarCom != null && mCarCom.isConnected();
-    }
-
-    public static void setCarCom(CarCom carCom) {
-        mCarCom = carCom;
-        //Setting manual to default
-        mCarCom.sendData(mCarCom.mMANUAL_KEY);
-    }
-
-    public static CarCom getCarCom() {
-        return mCarCom;
     }
 }

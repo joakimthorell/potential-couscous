@@ -59,6 +59,7 @@ public class JoystickController implements IJoystick {
 
     /**
      * This method reformates data from joystick and sends it to WirelessIno server.
+     *
      * @param angle
      * @param velocity
      */

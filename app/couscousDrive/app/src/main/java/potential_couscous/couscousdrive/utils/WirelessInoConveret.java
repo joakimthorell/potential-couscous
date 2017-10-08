@@ -10,6 +10,7 @@ public class WirelessInoConveret {
 
     /**
      * This method builds string with speed and steer data, always 10 characters long (VxxxxHxxxx)
+     *
      * @param steer
      * @param drive
      * @return

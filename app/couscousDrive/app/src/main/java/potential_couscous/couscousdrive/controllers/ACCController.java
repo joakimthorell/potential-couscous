@@ -10,6 +10,8 @@ import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
 
 import potential_couscous.couscousdrive.view.IACC;
 
+//TODO Send data to server in all ButtonListeners()
+
 public class ACCController implements IACC {
     private TextView mTextView;
     private int mCurrentVelocity;
@@ -17,14 +19,20 @@ public class ACCController implements IACC {
 
     public ACCController() {
         mCurrentVelocity = 5; //Speedmeter tends to get stuck otherwise
-        mCurrentAngle = 100;
+        mCurrentAngle = 100; //Representing steer 0 graphically when right meter is half-way full.
     }
+
     private void setText(String string) {
         if (mTextView != null) {
             mTextView.setText(string);
         }
     } //Currently not used...
 
+    /**
+     * Arrow button listeners, updating values for TubeSpeedometer values at the moment.
+     *
+     * @param leftButton
+     */
     private void setLeftButtonListener(ImageButton leftButton) {
         leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +77,15 @@ public class ACCController implements IACC {
         });
     }
 
+    /**
+     * Right anglemeter, set on default 100 representing steering 0.
+     *
+     * @param angleMeter
+     */
     private void setAngleMeterListener(TubeSpeedometer angleMeter) {
         angleMeter.setSpeedAt(100);
         angleMeter.setOnSpeedChangeListener(new OnSpeedChangeListener() {
-            private int lastAngle = 100;
+            private int lastAngle = 100; //Random number in order not to match  mCurrentAngle.
 
             @Override
             public void onSpeedChange(Gauge gauge, boolean isSpeedUp, boolean isByTremble) {
@@ -84,10 +97,15 @@ public class ACCController implements IACC {
         });
     }
 
+    /**
+     * Left velocitymeter, set on default 5 as it tends to get stuck on 0 otherwise.
+     *
+     * @param velocityMeter
+     */
     private void setVelocityMeterListener(final TubeSpeedometer velocityMeter) {
         velocityMeter.speedTo(mCurrentVelocity);
         velocityMeter.setOnSpeedChangeListener(new OnSpeedChangeListener() {
-            private int lastVelocity = 100;
+            private int lastVelocity = 100; //Random number in order not to match  mCurrentVelocity.
 
             @Override
             public void onSpeedChange(Gauge gauge, boolean isSpeedUp, boolean isByTremble) {
@@ -108,7 +126,7 @@ public class ACCController implements IACC {
     }
 
     @Override
-    public void setACCTubeSpeedmeterListeners(TubeSpeedometer velocityMeter, TubeSpeedometer angleMeter) {
+    public void setACCTubeSpeedometerListeners(TubeSpeedometer velocityMeter, TubeSpeedometer angleMeter) {
         setVelocityMeterListener(velocityMeter);
         setAngleMeterListener(angleMeter);
     }

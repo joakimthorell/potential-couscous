@@ -13,6 +13,9 @@ import com.github.anastr.speedviewlib.TubeSpeedometer;
 
 import potential_couscous.couscousdrive.R;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class ACCFragment extends Fragment {
     private IACC mController;
 
@@ -48,6 +51,7 @@ public class ACCFragment extends Fragment {
 
     /**
      * TextView in center of arrow buttons. Not used, data is shown in speedmeter instead.
+     *
      * @param view
      */
     private void setACCTextViewListener(View view) {
@@ -64,7 +68,7 @@ public class ACCFragment extends Fragment {
         TubeSpeedometer angleMeter = (TubeSpeedometer) view.findViewById(R.id.angle_meter);
 
         if (mController != null) {
-            mController.setACCTubeSpeedmeterListeners(velocityMeter, angleMeter);
+            mController.setACCTubeSpeedometerListeners(velocityMeter, angleMeter);
         }
     }
 

@@ -29,5 +29,6 @@ dependencies {
     compile 'io.github.controlwear:virtualjoystick:1.6.0'
     compile 'com.anthonymandra:ToggleButtons:2.0.0'
     compile 'com.github.anastr:speedviewlib:1.1.6'
+    compile 'com.skyfishjy.ripplebackground:library:1.0.1'
     testCompile 'junit:junit:4.12'
 }

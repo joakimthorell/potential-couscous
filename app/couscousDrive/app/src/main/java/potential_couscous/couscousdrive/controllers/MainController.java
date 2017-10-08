@@ -11,8 +11,10 @@ import potential_couscous.couscousdrive.view.FragmentFactory;
 
 public class MainController {
     private IFragmentChanger mFragmentReplacer;
+
     private JoystickController mJoystickController;
     private ACCController mACCController;
+    private PlatoonController mPlatoonController;
 
     public MainController() {
     }
@@ -38,7 +40,7 @@ public class MainController {
                         }
                         break;
                     case (R.id.platoon_button):
-                        //TODO Platoon fragment
+                        replaceFragment(FragmentFactory.createPlatoonFragment(mPlatoonController));
 
                         if (isCarCom(carCom)) {
                             carCom.sendData(carCom.mPLATOON_KEY);
@@ -53,6 +55,7 @@ public class MainController {
 
     /**
      * This method tells MainActivity to change fragment
+     *
      * @param fragment is the fragment you want to display.
      */
     private void replaceFragment(Fragment fragment) {
@@ -75,5 +78,9 @@ public class MainController {
 
     public void setACCController(ACCController ACCController) {
         mACCController = ACCController;
+    }
+
+    public void setPlatoonController(PlatoonController platoonController) {
+        mPlatoonController = platoonController;
     }
 }
