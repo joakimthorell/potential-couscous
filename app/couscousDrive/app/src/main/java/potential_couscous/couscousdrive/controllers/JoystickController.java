@@ -17,10 +17,12 @@ import potential_couscous.couscousdrive.view.IJoystick;
 public class JoystickController implements IJoystick {
     private ToggleGroup mToggleGroup;
     private volatile int currentVelocity;
+    private CarCom mCarCom;
 
-    public JoystickController(ToggleGroup toggleGroup) {
+    public JoystickController(ToggleGroup toggleGroup, CarCom carCom) {
         mToggleGroup = toggleGroup;
         currentVelocity = 1;
+        mCarCom = carCom;
     }
 
     @Override
@@ -68,9 +70,8 @@ public class JoystickController implements IJoystick {
         int drive = checkData(JoystickCalculator.calcSpeed(angle, velocity));
         String data = WirelessInoConveret.convertData(steer, drive);
 
-        CarCom carCom = MainActivity.getCarCom();
-        if (carCom != null && carCom.isConnected()) {
-            carCom.sendData(carCom.MANUAL_KEY, data);
+        if (mCarCom != null && mCarCom.isConnected()) {
+            mCarCom.sendData(mCarCom.MANUAL_KEY, data);
         }
     }
 

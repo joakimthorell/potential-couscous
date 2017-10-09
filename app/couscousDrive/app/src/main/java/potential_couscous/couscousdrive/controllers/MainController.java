@@ -18,35 +18,36 @@ public class MainController {
     private JoystickController mJoystickController;
     private ACCController mACCController;
     private PlatoonController mPlatoonController;
+    private CarCom mCarCom;
 
-    public MainController() {
+    public MainController(CarCom carCom) {
+        mCarCom = carCom;
     }
 
     public void setToggleButtonListener(final ToggleGroup toggleGroup) {
         toggleGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
-                CarCom carCom = MainActivity.getCarCom();
                 switch (toggleGroup.getCheckedId()) {
                     case (R.id.manual_button):
                         replaceFragment(FragmentFactory.createJoystickFragment(mJoystickController));
 
-                        if (isCarCom(carCom)) {
-                            carCom.sendData(carCom.MANUAL_KEY);
+                        if (isCarCom(mCarCom)) {
+                            mCarCom.sendData(mCarCom.MANUAL_KEY);
                         }
                         break;
                     case (R.id.acc_button):
                         replaceFragment(FragmentFactory.createACCFragment(mACCController));
 
-                        if (isCarCom(carCom)) {
-                            carCom.sendData(carCom.ACC_KEY);
+                        if (isCarCom(mCarCom)) {
+                            mCarCom.sendData(mCarCom.ACC_KEY);
                         }
                         break;
                     case (R.id.platoon_button):
                         replaceFragment(FragmentFactory.createPlatoonFragment(mPlatoonController));
 
-                        if (isCarCom(carCom)) {
-                            carCom.sendData(carCom.PLATOON_KEY);
+                        if (isCarCom(mCarCom)) {
+                            mCarCom.sendData(mCarCom.PLATOON_KEY);
                         }
                         break;
                     default:
@@ -67,8 +68,8 @@ public class MainController {
         }
     }
 
-    private boolean isCarCom(CarCom carCom) {
-        return carCom != null && carCom.isConnected();
+    private boolean isCarCom(CarCom mCarCom) {
+        return mCarCom != null && mCarCom.isConnected();
     }
 
     public void setFragmentReplacer(IFragmentChanger fragmentReplacer) {

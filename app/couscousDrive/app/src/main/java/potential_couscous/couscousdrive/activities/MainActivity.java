@@ -32,11 +32,7 @@ import potential_couscous.couscousdrive.view.PlatoonFragment;
 public class MainActivity extends AppCompatActivity implements IFragmentChanger {
     private static CarCom mCarCom;
     private TextView mSelectMode;
-
-    public static CarCom getCarCom() {
-        return mCarCom;
-    }
-
+    
     public static void setCarCom(CarCom carCom) {
         mCarCom = carCom;
         //Setting manual to default
@@ -63,20 +59,20 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
 
         //Set Togglebuttons
         ToggleGroup toggleGroup = (ToggleGroup) findViewById(R.id.groupTextAlignment);
-        MainController mainController = new MainController();
+        MainController mainController = new MainController(mCarCom);
         mainController.setToggleButtonListener(toggleGroup);
 
         mainController.setFragmentReplacer(this); //Allow togglebuttons to replace fragments.
 
         //Set JoystickView
         JoystickFragment joystickFragment = new JoystickFragment();
-        JoystickController joystickController = new JoystickController(toggleGroup);
+        JoystickController joystickController = new JoystickController(toggleGroup, mCarCom);
         joystickFragment.setIController(joystickController);
         mainController.setJoystickController(joystickController);
 
         //Set ACC
         ACCFragment accFragment = new ACCFragment();
-        ACCController accController = new ACCController();
+        ACCController accController = new ACCController(mCarCom);
         accFragment.setIController(accController);
         mainController.setACCController(accController);
 
