@@ -53,20 +53,20 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
 
         //Set Togglebuttons
         ToggleGroup toggleGroup = (ToggleGroup) findViewById(R.id.groupTextAlignment);
-        MainController mainController = new MainController(mCarCom);
+        MainController mainController = new MainController();
         mainController.setToggleButtonListener(toggleGroup);
 
         mainController.setFragmentReplacer(this); //Allow togglebuttons to replace fragments.
 
         //Set JoystickView
         JoystickFragment joystickFragment = new JoystickFragment();
-        JoystickController joystickController = new JoystickController(toggleGroup, mCarCom);
+        JoystickController joystickController = new JoystickController(toggleGroup);
         joystickFragment.setIController(joystickController);
         mainController.setJoystickController(joystickController);
 
         //Set ACC
         ACCFragment accFragment = new ACCFragment();
-        ACCController accController = new ACCController(mCarCom);
+        ACCController accController = new ACCController();
         accFragment.setIController(accController);
         mainController.setACCController(accController);
 
@@ -117,5 +117,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
         mCarCom = carCom;
         //Setting manual to default
         mCarCom.sendData(mCarCom.MANUAL_KEY);
+    }
+
+    public static CarCom getCarCom() {
+        return mCarCom;
     }
 }

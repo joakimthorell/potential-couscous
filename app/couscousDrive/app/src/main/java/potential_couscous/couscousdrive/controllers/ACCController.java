@@ -8,6 +8,7 @@ import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.TubeSpeedometer;
 import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
 
+import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 import potential_couscous.couscousdrive.view.IACC;
@@ -18,20 +19,19 @@ public class ACCController implements IACC {
     private TextView mTextView;
     private int mCurrentVelocity;
     private int mCurrentAngle;
-    private CarCom mCarCom;
 
-    public ACCController(CarCom carCom) {
+    public ACCController() {
         mCurrentVelocity = 5; //Speedmeter tends to get stuck otherwise
         mCurrentAngle = 100; //Representing steer 0 graphically when right meter is half-way full.
-        mCarCom = carCom;
     }
 
     private void sendData() {
         String data = WirelessInoConveret.convertData(calcSteerValue(),
                 calcDriveValue());
 
-        if (mCarCom != null && mCarCom.isConnected()) {
-            mCarCom.sendData(mCarCom.ACC_KEY, data);
+        CarCom carCom = MainActivity.getCarCom();
+        if (carCom != null && carCom.isConnected()) {
+            carCom.sendData(carCom.ACC_KEY, data);
         }
     }
 

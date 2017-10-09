@@ -8,6 +8,7 @@ import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 import potential_couscous.couscousdrive.R;
+import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.JoystickCalculator;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
@@ -16,12 +17,10 @@ import potential_couscous.couscousdrive.view.IJoystick;
 public class JoystickController implements IJoystick {
     private ToggleGroup mToggleGroup;
     private volatile int currentVelocity;
-    private CarCom mCarCom;
 
-    public JoystickController(ToggleGroup toggleGroup, CarCom carCom) {
+    public JoystickController(ToggleGroup toggleGroup) {
         mToggleGroup = toggleGroup;
         currentVelocity = 1;
-        mCarCom = carCom;
     }
 
     @Override
@@ -69,8 +68,10 @@ public class JoystickController implements IJoystick {
         int drive = checkData(JoystickCalculator.calcSpeed(angle, velocity));
         String data = WirelessInoConveret.convertData(steer, drive);
 
-        if (mCarCom != null && mCarCom.isConnected()) {
-            mCarCom.sendData(mCarCom.MANUAL_KEY, data);
+        CarCom carCom = MainActivity.getCarCom();
+        if (carCom != null && carCom.isConnected()) {
+            carCom.sendData(carCom
+                    .MANUAL_KEY, data);
         }
     }
 

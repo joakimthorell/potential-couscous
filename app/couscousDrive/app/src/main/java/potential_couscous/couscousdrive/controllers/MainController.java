@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.ToggleGroup;
 
 import potential_couscous.couscousdrive.R;
+import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.view.FragmentFactory;
 
@@ -17,35 +18,34 @@ public class MainController {
     private JoystickController mJoystickController;
     private ACCController mACCController;
     private PlatoonController mPlatoonController;
-    private CarCom mCarCom;
 
-    public MainController(CarCom carCom) {
-        mCarCom = carCom;
+    public MainController() {
     }
 
     public void setToggleButtonListener(final ToggleGroup toggleGroup) {
         toggleGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
+                CarCom carCom = MainActivity.getCarCom();
                 switch (toggleGroup.getCheckedId()) {
                     case (R.id.manual_button):
                         replaceFragment(FragmentFactory.createJoystickFragment(mJoystickController));
-                        if (isCarCom()) {
-                            mCarCom.sendData(mCarCom.MANUAL_KEY);
+                        if (isCarCom(carCom)) {
+                            carCom.sendData(carCom.MANUAL_KEY);
                         }
                         break;
                     case (R.id.acc_button):
                         replaceFragment(FragmentFactory.createACCFragment(mACCController));
 
-                        if (isCarCom()) {
-                            mCarCom.sendData(mCarCom.ACC_KEY);
+                        if (isCarCom(carCom)) {
+                            carCom.sendData(carCom.ACC_KEY);
                         }
                         break;
                     case (R.id.platoon_button):
                         replaceFragment(FragmentFactory.createPlatoonFragment(mPlatoonController));
 
-                        if (isCarCom()) {
-                            mCarCom.sendData(mCarCom.PLATOON_KEY);
+                        if (isCarCom(carCom)) {
+                            carCom.sendData(carCom.PLATOON_KEY);
                         }
                         break;
                     default:
@@ -66,8 +66,8 @@ public class MainController {
         }
     }
 
-    private boolean isCarCom() {
-        return mCarCom != null && mCarCom.isConnected();
+    private boolean isCarCom(CarCom carCom) {
+        return carCom != null && carCom.isConnected();
     }
 
     public void setFragmentReplacer(IFragmentChanger fragmentReplacer) {
