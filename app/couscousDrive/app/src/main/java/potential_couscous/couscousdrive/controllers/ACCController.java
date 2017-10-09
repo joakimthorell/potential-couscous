@@ -30,7 +30,9 @@ public class ACCController implements IACC {
         String drivingData = WirelessInoConveret.convertData(calcSteeringValue(),
                 calcVelocityValue());
 
-        mCarCom.sendData(mCarCom.ACC_KEY, drivingData);
+        if (mCarCom != null && mCarCom.isConnected()) {
+            mCarCom.sendData(mCarCom.ACC_KEY, drivingData);
+        }
     }
 
     private int calcSteeringValue() {
