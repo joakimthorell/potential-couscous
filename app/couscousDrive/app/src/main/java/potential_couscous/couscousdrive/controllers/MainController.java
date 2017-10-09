@@ -31,22 +31,21 @@ public class MainController {
                 switch (toggleGroup.getCheckedId()) {
                     case (R.id.manual_button):
                         replaceFragment(FragmentFactory.createJoystickFragment(mJoystickController));
-
-                        if (isCarCom(mCarCom)) {
+                        if (isCarCom()) {
                             mCarCom.sendData(mCarCom.MANUAL_KEY);
                         }
                         break;
                     case (R.id.acc_button):
                         replaceFragment(FragmentFactory.createACCFragment(mACCController));
 
-                        if (isCarCom(mCarCom)) {
+                        if (isCarCom()) {
                             mCarCom.sendData(mCarCom.ACC_KEY);
                         }
                         break;
                     case (R.id.platoon_button):
                         replaceFragment(FragmentFactory.createPlatoonFragment(mPlatoonController));
 
-                        if (isCarCom(mCarCom)) {
+                        if (isCarCom()) {
                             mCarCom.sendData(mCarCom.PLATOON_KEY);
                         }
                         break;
@@ -68,7 +67,7 @@ public class MainController {
         }
     }
 
-    private boolean isCarCom(CarCom mCarCom) {
+    private boolean isCarCom() {
         return mCarCom != null && mCarCom.isConnected();
     }
 

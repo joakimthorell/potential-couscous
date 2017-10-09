@@ -32,7 +32,7 @@ import potential_couscous.couscousdrive.view.PlatoonFragment;
 public class MainActivity extends AppCompatActivity implements IFragmentChanger {
     private static CarCom mCarCom;
     private TextView mSelectMode;
-    
+
     public static void setCarCom(CarCom carCom) {
         mCarCom = carCom;
         //Setting manual to default
