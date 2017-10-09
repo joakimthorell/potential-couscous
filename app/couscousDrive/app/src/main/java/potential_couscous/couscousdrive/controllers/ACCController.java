@@ -58,6 +58,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentAngle > 0) {
                     mCurrentAngle -= 10;
+                    sendNewDrivingValues();
                 }
             }
         });
@@ -69,6 +70,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentAngle < 200) {
                     mCurrentAngle += 10;
+                    sendNewDrivingValues();
                 }
             }
         });
@@ -80,6 +82,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentVelocity < 100) {
                     mCurrentVelocity += 5;
+                    sendNewDrivingValues();
                 }
             }
         });
@@ -91,6 +94,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentVelocity > 0) {
                     mCurrentVelocity -= 5;
+                    sendNewDrivingValues();
                 }
             }
         });
