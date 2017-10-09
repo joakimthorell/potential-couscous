@@ -85,9 +85,13 @@ public class ConnectActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        startMainActivity();
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void startMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
-        return super.onOptionsItemSelected(item);
     }
 
     private void setConnectButtonListener(final SharedPreferences sp, final Context context) {
@@ -144,6 +148,7 @@ public class ConnectActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             if (isCarCom()) {
                 MainActivity.setCarCom(mCarCom);
+                startMainActivity();
                 finish();
             } else {
                 Toast.makeText(mContext, "Not able to connect...", Toast.LENGTH_LONG).show();
