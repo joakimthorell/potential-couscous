@@ -5,19 +5,17 @@ import org.junit.Test;
 
 import potential_couscous.couscousdrive.utils.JoystickCalculator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AngleCalculatorTest {
 
-    private int DELTA = 1;
-
     int iAngle;
     double dAngle;
-
     int angle0To90;
     int angle90To180;
     int angle180To270;
     int angle270To360;
+    private int DELTA = 1;
 
     @Before
     public void setup() {

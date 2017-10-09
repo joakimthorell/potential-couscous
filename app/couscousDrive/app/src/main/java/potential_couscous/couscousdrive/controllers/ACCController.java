@@ -26,20 +26,20 @@ public class ACCController implements IACC {
         mCarCom = carCom;
     }
 
-    private void sendNewDrivingValues() {
-        String drivingData = WirelessInoConveret.convertData(calcSteeringValue(),
-                calcVelocityValue());
+    private void sendData() {
+        String data = WirelessInoConveret.convertData(calcSteerValue(),
+                calcDriveValue());
 
         if (mCarCom != null && mCarCom.isConnected()) {
-            mCarCom.sendData(mCarCom.ACC_KEY, drivingData);
+            mCarCom.sendData(mCarCom.ACC_KEY, data);
         }
     }
 
-    private int calcSteeringValue() {
+    private int calcSteerValue() {
         return mCurrentAngle - 100;
     }
 
-    private int calcVelocityValue() {
+    private int calcDriveValue() {
         return mCurrentVelocity;
     }
 
@@ -60,7 +60,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentAngle > 0) {
                     mCurrentAngle -= 10;
-                    sendNewDrivingValues();
+                    sendData();
                 }
             }
         });
@@ -72,7 +72,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentAngle < 200) {
                     mCurrentAngle += 10;
-                    sendNewDrivingValues();
+                    sendData();
                 }
             }
         });
@@ -84,7 +84,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentVelocity < 100) {
                     mCurrentVelocity += 5;
-                    sendNewDrivingValues();
+                    sendData();
                 }
             }
         });
@@ -96,7 +96,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentVelocity > 0) {
                     mCurrentVelocity -= 5;
-                    sendNewDrivingValues();
+                    sendData();
                 }
             }
         });

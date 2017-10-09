@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
         android:text=" host IP"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/connect_toolbar"
-        tools:text=" host IP"
-        android:layout_marginStart="36dp" />
+        tools:text=" host IP" />
 
     <EditText
         android:id="@+id/ip_address"
