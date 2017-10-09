@@ -5,7 +5,7 @@ import com.github.anastr.speedviewlib.TubeSpeedometer;
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 /**
- * Interface for communication with joyStickController
+ * Interface for communication with JoystickController
  */
 public interface IJoystick {
     void setJoystickViewListener(JoystickView joystickView);

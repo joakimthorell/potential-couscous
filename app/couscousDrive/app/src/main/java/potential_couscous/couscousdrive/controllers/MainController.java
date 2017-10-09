@@ -9,6 +9,9 @@ import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.view.FragmentFactory;
 
+/**
+ * Main controller responsible for toggle buttons, changing fragments.
+ */
 public class MainController {
     private IFragmentChanger mFragmentReplacer;
 

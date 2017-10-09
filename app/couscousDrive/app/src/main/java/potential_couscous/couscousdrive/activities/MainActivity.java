@@ -2,6 +2,7 @@ package potential_couscous.couscousdrive.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -53,12 +54,12 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
 
         mSelectMode = (TextView) findViewById(R.id.select_mode_textview);
 
-        /*
+
         // Not the best solution... Fix this if there is more time.
         // This solves the networks call on main thread problems
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        */
+
 
         //Set Togglebuttons
         ToggleGroup toggleGroup = (ToggleGroup) findViewById(R.id.groupTextAlignment);

@@ -22,6 +22,10 @@ import java.net.Socket;
 import potential_couscous.couscousdrive.R;
 import potential_couscous.couscousdrive.utils.CarCom;
 
+/**
+ * This Activity let's user connect to 2 different servers on the MOPED:
+ * WirelessIno for manual driving and Python server for ACC and Platoon
+ */
 public class ConnectActivity extends AppCompatActivity {
     private final static int WIRELESSINO_PORT = 9000;
     private final static int COUSCOUS_PORT = 8888;
@@ -65,9 +69,9 @@ public class ConnectActivity extends AppCompatActivity {
         mHost.setCursorVisible(true);
         //Limit number of input characters
         InputFilter[] filters = new InputFilter[1];
-        filters[0] = new InputFilter.LengthFilter(15); //Filter to 15 characters
+        filters[0] = new InputFilter.LengthFilter(15); //Set textfield to max 15 characters
         mHost.setFilters(filters);
-        //Set cursor at the end of current ip
+        //Set cursor at the end of current ip input
         int lenght = mHost.getText().length();
         mHost.setSelection(lenght, lenght);
     }
