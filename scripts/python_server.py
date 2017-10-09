@@ -22,7 +22,8 @@ def clientthread(conn, listener):  # shadow-naming s becomes conn from here on.
         data = byteData.decode('utf-8')
         data = str(data)
 
-        listener(data)
+        if not (len(data) < 1):
+            listener(data)
 
     # came out of loop
     conn.close()
