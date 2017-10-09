@@ -10,14 +10,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class CarCom {
-    public final String mACC_KEY = "acckey";
-    public final String mPLATOON_KEY = "platoonkey";
-    public final String mMANUAL_KEY = "manualkey";
+    public final String ACC_KEY = "acckey";
+    public final String PLATOON_KEY = "platoonkey";
+    public final String MANUAL_KEY = "manualkey";
 
     private Socket mManualSocket; // WirelessIno socket.
-    private PrintWriter mManualOut; // Couscous server socket
+    private PrintWriter mManualOut;
 
-    private Socket mAutoSocket;
+    private Socket mAutoSocket; // Couscous server socket
     private PrintWriter mAutoOut;
 
     /**
@@ -93,11 +93,19 @@ public class CarCom {
      */
     public void sendData(String key, String data) {
         System.out.println(data);
-        if (key.equals(mACC_KEY) || key.equals(mPLATOON_KEY)) {
+
+        if (key.equals(ACC_KEY)) {
+            if (data != null) {
+                mAutoOut.println(data);
+                return;
+            }
+        }
+
+        if (key.equals(ACC_KEY) || key.equals(PLATOON_KEY)) {
             sendData(key);
             return;
         }
-        if (key.equals(mMANUAL_KEY)) {
+        if (key.equals(MANUAL_KEY)) {
             mManualOut.println(data);
         }
     }
@@ -109,13 +117,13 @@ public class CarCom {
      */
     public void sendData(String key) {
         switch (key) {
-            case mACC_KEY:
+            case ACC_KEY:
                 mAutoOut.println("a");
                 break;
-            case mPLATOON_KEY:
+            case PLATOON_KEY:
                 mAutoOut.println("p");
                 break;
-            case mMANUAL_KEY:
+            case MANUAL_KEY:
                 mAutoOut.println("m");
                 break;
             default:

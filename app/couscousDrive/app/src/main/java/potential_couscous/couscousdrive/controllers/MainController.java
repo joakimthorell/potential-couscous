@@ -32,21 +32,21 @@ public class MainController {
                         replaceFragment(FragmentFactory.createJoystickFragment(mJoystickController));
 
                         if (isCarCom(carCom)) {
-                            carCom.sendData(carCom.mMANUAL_KEY);
+                            carCom.sendData(carCom.MANUAL_KEY);
                         }
                         break;
                     case (R.id.acc_button):
                         replaceFragment(FragmentFactory.createACCFragment(mACCController));
 
                         if (isCarCom(carCom)) {
-                            carCom.sendData(carCom.mACC_KEY);
+                            carCom.sendData(carCom.ACC_KEY);
                         }
                         break;
                     case (R.id.platoon_button):
                         replaceFragment(FragmentFactory.createPlatoonFragment(mPlatoonController));
 
                         if (isCarCom(carCom)) {
-                            carCom.sendData(carCom.mPLATOON_KEY);
+                            carCom.sendData(carCom.PLATOON_KEY);
                         }
                         break;
                     default:

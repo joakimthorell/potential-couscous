@@ -8,6 +8,7 @@ import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.TubeSpeedometer;
 import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
 
+import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 import potential_couscous.couscousdrive.view.IACC;
 
 //TODO Send data to server in all ButtonListeners()
@@ -20,6 +21,21 @@ public class ACCController implements IACC {
     public ACCController() {
         mCurrentVelocity = 5; //Speedmeter tends to get stuck otherwise
         mCurrentAngle = 100; //Representing steer 0 graphically when right meter is half-way full.
+    }
+
+    private void sendNewDrivingValues() {
+        String drivingData = WirelessInoConveret.convertData(calcSteeringValue(),
+                calcVelocityValue());
+
+        // send data now...
+    }
+
+    private int calcSteeringValue() {
+        return mCurrentAngle - 100;
+    }
+
+    private int calcVelocityValue() {
+        return mCurrentVelocity;
     }
 
     private void setText(String string) {
@@ -76,6 +92,7 @@ public class ACCController implements IACC {
             }
         });
     }
+
 
     /**
      * Right anglemeter, set on default 100 representing steering 0.

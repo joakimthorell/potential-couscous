@@ -70,7 +70,7 @@ public class JoystickController implements IJoystick {
 
         CarCom carCom = MainActivity.getCarCom();
         if (carCom != null && carCom.isConnected()) {
-            carCom.sendData(carCom.mMANUAL_KEY, data);
+            carCom.sendData(carCom.MANUAL_KEY, data);
         }
     }
 

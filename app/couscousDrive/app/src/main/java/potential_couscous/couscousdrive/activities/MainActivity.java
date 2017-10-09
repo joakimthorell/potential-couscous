@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
     public static void setCarCom(CarCom carCom) {
         mCarCom = carCom;
         //Setting manual to default
-        mCarCom.sendData(mCarCom.mMANUAL_KEY);
+        mCarCom.sendData(mCarCom.MANUAL_KEY);
     }
 
     @Override
