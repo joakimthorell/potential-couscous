@@ -1,6 +1,7 @@
 import cv2
 import cv2 as cv
 import numpy as np
+import sys
 
 kernel = np.ones((5, 5), np.uint8)
 
@@ -11,38 +12,51 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 320)
 cap.set(4, 240)
 
+####
+# Pass any argument in order to enable calibration mode
+###
+calib = False
+if len(sys.argv) > 1:
+    calib = True
+
 
 def nothing(x):
     pass
 
+# Current values
+hmn = 30
+hmx = 59
+smn = 41
+smx = 145
+vmn = 85
+vmx = 255
 
-# Creating a windows for later use
-cv2.namedWindow('HueComp')
-cv2.namedWindow('SatComp')
-cv2.namedWindow('ValComp')
-cv2.namedWindow('closing')
-cv2.namedWindow('tracking')
+if calib:
+    # Creating a windows for later use
+    cv2.namedWindow('HueComp')
+    cv2.namedWindow('SatComp')
+    cv2.namedWindow('ValComp')
+    cv2.namedWindow('closing')
+    cv2.namedWindow('tracking')
 
-# Creating track bar for min and max for hue, saturation and value
-# You can adjust the defaults as you like
-cv2.createTrackbar('hmin', 'HueComp', 0, 179, nothing)
-cv2.createTrackbar('hmax', 'HueComp', 57, 179, nothing)
+    # Creating track bar for min and max for hue, saturation and value
+    # You can adjust the defaults as you like
+    cv2.createTrackbar('hmin', 'HueComp', hmn, 179, nothing)
+    cv2.createTrackbar('hmax', 'HueComp', hmx, 179, nothing)
 
-cv2.createTrackbar('smin', 'SatComp', 82, 255, nothing)
-cv2.createTrackbar('smax', 'SatComp', 255, 255, nothing)
+    cv2.createTrackbar('smin', 'SatComp', smn, 255, nothing)
+    cv2.createTrackbar('smax', 'SatComp', smx, 255, nothing)
 
-cv2.createTrackbar('vmin', 'ValComp', 65, 255, nothing)
-cv2.createTrackbar('vmax', 'ValComp', 255, 255, nothing)
+    cv2.createTrackbar('vmin', 'ValComp', vmn, 255, nothing)
+    cv2.createTrackbar('vmax', 'ValComp', vmx, 255, nothing)
 
-# My experimental values
-# hmn = 12
-# hmx = 37
-# smn = 145
-# smx = 255
-# vmn = 186
-# vmx = 255
+
 
 lastPos = 0;
+
+def exitTest():
+    cap.release()
+    cv2.destroyAllWindows()
 
 while (1):
 
@@ -52,16 +66,16 @@ while (1):
     # converting to HSV
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     hue, sat, val = cv2.split(hsv)
+    if calib:
+        # get info from track bar and appy to result
+        hmn = cv2.getTrackbarPos('hmin', 'HueComp')
+        hmx = cv2.getTrackbarPos('hmax', 'HueComp')
 
-    # get info from track bar and appy to result
-    hmn = cv2.getTrackbarPos('hmin', 'HueComp')
-    hmx = cv2.getTrackbarPos('hmax', 'HueComp')
+        smn = cv2.getTrackbarPos('smin', 'SatComp')
+        smx = cv2.getTrackbarPos('smax', 'SatComp')
 
-    smn = cv2.getTrackbarPos('smin', 'SatComp')
-    smx = cv2.getTrackbarPos('smax', 'SatComp')
-
-    vmn = cv2.getTrackbarPos('vmin', 'ValComp')
-    vmx = cv2.getTrackbarPos('vmax', 'ValComp')
+        vmn = cv2.getTrackbarPos('vmin', 'ValComp')
+        vmx = cv2.getTrackbarPos('vmax', 'ValComp')
 
     # Apply thresholding
     hthresh = cv2.inRange(np.array(hue), np.array(hmn), np.array(hmx))
@@ -87,8 +101,10 @@ while (1):
             cv2.circle(frame, (int(round(i[0])), int(round(i[1]))), int(round(i[2])), (0, 0, 255), 5)
             cv2.circle(frame, (int(round(i[0])), int(round(i[1]))), 2, (0, 0, 255), 10)
             xVal = round(i[0])
-            xVal = xVal - 637/2
-            pos = round(xVal / 3)
+
+            #cap.get(3) <- frame width
+            xVal = xVal - cap.get(3)/2
+            pos = round(xVal / (cap.get(3)/2)*100)
             if (pos - lastPos > 5 or pos - lastPos < -5):
                 print(pos)
                 lastPos = pos;
@@ -99,17 +115,17 @@ while (1):
                 # if buzz:
                 # put your GPIO line here
 
-    # Show the result in frames
-    cv2.imshow('HueComp', hthresh)
-    cv2.imshow('SatComp', sthresh)
-    cv2.imshow('ValComp', vthresh)
-    cv2.imshow('closing', closing)
-    cv2.imshow('tracking', frame)
+    if calib:
+        # Show the result in frames
+        cv2.imshow('HueComp', hthresh)
+        cv2.imshow('SatComp', sthresh)
+        cv2.imshow('ValComp', vthresh)
+        cv2.imshow('closing', closing)
+        cv2.imshow('tracking', frame)
 
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
+        exitTest()
         break
 
-cap.release()
 
-cv2.destroyAllWindows()
