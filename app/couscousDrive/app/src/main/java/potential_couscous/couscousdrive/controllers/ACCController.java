@@ -8,6 +8,9 @@ import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.TubeSpeedometer;
 import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
 
+import potential_couscous.couscousdrive.activities.MainActivity;
+import potential_couscous.couscousdrive.utils.CarCom;
+import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 import potential_couscous.couscousdrive.view.IACC;
 
 //TODO Send data to server in all ButtonListeners()
@@ -20,6 +23,24 @@ public class ACCController implements IACC {
     public ACCController() {
         mCurrentVelocity = 5; //Speedmeter tends to get stuck otherwise
         mCurrentAngle = 100; //Representing steer 0 graphically when right meter is half-way full.
+    }
+
+    private void sendData() {
+        String data = WirelessInoConveret.convertData(calcSteerValue(),
+                calcDriveValue());
+
+        CarCom carCom = MainActivity.getCarCom();
+        if (carCom != null && carCom.isConnected()) {
+            carCom.sendData(carCom.ACC_KEY, data);
+        }
+    }
+
+    private int calcSteerValue() {
+        return mCurrentAngle - 100;
+    }
+
+    private int calcDriveValue() {
+        return mCurrentVelocity;
     }
 
     private void setText(String string) {
@@ -39,6 +60,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentAngle > 0) {
                     mCurrentAngle -= 10;
+                    sendData();
                 }
             }
         });
@@ -50,6 +72,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentAngle < 200) {
                     mCurrentAngle += 10;
+                    sendData();
                 }
             }
         });
@@ -61,6 +84,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentVelocity < 100) {
                     mCurrentVelocity += 5;
+                    sendData();
                 }
             }
         });
@@ -72,10 +96,12 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentVelocity > 0) {
                     mCurrentVelocity -= 5;
+                    sendData();
                 }
             }
         });
     }
+
 
     /**
      * Right anglemeter, set on default 100 representing steering 0.

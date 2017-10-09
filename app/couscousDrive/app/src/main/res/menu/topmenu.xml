@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/action_connect"
-        android:title="@string/connect"
         android:icon="@drawable/ic_action_connect"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/connect"
+        app:showAsAction="ifRoom" />
 
 
 </menu>

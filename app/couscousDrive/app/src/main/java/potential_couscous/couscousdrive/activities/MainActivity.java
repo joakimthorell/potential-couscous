@@ -33,16 +33,6 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
     private static CarCom mCarCom;
     private TextView mSelectMode;
 
-    public static CarCom getCarCom() {
-        return mCarCom;
-    }
-
-    public static void setCarCom(CarCom carCom) {
-        mCarCom = carCom;
-        //Setting manual to default
-        mCarCom.sendData(mCarCom.mMANUAL_KEY);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,5 +111,15 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
 
     private boolean isCarCom() {
         return mCarCom != null && mCarCom.isConnected();
+    }
+
+    public static void setCarCom(CarCom carCom) {
+        mCarCom = carCom;
+        //Setting manual to default
+        mCarCom.sendData(mCarCom.MANUAL_KEY);
+    }
+
+    public static CarCom getCarCom() {
+        return mCarCom;
     }
 }
