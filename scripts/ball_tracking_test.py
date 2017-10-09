@@ -25,13 +25,13 @@ cv2.namedWindow('tracking')
 
 # Creating track bar for min and max for hue, saturation and value
 # You can adjust the defaults as you like
-cv2.createTrackbar('hmin', 'HueComp', 12, 179, nothing)
-cv2.createTrackbar('hmax', 'HueComp', 37, 179, nothing)
+cv2.createTrackbar('hmin', 'HueComp', 0, 179, nothing)
+cv2.createTrackbar('hmax', 'HueComp', 57, 179, nothing)
 
-cv2.createTrackbar('smin', 'SatComp', 96, 255, nothing)
+cv2.createTrackbar('smin', 'SatComp', 82, 255, nothing)
 cv2.createTrackbar('smax', 'SatComp', 255, 255, nothing)
 
-cv2.createTrackbar('vmin', 'ValComp', 186, 255, nothing)
+cv2.createTrackbar('vmin', 'ValComp', 65, 255, nothing)
 cv2.createTrackbar('vmax', 'ValComp', 255, 255, nothing)
 
 # My experimental values
@@ -42,6 +42,7 @@ cv2.createTrackbar('vmax', 'ValComp', 255, 255, nothing)
 # vmn = 186
 # vmx = 255
 
+lastPos = 0;
 
 while (1):
 
@@ -83,15 +84,15 @@ while (1):
     # Draw Circles
     if circles is not None:
         for i in circles[0, :]:
-            # If the ball is far, draw it in green
-            if int(round(i[2])) < 30:
-                cv2.circle(frame, (int(round(i[0])), int(round(i[1]))), int(round(i[2])), (0, 255, 0), 5)
-                cv2.circle(frame, (int(round(i[0])), int(round(i[1]))), 2, (0, 255, 0), 10)
-            # else draw it in red
-            elif int(round(i[2])) > 35:
-                cv2.circle(frame, (int(round(i[0])), int(round(i[1]))), int(round(i[2])), (0, 0, 255), 5)
-                cv2.circle(frame, (int(round(i[0])), int(round(i[1]))), 2, (0, 0, 255), 10)
-                buzz = 1
+            cv2.circle(frame, (int(round(i[0])), int(round(i[1]))), int(round(i[2])), (0, 0, 255), 5)
+            cv2.circle(frame, (int(round(i[0])), int(round(i[1]))), 2, (0, 0, 255), 10)
+            xVal = round(i[0])
+            xVal = xVal - 637/2
+            pos = round(xVal / 3)
+            if (pos - lastPos > 5 or pos - lastPos < -5):
+                print(pos)
+                lastPos = pos;
+            buzz = 1
 
                 # you can use the 'buzz' variable as a trigger to switch some GPIO lines on Rpi :)
                 # print buzz
