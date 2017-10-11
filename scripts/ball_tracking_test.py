@@ -12,9 +12,6 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 320)
 cap.set(4, 240)
 
-####
-# Pass any argument in order to enable calibration mode
-###
 calib = False
 if len(sys.argv) > 1:
     calib = True
