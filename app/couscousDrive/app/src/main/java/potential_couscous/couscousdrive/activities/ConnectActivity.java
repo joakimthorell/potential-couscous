@@ -27,7 +27,6 @@ import potential_couscous.couscousdrive.utils.CarCom;
  * WirelessIno for manual driving and Python server for ACC and Platoon
  */
 public class ConnectActivity extends AppCompatActivity {
-    private final static int WIRELESSINO_PORT = 9000;
     private final static int COUSCOUS_PORT = 8888;
     private final static int CONNECTION_TIMEOUT = 3000;
 
@@ -118,10 +117,9 @@ public class ConnectActivity extends AppCompatActivity {
                 String ip = params[0];
 
                 closeSockets();
-                Socket wirelessInoSocket = connectNewSocket(ip, WIRELESSINO_PORT, CONNECTION_TIMEOUT);
                 Socket couscousSocket = connectNewSocket(ip, COUSCOUS_PORT, CONNECTION_TIMEOUT);
 
-                mCarCom = new CarCom(wirelessInoSocket, couscousSocket);
+                mCarCom = new CarCom(couscousSocket);
 
             } catch (IOException e) {
                 e.printStackTrace();

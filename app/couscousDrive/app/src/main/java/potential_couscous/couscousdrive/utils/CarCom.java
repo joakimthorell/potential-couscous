@@ -14,9 +14,6 @@ public class CarCom {
     public final String PLATOON_KEY = "platoonkey";
     public final String MANUAL_KEY = "manualkey";
 
-    private Socket mManualSocket; // WirelessIno socket.
-    private PrintWriter mManualOut;
-
     private Socket mAutoSocket; // Couscous server socket
     private PrintWriter mAutoOut;
 
@@ -24,23 +21,15 @@ public class CarCom {
      * This Constructor will initiate the Sockets and throws exception
      * if not able to establish connection.
      *
-     * @param manualSocket
      * @param autoSocket
      * @throws IOException
      */
-    public CarCom(Socket manualSocket, Socket autoSocket) throws IOException {
-        mManualSocket = manualSocket;
+    public CarCom(Socket autoSocket) throws IOException {
         mAutoSocket = autoSocket;
         init();
     }
 
     private void init() throws IOException {
-        mManualOut = new PrintWriter(
-                new BufferedWriter(
-                        new OutputStreamWriter(
-                                mManualSocket.getOutputStream())), true);
-        System.out.println("manualOut complete");
-
         mAutoOut = new PrintWriter(
                 new BufferedWriter(
                         new OutputStreamWriter(
@@ -54,8 +43,7 @@ public class CarCom {
      * @return true if connected, otherwise false
      */
     public boolean isConnected() {
-        if (mManualSocket != null && mManualSocket.isConnected() &&
-                mAutoSocket != null && mAutoSocket.isConnected()) {
+        if (mAutoSocket != null && mAutoSocket.isConnected()) {
             return true;
         }
         return false;
@@ -68,15 +56,11 @@ public class CarCom {
      */
     public boolean close() {
         try {
-            mManualOut.close();
-            mManualSocket.close();
             mAutoOut.close();
             mAutoSocket.close();
 
-            mManualSocket = null;
             mAutoSocket = null;
             mAutoOut = null;
-            mManualOut = null;
 
             return true;
         } catch (IOException e) {
@@ -105,8 +89,11 @@ public class CarCom {
             sendData(key);
             return;
         }
+
         if (key.equals(MANUAL_KEY)) {
-            mManualOut.println(data);
+            if (data != null) {
+                mAutoOut.println(data);
+            }
         }
     }
 
