@@ -58,7 +58,7 @@ public class JoystickController implements IJoystick {
     }
 
     /**
-     * This method reformates data from joystick and sends it to WirelessIno server.
+     * This method reformates and sends data from joystick input to server.
      *
      * @param angle
      * @param velocity
@@ -69,10 +69,13 @@ public class JoystickController implements IJoystick {
         String data = WirelessInoConveret.convertData(steer, drive);
 
         CarCom carCom = MainActivity.getCarCom();
-        if (carCom != null && carCom.isConnected()) {
-            carCom.sendData(carCom
-                    .MANUAL_KEY, data);
+        if (isCarCom(carCom)) {
+            carCom.sendData(carCom.MANUAL_KEY, data);
         }
+    }
+
+    private boolean isCarCom(CarCom carCom) {
+        return carCom != null && carCom.isConnected();
     }
 
     private int checkData(int value) {

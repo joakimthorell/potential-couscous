@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CousCousDrive</string>
+    <string name="app_name">CousCous</string>
     <string name="connect">Connect</string>
     <string name="host_ip">host ip</string>
     <string name="default_host_ip">192.168.1.##</string>

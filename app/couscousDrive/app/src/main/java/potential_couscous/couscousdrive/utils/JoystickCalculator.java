@@ -84,22 +84,34 @@ public class JoystickCalculator {
     }
 
     /**
-     * Attempt to minimize velocity and send less data to WirelessIno server
+     * This method limits velocity and send less data to MOPED.
      *
      * @param velocity
      * @return
      */
     private static int translateSpeed(int velocity) {
-        if (velocity > 0 && velocity <= 25) {
+        if (velocity > 0 && velocity <= 10) {
             return 11;
-        } else if (velocity > 25 && velocity <= 50) {
+        } else if (velocity > 10 && velocity <= 20) {
             return 12;
-        } else if (velocity > 50 && velocity <= 75) {
+        } else if (velocity > 20 && velocity <= 30) {
             return 13;
-        } else if (velocity > 75 && velocity < 100) {
+        } else if (velocity > 30 && velocity < 40) {
             return 14;
-        } else if (velocity == 100) {
+        } else if (velocity > 40 && velocity < 50) {
             return 15;
+        } else if (velocity > 50 && velocity < 60) {
+            return 16;
+        } else if (velocity > 60 && velocity < 70) {
+            return 17;
+        } else if (velocity > 70 && velocity < 80) {
+            return 18;
+        } else if (velocity > 80 && velocity < 90) {
+            return 19;
+        } else if (velocity > 90 && velocity < 100) {
+            return 20;
+        } else if (velocity == 100) {
+            return 21;
         }
         return 0;
     }
