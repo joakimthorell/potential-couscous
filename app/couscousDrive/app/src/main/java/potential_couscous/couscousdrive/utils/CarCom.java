@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class CarCom {
+    private static CarCom mCarCom;
+
     public final String ACC_KEY = "acckey";
     public final String PLATOON_KEY = "platoonkey";
     public final String MANUAL_KEY = "manualkey";
@@ -18,13 +20,12 @@ public class CarCom {
     private PrintWriter mAutoOut;
 
     /**
-     * This Constructor will initiate the Sockets and throws exception
-     * if not able to establish connection.
+     * This Constructor initiates the Socket.
      *
      * @param autoSocket
-     * @throws IOException
+     * @throws IOException if not able to establish connection
      */
-    public CarCom(Socket autoSocket) throws IOException {
+    private CarCom(Socket autoSocket) throws IOException {
         mAutoSocket = autoSocket;
         init();
     }
@@ -34,7 +35,7 @@ public class CarCom {
                 new BufferedWriter(
                         new OutputStreamWriter(
                                 mAutoSocket.getOutputStream())), true);
-        System.out.println("autoOut complete");
+        //System.out.println("autoOut complete");
     }
 
     /**
@@ -118,4 +119,19 @@ public class CarCom {
                 System.out.println("Something went wrong sending data from CarCom class");
         }
     }
+
+    public static CarCom getCarCom(Socket socket) throws IOException {
+        if (mCarCom != null) {
+            mCarCom = new CarCom(socket);
+        }
+        return mCarCom;
+    }
+
+    public static CarCom getCarCom() {
+        if (mCarCom != null) {
+            return mCarCom;
+        }
+        return null;
+    }
+
 }

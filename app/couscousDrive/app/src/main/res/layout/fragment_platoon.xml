@@ -32,6 +32,7 @@
             android:layout_height="82dp"
             android:layout_centerInParent="true"
             android:src="@mipmap/orange_ball" />
+
     </com.skyfishjy.library.RippleBackground>
 
 </android.support.constraint.ConstraintLayout>

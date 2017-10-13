@@ -68,7 +68,7 @@ public class JoystickController implements IJoystick {
         int drive = checkData(JoystickCalculator.calcSpeed(angle, velocity));
         String data = WirelessInoConveret.convertData(steer, drive);
 
-        CarCom carCom = MainActivity.getCarCom();
+        CarCom carCom = CarCom.getCarCom();
         if (isCarCom(carCom)) {
             carCom.sendData(carCom.MANUAL_KEY, data);
         }

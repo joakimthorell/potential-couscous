@@ -34,7 +34,6 @@ public class ACCFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setACCButtonListeners(view);
-        //setACCTextViewListener(view);
         setACCSpeedMeters(view);
     }
 
@@ -46,20 +45,6 @@ public class ACCFragment extends Fragment {
 
         if (mController != null) {
             mController.setACCImageButtonListeners(left, right, up, down);
-        }
-    }
-
-    /**
-     * TextView in center of arrow buttons. Not used, data is shown in speedmeter instead.
-     *
-     * @param view
-     */
-    private void setACCTextViewListener(View view) {
-        TextView textView = (TextView) view.findViewById(R.id.acc_textview);
-
-        if (mController != null) {
-            mController.setACCTextView(textView);
-            mController.setACCTextViewListener();
         }
     }
 

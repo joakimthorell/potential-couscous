@@ -119,7 +119,7 @@ public class ConnectActivity extends AppCompatActivity {
                 closeSockets();
                 Socket couscousSocket = connectNewSocket(ip, COUSCOUS_PORT, CONNECTION_TIMEOUT);
 
-                mCarCom = new CarCom(couscousSocket);
+                mCarCom = CarCom.getCarCom(couscousSocket);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -145,7 +145,7 @@ public class ConnectActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (isCarCom()) {
-                MainActivity.setCarCom(mCarCom);
+                mCarCom.sendData(mCarCom.MANUAL_KEY); // Default message to server.
                 startMainActivity();
                 finish();
             } else {

@@ -26,7 +26,8 @@ public class MainController {
         toggleGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
-                CarCom carCom = MainActivity.getCarCom();
+                CarCom carCom = CarCom.getCarCom();
+
                 switch (toggleGroup.getCheckedId()) {
                     case (R.id.manual_button):
                         replaceFragment(FragmentFactory.createJoystickFragment(mJoystickController));
@@ -44,9 +45,7 @@ public class MainController {
                     case (R.id.platoon_button):
                         replaceFragment(FragmentFactory.createPlatoonFragment(mPlatoonController));
 
-                        if (isCarCom(carCom)) {
-                            carCom.sendData(carCom.PLATOON_KEY);
-                        }
+                        //Platooning is activates in PlatoonController
                         break;
                     default:
                         break;

@@ -16,7 +16,6 @@ import potential_couscous.couscousdrive.view.IACC;
 //TODO Send data to server in all ButtonListeners()
 
 public class ACCController implements IACC {
-    private TextView mTextView;
     private int mCurrentVelocity;
     private int mCurrentAngle;
 
@@ -29,7 +28,7 @@ public class ACCController implements IACC {
         String data = WirelessInoConveret.convertData(calcSteerValue(),
                 calcDriveValue());
 
-        CarCom carCom = MainActivity.getCarCom();
+        CarCom carCom = CarCom.getCarCom();
         if (carCom != null && carCom.isConnected()) {
             carCom.sendData(carCom.ACC_KEY, data);
         }
@@ -43,18 +42,12 @@ public class ACCController implements IACC {
         return mCurrentVelocity;
     }
 
-    private void setText(String string) {
-        if (mTextView != null) {
-            mTextView.setText(string);
-        }
-    } //Currently not used...
-
     /**
      * Arrow button listeners, updating values for TubeSpeedometer values at the moment.
      *
      * @param leftButton
      */
-    private void setLeftButtonListener(ImageButton leftButton) {
+    private void setRightButtonListener(ImageButton leftButton) {
         leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +59,7 @@ public class ACCController implements IACC {
         });
     }
 
-    private void setRightButtonListener(ImageButton rightButton) {
+    private void setLeftButtonListener(ImageButton rightButton) {
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,20 +149,4 @@ public class ACCController implements IACC {
         setVelocityMeterListener(velocityMeter);
         setAngleMeterListener(angleMeter);
     }
-
-    @Override
-    public void setACCTextView(TextView textView) {
-        mTextView = textView;
-    } //Currently not used...
-
-    @Override
-    public void setACCTextViewListener() {
-        if (mTextView != null) {
-            mTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });
-        }
-    } //Currently not used...
 }

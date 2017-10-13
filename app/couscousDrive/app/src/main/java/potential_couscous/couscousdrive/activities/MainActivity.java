@@ -30,7 +30,6 @@ import potential_couscous.couscousdrive.view.PlatoonFragment;
  * Main
  */
 public class MainActivity extends AppCompatActivity implements IFragmentChanger {
-    private static CarCom mCarCom;
     private TextView mSelectMode;
 
     @Override
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_connect:
-                if (isCarCom()) {
+                if (isCarCom(CarCom.getCarCom())) {
                     Toast.makeText(this, "You are connected...", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent i = new Intent(this, ConnectActivity.class);
@@ -109,17 +108,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
         ft.commit();
     }
 
-    private boolean isCarCom() {
-        return mCarCom != null && mCarCom.isConnected();
-    }
-
-    public static void setCarCom(CarCom carCom) {
-        mCarCom = carCom;
-        //Setting manual to default
-        mCarCom.sendData(mCarCom.MANUAL_KEY);
-    }
-
-    public static CarCom getCarCom() {
-        return mCarCom;
+    private boolean isCarCom(CarCom carCom) {
+        return carCom != null && carCom.isConnected();
     }
 }

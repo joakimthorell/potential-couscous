@@ -8,14 +8,12 @@
 
     <com.github.anastr.speedviewlib.TubeSpeedometer
         android:id="@+id/velocity_manual_meter"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:sv_highSpeedColor="@color/colorRED"
         app:sv_lowSpeedColor="@color/colorPRIMDARK"
         app:sv_lowSpeedPercent="30"
@@ -25,6 +23,7 @@
         app:sv_speedTextColor="#00ffffff"
         app:sv_textColor="#00ffffff"
         app:sv_unitTextColor="#00ffffff"
+        app:sv_withEffects3D="false"
         custom:layout_constraintBottom_toBottomOf="@+id/joystick_view"
         custom:layout_constraintLeft_toLeftOf="parent"
         custom:layout_constraintRight_toRightOf="parent"
@@ -32,14 +31,9 @@
 
     <io.github.controlwear.virtual.joystick.android.JoystickView
         android:id="@+id/joystick_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+
         custom:JV_backgroundColor="@color/colorPrimary"
         custom:JV_borderColor="@color/colorBorder"
         custom:JV_borderWidth="2dp"
@@ -47,7 +41,6 @@
         custom:JV_buttonSizeRatio="19%"
         custom:JV_fixedCenter="false"
         custom:layout_constraintBottom_toBottomOf="parent"
-        custom:layout_constraintHorizontal_bias="0.468"
         custom:layout_constraintLeft_toLeftOf="parent"
         custom:layout_constraintRight_toRightOf="parent"
         custom:layout_constraintTop_toTopOf="parent" />
