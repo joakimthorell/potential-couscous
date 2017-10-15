@@ -15,7 +15,7 @@ import potential_couscous.couscousdrive.view.IACC;
 
 //TODO Send data to server in all ButtonListeners()
 
-public class ACCController implements IACC {
+public class ACCController extends AbstractController implements IACC {
     private int mCurrentVelocity;
     private int mCurrentAngle;
 
@@ -29,7 +29,7 @@ public class ACCController implements IACC {
                 calcDriveValue());
 
         CarCom carCom = CarCom.getCarCom();
-        if (carCom != null && carCom.isConnected()) {
+        if (isCarCom(carCom)) {
             carCom.sendData(carCom.ACC_KEY, data);
         }
     }

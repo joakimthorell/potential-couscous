@@ -12,7 +12,7 @@ import potential_couscous.couscousdrive.view.FragmentFactory;
 /**
  * Main controller responsible for toggle buttons, changing fragments.
  */
-public class MainController {
+public class MainController extends AbstractController {
     private IFragmentChanger mFragmentReplacer;
 
     private JoystickController mJoystickController;
@@ -63,10 +63,6 @@ public class MainController {
         if (mFragmentReplacer != null) {
             mFragmentReplacer.replaceFragment(fragment);
         }
-    }
-
-    private boolean isCarCom(CarCom carCom) {
-        return carCom != null && carCom.isConnected();
     }
 
     public void setFragmentReplacer(IFragmentChanger fragmentReplacer) {

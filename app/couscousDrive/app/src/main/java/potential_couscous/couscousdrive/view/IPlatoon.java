@@ -1,6 +1,7 @@
 package potential_couscous.couscousdrive.view;
 
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.skyfishjy.library.RippleBackground;
 
@@ -9,4 +10,6 @@ import com.skyfishjy.library.RippleBackground;
  */
 public interface IPlatoon {
     void setRippleBackgroundListener(RippleBackground rippleBackground, ImageView imageView);
+
+    void setTogglePlatoonImageViews(ImageView playButton, ImageView stopButton);
 }

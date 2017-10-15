@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     tools:context="potential_couscous.couscousdrive.view.PlatoonFragment">
 
-    <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.skyfishjy.library.RippleBackground
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -17,9 +16,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:rb_color="@color/colorORANDARK"
         app:rb_duration="3000"
         app:rb_radius="32dp"
@@ -32,6 +33,22 @@
             android:layout_height="82dp"
             android:layout_centerInParent="true"
             android:src="@mipmap/orange_ball" />
+
+        <ImageView
+            android:id="@+id/play_platoon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@mipmap/click_platoon" />
+
+        <ImageView
+            android:id="@+id/stop_platoon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignStart="@+id/play_platoon"
+            android:layout_alignTop="@+id/play_platoon"
+            app:srcCompat="@mipmap/pause_platoon" />
 
     </com.skyfishjy.library.RippleBackground>
 

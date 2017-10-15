@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.skyfishjy.library.RippleBackground;
 
@@ -34,6 +35,7 @@ public class PlatoonFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setTogglePlatoonImageView(view);
         setRippleBackgroundListener(view);
     }
 
@@ -43,6 +45,15 @@ public class PlatoonFragment extends Fragment {
 
         if (mController != null) {
             mController.setRippleBackgroundListener(rippleBackground, imageView);
+        }
+    }
+
+    private void setTogglePlatoonImageView(View view) {
+        ImageView playButton = (ImageView) view.findViewById(R.id.play_platoon);
+        ImageView stopButton = (ImageView) view.findViewById(R.id.stop_platoon);
+
+        if (mController != null) {
+            mController.setTogglePlatoonImageViews(playButton, stopButton);
         }
     }
 

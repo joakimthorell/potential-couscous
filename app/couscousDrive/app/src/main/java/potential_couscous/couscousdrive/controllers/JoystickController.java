@@ -14,7 +14,7 @@ import potential_couscous.couscousdrive.utils.JoystickCalculator;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 import potential_couscous.couscousdrive.view.IJoystick;
 
-public class JoystickController implements IJoystick {
+public class JoystickController extends AbstractController implements IJoystick {
     private ToggleGroup mToggleGroup;
     private volatile int currentVelocity;
 
@@ -72,10 +72,6 @@ public class JoystickController implements IJoystick {
         if (isCarCom(carCom)) {
             carCom.sendData(carCom.MANUAL_KEY, data);
         }
-    }
-
-    private boolean isCarCom(CarCom carCom) {
-        return carCom != null && carCom.isConnected();
     }
 
     private int checkData(int value) {
