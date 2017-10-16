@@ -7,10 +7,8 @@
 
     <com.github.anastr.speedviewlib.TubeSpeedometer
         android:id="@+id/velocity_meter"
-        android:layout_width="180dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:sv_highSpeedColor="@color/colorRED"
@@ -28,10 +26,8 @@
 
     <com.github.anastr.speedviewlib.TubeSpeedometer
         android:id="@+id/angle_meter"
-        android:layout_width="180dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:sv_highSpeedColor="@android:color/transparent"
@@ -50,27 +46,57 @@
         app:sv_unitTextColor="@android:color/transparent"
         app:sv_withEffects3D="false" />
 
-    <GridLayout
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="118dp"
+        android:layout_marginTop="106dp"
+        android:rotation="-45"
+        android:text="0°"
+        android:textColor="@color/colorORANDARK"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="45dp"
+        android:textColor="@color/colorORANDARK"
+        android:textSize="16sp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/angle_meter">
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/angle_meter"
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
             android:id="@+id/up_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="2"
+            android:layout_columnWeight="1"
             android:layout_row="1"
+            android:layout_rowWeight="1"
             android:background="@drawable/acc_button_up"
-            android:minHeight="80dp"
-            android:minWidth="80dp"
+            android:maxHeight="100dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/up_arrow_white" />
 
@@ -79,10 +105,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
+            android:layout_columnWeight="1"
             android:layout_row="2"
+            android:layout_rowWeight="1"
             android:background="@drawable/acc_button_left"
-            android:minHeight="80dp"
-            android:minWidth="80dp"
+            android:maxHeight="100dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/left_arrow_white"
             tools:layoutDirection="rtl" />
@@ -92,10 +119,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="3"
+            android:layout_columnWeight="1"
             android:layout_row="2"
+            android:layout_rowWeight="1"
             android:background="@drawable/acc_button_right"
-            android:minHeight="80dp"
-            android:minWidth="80dp"
+            android:maxHeight="100dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/right_arrow_white" />
 
@@ -104,36 +132,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="2"
+            android:layout_columnWeight="1"
             android:layout_row="3"
+            android:layout_rowWeight="1"
             android:background="@drawable/acc_button_down"
-            android:minHeight="80dp"
-            android:minWidth="80dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/down_arrow_white" />
     </GridLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="45dp"
-        android:text="ANGLE"
-        android:textColor="@color/colorORANDARK"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="45dp"
-        android:text="VELOCITY"
-        android:textColor="@color/colorORANDARK"
-        android:textSize="16sp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
