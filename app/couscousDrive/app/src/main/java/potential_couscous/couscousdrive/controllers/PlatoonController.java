@@ -36,7 +36,7 @@ public class PlatoonController extends AbstractController implements IPlatoon {
                     }
 
                     if (isCarCom(carCom)) {
-                        //carCom.sendData(carCom.PLATOON_KEY);
+                        carCom.sendData(carCom.PLATOON_KEY);
                     }
 
                 } else {
@@ -49,10 +49,7 @@ public class PlatoonController extends AbstractController implements IPlatoon {
                     }
 
                     if (isCarCom(carCom)) {
-                        //carCom.sendData(carCom.PLATOON_KEY);
-
-                        //TODO Send message that ends Platoon MODE
-
+                        //carCom.sendData(carCom.PLATOON_KEY, "KILL PLATOON");
                     }
                 }
             }

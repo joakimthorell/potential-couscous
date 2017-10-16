@@ -77,24 +77,10 @@ public class CarCom {
      * @param data String data will be sent to car
      */
     public void sendData(String key, String data) {
-        System.out.println(data);
-
-        if (key.equals(ACC_KEY)) {
-            if (data != null) {
-                mAutoOut.println(data);
-                return;
-            }
-        }
-
-        if (key.equals(ACC_KEY) || key.equals(PLATOON_KEY)) {
+        if (data == null) {
             sendData(key);
-            return;
-        }
-
-        if (key.equals(MANUAL_KEY)) {
-            if (data != null) {
-                mAutoOut.println(data);
-            }
+        } else {
+            mAutoOut.println(data);
         }
     }
 
@@ -121,7 +107,7 @@ public class CarCom {
     }
 
     public static CarCom getCarCom(Socket socket) throws IOException {
-        if (mCarCom != null) {
+        if (mCarCom == null) {
             mCarCom = new CarCom(socket);
         }
         return mCarCom;
