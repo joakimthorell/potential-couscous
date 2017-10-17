@@ -30,6 +30,20 @@ public class CarCom {
         init();
     }
 
+    public static CarCom getCarCom(Socket socket) throws IOException {
+        if (mCarCom == null) {
+            mCarCom = new CarCom(socket);
+        }
+        return mCarCom;
+    }
+
+    public static CarCom getCarCom() {
+        if (mCarCom != null) {
+            return mCarCom;
+        }
+        return null;
+    }
+
     private void init() throws IOException {
         mAutoOut = new PrintWriter(
                 new BufferedWriter(
@@ -104,19 +118,5 @@ public class CarCom {
                 // nothing should be done here
                 System.out.println("Something went wrong sending data from CarCom class");
         }
-    }
-
-    public static CarCom getCarCom(Socket socket) throws IOException {
-        if (mCarCom == null) {
-            mCarCom = new CarCom(socket);
-        }
-        return mCarCom;
-    }
-
-    public static CarCom getCarCom() {
-        if (mCarCom != null) {
-            return mCarCom;
-        }
-        return null;
     }
 }

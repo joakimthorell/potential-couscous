@@ -24,8 +24,10 @@
         android:id="@+id/ip_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="38dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="38dp"
+        android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:ems="10"
         android:hint="@string/default_host_ip"
@@ -37,9 +39,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_host"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/tv_host"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="38dp">
+        app:layout_constraintRight_toRightOf="parent">
 
         <requestFocus />
     </EditText>

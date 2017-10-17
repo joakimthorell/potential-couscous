@@ -8,7 +8,6 @@ import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 import potential_couscous.couscousdrive.R;
-import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.JoystickCalculator;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;

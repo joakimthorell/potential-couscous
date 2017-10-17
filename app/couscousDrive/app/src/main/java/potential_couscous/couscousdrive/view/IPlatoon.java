@@ -1,7 +1,6 @@
 package potential_couscous.couscousdrive.view;
 
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.skyfishjy.library.RippleBackground;
 

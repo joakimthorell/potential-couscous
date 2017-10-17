@@ -12,4 +12,8 @@ public interface IACC {
     void setACCImageButtonListeners(ImageButton left, ImageButton right, ImageButton up, ImageButton down);
 
     void setACCTubeSpeedometerListeners(TubeSpeedometer velocityMeter, TubeSpeedometer angleMeter);
+
+    void setSteerTextView(TextView textView);
+
+    void setDriveTextView(TextView textView);
 }

@@ -47,13 +47,14 @@
         app:sv_withEffects3D="false" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/steer_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="118dp"
         android:layout_marginTop="106dp"
         android:rotation="-45"
         android:text="0°"
+        android:textAlignment="center"
         android:textColor="@color/colorORANDARK"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -61,14 +62,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/drive_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginRight="118dp"
+        android:layout_marginTop="106dp"
+        android:rotation="45"
+        android:textAlignment="center"
         android:textColor="@color/colorORANDARK"
-        android:textSize="16sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
