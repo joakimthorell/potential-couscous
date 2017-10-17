@@ -7,7 +7,7 @@
 Vad har vi gjort? TODO
 
 
-### [`/Documents`](/Documents/)
+### `/Documents`
 
 * Deliverbles
     * [D1. Strategies for SCRUM](https://github.com/mattssonj/potentialcouscous/blob/master/Documents/Deliverables/D1_Strategier%20för%20SCRUM.pdf)
@@ -66,7 +66,7 @@ Press Connect and choose mode.
 |Fredrik Viberg|CID|vibergf|
 |Jakob Erlandsson|CID|JakobErlandsson|
 |Jakob Wall|CID|jakwall|
-|Joakim Mattsson|joamatt@student.chalmers.se|mattssonj|
+|Joakim Mattsson|joamatt|mattssonj|
 |Kevin Brunström|CID|Kevinbrunstrom|
 |Philip Nord|CID|nordp|
 |Sanjin Slavnic|CID|lasanjin|
