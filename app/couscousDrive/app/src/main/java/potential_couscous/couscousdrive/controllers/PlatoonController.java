@@ -1,19 +1,23 @@
 package potential_couscous.couscousdrive.controllers;
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.skyfishjy.library.RippleBackground;
 
 import potential_couscous.couscousdrive.utils.CarCom;
+import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 import potential_couscous.couscousdrive.view.IPlatoon;
 
 public class PlatoonController extends AbstractController implements IPlatoon {
     private ImageView mPlay;
     private ImageView mStop;
 
-    public PlatoonController() {
+    private int mSteer;
 
+    public PlatoonController() {
+        mSteer = 0;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class PlatoonController extends AbstractController implements IPlatoon {
                     }
 
                     if (isCarCom(carCom)) {
-                        carCom.sendData(carCom.PLATOON_KEY);
+                        carCom.sendData(carCom.PLATOON_KEY, WirelessInoConveret.convertData(mSteer, 40));
                     }
 
                 } else {
@@ -53,6 +57,46 @@ public class PlatoonController extends AbstractController implements IPlatoon {
                 }
             }
         });
+    }
+
+    private void setLeftCalibrationButtonListener(ImageButton left) {
+        left.setOnClickListener(new View.OnClickListener() {
+            private CarCom carCom = CarCom.getCarCom();
+
+            @Override
+            public void onClick(View v) {
+                if (mSteer > -100) {
+                    mSteer -= 5;
+                }
+                if (isCarCom(carCom)) {
+                    carCom.sendData(carCom.PLATOON_KEY, WirelessInoConveret.convertData(mSteer, 0));
+                }
+            }
+        });
+
+    }
+
+    private void setRightCalibrationButtonListener(ImageButton right) {
+        right.setOnClickListener(new View.OnClickListener() {
+            private CarCom carCom = CarCom.getCarCom();
+
+            @Override
+            public void onClick(View v) {
+                if (mSteer < 100) {
+                    mSteer += 5;
+                }
+                if (isCarCom(carCom)) {
+                    carCom.sendData(carCom.PLATOON_KEY, WirelessInoConveret.convertData(mSteer, 0));
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void setPlatoonButtonListeners(ImageButton left, ImageButton right) {
+        setLeftCalibrationButtonListener(left);
+        setRightCalibrationButtonListener(right);
     }
 
     @Override

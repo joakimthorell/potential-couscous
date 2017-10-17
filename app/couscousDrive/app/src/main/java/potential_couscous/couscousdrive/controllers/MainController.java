@@ -44,7 +44,9 @@ public class MainController extends AbstractController {
                     case (R.id.platoon_button):
                         replaceFragment(FragmentFactory.createPlatoonFragment(mPlatoonController));
 
-                        //Platooning is activates in PlatoonController
+                        if (isCarCom(carCom)) {
+                            carCom.sendData(carCom.PLATOON_KEY);
+                        }
                         break;
                     default:
                         break;
