@@ -12,7 +12,7 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 320)
 cap.set(4, 240)
 
-calib = False
+calib = True
 if len(sys.argv) > 1:
     calib = True
 
@@ -88,7 +88,7 @@ while (1):
     closing = cv2.GaussianBlur(closing, (5, 5), 0)
 
     # Detect circles using HoughCircles
-    circles = cv2.HoughCircles(closing, cv2.HOUGH_GRADIENT, 2, 120, param1=120, param2=50, minRadius=10, maxRadius=0)
+    circles = cv2.HoughCircles(closing, cv2.HOUGH_GRADIENT, 2, 500, param1=120, param2=50, minRadius=15, maxRadius=100)
     # circles = np.uint16(np.around(circles))
 
 
@@ -103,7 +103,7 @@ while (1):
             xVal = xVal - cap.get(3)/2
             pos = round(xVal / (cap.get(3)/2)*100)
             if (pos - lastPos > 5 or pos - lastPos < -5):
-                print(pos)
+                print('xPos:' + str(pos) + ' Size: ' + str(int(round(i[2]))))
                 lastPos = pos;
             buzz = 1
 
