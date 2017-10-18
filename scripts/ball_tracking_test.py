@@ -21,11 +21,11 @@ def nothing(x):
     pass
 
 # Current values
-hmn = 30
-hmx = 59
-smn = 41
-smx = 145
-vmn = 85
+hmn = 29
+hmx = 49
+smn = 121
+smx = 222
+vmn = 56
 vmx = 255
 
 if calib:
@@ -88,7 +88,7 @@ while (1):
     closing = cv2.GaussianBlur(closing, (5, 5), 0)
 
     # Detect circles using HoughCircles
-    circles = cv2.HoughCircles(closing, cv2.HOUGH_GRADIENT, 2, 500, param1=120, param2=50, minRadius=15, maxRadius=100)
+    circles = cv2.HoughCircles(closing, cv2.HOUGH_GRADIENT, 3, 500, param1=120, param2=50, minRadius=5, maxRadius=100)
     # circles = np.uint16(np.around(circles))
 
 
@@ -124,5 +124,3 @@ while (1):
     if k == 27:
         exitTest()
         break
-
-
