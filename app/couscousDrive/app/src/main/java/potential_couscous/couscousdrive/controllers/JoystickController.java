@@ -22,7 +22,7 @@ public class JoystickController extends AbstractController implements IJoystick 
      * Change REVERSE_STEERING depending on car. I think 4wheeldrive MOPEDs need reverse false
      * and 2wheeldrive to true.
      */
-    private static boolean REVERSE_STEERING = true;
+    private static boolean REVERSE_STEERING = false;
 
     private int mCalibrateSteering;
     private ToggleGroup mToggleGroup;
@@ -57,6 +57,7 @@ public class JoystickController extends AbstractController implements IJoystick 
     private void updateCalibrateDisplay() {
         if (mCalibrateDisplay != null) {
             mCalibrateDisplay.setText(String.valueOf(mCalibrateSteering));
+            driveCar(mCalibrateSteering);
         }
     }
 
@@ -87,6 +88,7 @@ public class JoystickController extends AbstractController implements IJoystick 
                         mCalibrateSteering - 5 :
                         mCalibrateSteering;
                 updateCalibrateDisplay();
+
             }
         });
     }
@@ -124,6 +126,23 @@ public class JoystickController extends AbstractController implements IJoystick 
         steer = calculateCalibration(steer);
         int drive = checkData(JoystickCalculator.calcSpeed(angle, velocity));
         String data = WirelessInoConveret.convertData(steer, drive);
+
+        CarCom carCom = CarCom.getCarCom();
+        if (isCarCom(carCom)) {
+            carCom.sendData(carCom.MANUAL_KEY, data);
+        }
+    }
+
+    /**
+     * This method only send driving value to car. Velocity will be 0
+     * @param steeringValue
+     */
+    private void driveCar(int steeringValue) {
+        int steer = checkData(steeringValue);
+        steer = REVERSE_STEERING ? steer * -1 : steer;
+        steer = calculateCalibration(steer);
+
+        String data =  WirelessInoConveret.convertData(steer, 0);
 
         CarCom carCom = CarCom.getCarCom();
         if (isCarCom(carCom)) {
