@@ -72,7 +72,7 @@ See [result](/Documents/gitinspector.md) TODO
 |Anton Hägermalm|anthage|antonhager|
 |Fredrik Viberg|vibergf|vibergf|
 |Jakob Erlandsson|erjakob|JakobErlandsson|
-|Jakob Wall|CID|jakwall|
+|Jakob Wall|jwall|jakwall|
 |Joakim Mattsson|joamatt|mattssonj|
 |Kevin Brunström|kevinbr|Kevinbrunstrom|
 |Philip Nord|nordp|nordp|
