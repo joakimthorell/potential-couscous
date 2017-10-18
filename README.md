@@ -1,6 +1,8 @@
 # Software Engineering Project DAT255, Autumn 2017
 
-<p align="center"> <img src="/Documents/images/Logo.2.0..png"> </p>
+
+### Team
+<img src="/Documents/images/Logo.2.0..png">
 
 
 ### Description
@@ -21,8 +23,8 @@ This is a repository for a software engineering project at Chalmers University o
 
 
 ### Code
-   * [`/scripts`](/scripts/) - This is all the code we developed to make the MOPED work as intended. 
-   * [`/app`](/app/) - Android application source code. For complete app download apk [here](www.google.com)
+   * [`/scripts`](/scripts/) - All code we developed to make the MOPED work as intended. 
+   * [`/app`](/app/) - Android application source code. For complete app download APK [here](www.google.com)
 
 
 ### How to run the system
