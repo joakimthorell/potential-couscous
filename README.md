@@ -1,13 +1,13 @@
 # Software Engineering Project DAT255, Autumn 2017
 
-![PC Logo](/Documents/images/Logo.2.0..png)
+<p align="center"> <img src="/Documents/images/Logo.2.0..png"> </p>
 
 
-#### What is this?
-Vad har vi gjort? TODO
+### Description
+This is a repository for a software engineering project at Chalmers University of Technology. The project consist of developing software for autonomous platooning implemented on a Mobile Open Platform Development ([MOPED](https://github.com/sics-sse/moped)) unit under real-life working conditions with the purpose of learning and implementing Scrum.
 
 
-### `/Documents`
+### Documents
 
 * Deliverbles
     * [D1. Strategies for SCRUM](https://github.com/mattssonj/potentialcouscous/blob/master/Documents/Deliverables/D1_Strategier%20för%20SCRUM.pdf)
@@ -20,9 +20,9 @@ Vad har vi gjort? TODO
 
 
 
-[`/scripts`](/scripts/) - This is all the code we developed to make the MOPED work as intended. 
-
-[`/app`](/app/) - Android application source code. For complete app download apk [here](www.google.com)
+### Code
+   * [`/scripts`](/scripts/) - This is all the code we developed to make the MOPED work as intended. 
+   * [`/app`](/app/) - Android application source code. For complete app download apk [here](www.google.com)
 
 
 ### How to run the system
@@ -60,15 +60,15 @@ Press Connect and choose mode.
 
 | Name | CID | GitHub |
 |------|-----|--------|
-|Alexandra Garrido Jaque|CID|AlexAndraGarrido|
-|Anne Keller|CID|kelleranne|
-|Anton Hägermalm|CID|antonhager|
-|Fredrik Viberg|CID|vibergf|
-|Jakob Erlandsson|CID|JakobErlandsson|
+|Alexandra Garrido Jaque|jaque|AlexAndraGarrido|
+|Anne Keller|annkel|kelleranne|
+|Anton Hägermalm|anthage|antonhager|
+|Fredrik Viberg|vibergf|vibergf|
+|Jakob Erlandsson|erjakob|JakobErlandsson|
 |Jakob Wall|CID|jakwall|
 |Joakim Mattsson|joamatt|mattssonj|
-|Kevin Brunström|CID|Kevinbrunstrom|
-|Philip Nord|CID|nordp|
-|Sanjin Slavnic|CID|lasanjin|
-|Simon Kärrman|CID|skarrman|
-|Svante Bennhage|CID|Skroudelz|
+|Kevin Brunström|kevinbr|Kevinbrunstrom|
+|Philip Nord|nordp|nordp|
+|Sanjin Slavnic|slavnic|lasanjin|
+|Simon Kärrman|simkarr|skarrman|
+|Svante Bennhage|svaben|Skroudelz|
