@@ -15,6 +15,12 @@ This is a repository for a software engineering project at Chalmers University o
     * [D1. Strategies for SCRUM](/Documents/Deliverables/D1_Stratergies_for_scrum.pdf)
     * [D2. Backlog](https://trello.com/b/gsIRwmhq/potential-couscous)
     * [D3. Half-time evaluation](/Documents/Deliverables/D3_HalfTime_Evaluation.pdf)
+    * D4. Presentation at Lindholmen
+    * D5. --- Coming Soon ---
+    * Extras
+      * [Vision](/Documents/Deliverables/Our_vision_statement.pdf) - Our team vision
+      * [Contract](/Documents/GroupContract.pdf) - Group Contract
+      
 * [Meeting protocols](https://github.com/mattssonj/potential-couscous/tree/master/Documents/Meeting%20Protocols) - All our meeting protocols during the weeks
 * [Retrospectives](https://github.com/mattssonj/potential-couscous/tree/master/Documents/Retrospectives) - Our sprint retrospectives
 
@@ -47,6 +53,14 @@ Make sure you are connected to the same network as p.1 pointed out. (`port 8888`
 System changes between 3 diffrent states, Manual, ACC, Platooning. 
 
 5. The Main system collects data from the CAN-Bus. This data (Ultra Sonic Sensor) are then used to help calculate situations in platooning and ACC mode. 
+
+### External libraries
+Show and link to our external libraries, eg. OpenCV, maybe the graphical android libraries we used?
+
+### Gitinspector
+To evaluate how much code people have pushed to the repository we used [gitinspector](www.google.com).
+
+See [result](/Documents/gitinspector.md) TODO
 
 
 ### Contributors
