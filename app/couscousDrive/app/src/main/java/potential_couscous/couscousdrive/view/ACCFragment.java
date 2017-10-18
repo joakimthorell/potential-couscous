@@ -18,7 +18,6 @@ import potential_couscous.couscousdrive.R;
  */
 public class ACCFragment extends Fragment {
     private IACC mController;
-    private TextView mSteer;
 
     public ACCFragment() {
         // Required empty public constructor

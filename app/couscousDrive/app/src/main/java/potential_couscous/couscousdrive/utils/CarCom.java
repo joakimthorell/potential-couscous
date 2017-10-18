@@ -12,9 +12,9 @@ import java.net.Socket;
 public class CarCom {
     private static CarCom mCarCom;
 
-    public final String ACC_KEY = "acckey";
-    public final String PLATOON_KEY = "platoonkey";
-    public final String MANUAL_KEY = "manualkey";
+    public static final String ACC_KEY = "acckey";
+    public static final String PLATOON_KEY = "platoonkey";
+    public static final String MANUAL_KEY = "manualkey";
 
     private Socket mAutoSocket; // Couscous server socket
     private PrintWriter mAutoOut;

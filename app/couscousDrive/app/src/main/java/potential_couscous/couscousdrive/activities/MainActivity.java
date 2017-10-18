@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentChanger 
                     Intent i = new Intent(this, ConnectActivity.class);
                     startActivity(i);
                 }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
