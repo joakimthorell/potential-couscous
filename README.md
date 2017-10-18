@@ -12,9 +12,9 @@ This is a repository for a software engineering project at Chalmers University o
 ### Documents
 
 * Deliverbles
-    * [D1. Strategies for SCRUM](https://github.com/mattssonj/potentialcouscous/blob/master/Documents/Deliverables/D1_Strategier%20för%20SCRUM.pdf)
+    * [D1. Strategies for SCRUM](/Documents/Deliverables/D1_Stratergies_for_scrum.pdf)
     * [D2. Backlog](https://trello.com/b/gsIRwmhq/potential-couscous)
-    * [D3. Half-time evaluation](https://github.com/mattssonj/potential-couscous/blob/master/Documents/Deliverables/D3%20Half-time%20evaluation.pdf)
+    * [D3. Half-time evaluation](/Documents/Deliverables/D3_HalfTime_Evaluation.pdf)
 * [Meeting protocols](https://github.com/mattssonj/potential-couscous/tree/master/Documents/Meeting%20Protocols) - All our meeting protocols during the weeks
 * [Retrospectives](https://github.com/mattssonj/potential-couscous/tree/master/Documents/Retrospectives) - Our sprint retrospectives
 
