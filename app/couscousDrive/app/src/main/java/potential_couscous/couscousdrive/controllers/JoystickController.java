@@ -2,6 +2,7 @@ package potential_couscous.couscousdrive.controllers;
 
 import android.support.v7.widget.ToggleGroup;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -18,12 +19,7 @@ import potential_couscous.couscousdrive.view.IJoystick;
 
 public class JoystickController extends AbstractController implements IJoystick {
 
-    /**
-     * Change REVERSE_STEERING depending on car. I think 4wheeldrive MOPEDs need reverse false
-     * and 2wheeldrive to true.
-     */
-    private static boolean REVERSE_STEERING = false;
-
+    private CheckBox mReverseSteering;
     private int mCalibrateSteering;
     private ToggleGroup mToggleGroup;
     private volatile int currentVelocity;
@@ -46,6 +42,11 @@ public class JoystickController extends AbstractController implements IJoystick 
                 }
             }
         });
+    }
+
+    @Override
+    public void setReverseBox(CheckBox box) {
+        mReverseSteering = box;
     }
 
     @Override
@@ -122,7 +123,7 @@ public class JoystickController extends AbstractController implements IJoystick 
      */
     private void driveCar(int angle, int velocity) {
         int steer = checkData(JoystickCalculator.calcAngle(angle) * -1);
-        steer = REVERSE_STEERING ? steer * -1 : steer;
+        steer = isReverse() ? steer * -1 : steer;
         steer = calculateCalibration(steer);
         int drive = checkData(JoystickCalculator.calcSpeed(angle, velocity));
         String data = WirelessInoConveret.convertData(steer, drive);
@@ -139,7 +140,7 @@ public class JoystickController extends AbstractController implements IJoystick 
      */
     private void driveCar(int steeringValue) {
         int steer = checkData(steeringValue);
-        steer = REVERSE_STEERING ? steer * -1 : steer;
+        steer = isReverse() ? steer * -1 : steer;
         steer = calculateCalibration(steer);
 
         String data =  WirelessInoConveret.convertData(steer, 0);
@@ -163,6 +164,13 @@ public class JoystickController extends AbstractController implements IJoystick 
 
         return mCalibrateSteering - ((steering * mCalibrateSteering) / 100 );
 
+    }
+
+    private boolean isReverse() {
+        if (mReverseSteering != null) {
+            return mReverseSteering.isChecked();
+        }
+        return false;
     }
 
     private int checkData(int value) {

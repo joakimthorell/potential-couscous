@@ -1,5 +1,6 @@
 package potential_couscous.couscousdrive.view;
 
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -18,4 +19,6 @@ public interface IJoystick {
     void setCalibrateButtons(ImageButton leftButton, ImageButton rightButton);
 
     void setCalibrateDisplay(TextView calibrateDisplay);
+
+    void setReverseBox(final CheckBox checkBox);
 }

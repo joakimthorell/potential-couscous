@@ -48,16 +48,17 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif"
         android:text="-60"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintLeft_toRightOf="@+id/manual_button_left"
         app:layout_constraintRight_toLeftOf="@+id/manual_button_right"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/reverseBox" />
 
     <com.github.anastr.speedviewlib.TubeSpeedometer
         android:id="@+id/velocity_manual_meter"
@@ -96,5 +97,17 @@
         custom:layout_constraintLeft_toLeftOf="parent"
         custom:layout_constraintRight_toRightOf="parent"
         custom:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/reverseBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:text="Reverse?"
+        app:layout_constraintLeft_toRightOf="@+id/manual_button_left"
+        app:layout_constraintRight_toLeftOf="@+id/manual_button_right"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
