@@ -6,9 +6,62 @@
     android:layout_height="match_parent"
     tools:context="potential_couscous.couscousdrive.view.JoystickFragment">
 
+    <ImageButton
+        android:id="@+id/manual_button_right"
+        android:layout_width="71dp"
+        android:layout_height="62dp"
+        android:layout_column="3"
+        android:layout_columnWeight="1"
+        android:layout_marginRight="32dp"
+        android:layout_row="2"
+        android:layout_rowWeight="1"
+        android:background="@drawable/acc_button_right"
+        android:maxHeight="100dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/right_arrow_white"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <ImageButton
+        android:id="@+id/manual_button_left"
+        android:layout_width="71dp"
+        android:layout_height="62dp"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="32dp"
+        android:layout_row="2"
+        android:layout_rowWeight="1"
+        android:background="@drawable/acc_button_left"
+        android:maxHeight="100dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:srcCompat="@drawable/left_arrow_white"
+        tools:layoutDirection="rtl"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/manual_steering_cali"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif"
+        android:text="-60"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/manual_button_left"
+        app:layout_constraintRight_toLeftOf="@+id/manual_button_right"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.github.anastr.speedviewlib.TubeSpeedometer
         android:id="@+id/velocity_manual_meter"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
@@ -31,9 +84,8 @@
 
     <io.github.controlwear.virtual.joystick.android.JoystickView
         android:id="@+id/joystick_view"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         custom:JV_backgroundColor="@color/colorPrimary"
         custom:JV_borderColor="@color/colorBorder"
         custom:JV_borderWidth="2dp"

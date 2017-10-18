@@ -1,6 +1,9 @@
 package potential_couscous.couscousdrive.controllers;
 
 import android.support.v7.widget.ToggleGroup;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.TubeSpeedometer;
@@ -14,12 +17,22 @@ import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 import potential_couscous.couscousdrive.view.IJoystick;
 
 public class JoystickController extends AbstractController implements IJoystick {
+
+    /**
+     * Change REVERSE_STEERING depending on car. I think 4wheeldrive MOPEDs need reverse false
+     * and 2wheeldrive to true.
+     */
+    private static boolean REVERSE_STEERING = true;
+
+    private int mCalibrateSteering;
     private ToggleGroup mToggleGroup;
     private volatile int currentVelocity;
+    private TextView mCalibrateDisplay;
 
     public JoystickController(ToggleGroup toggleGroup) {
         mToggleGroup = toggleGroup;
         currentVelocity = 1;
+        mCalibrateSteering = 0;
     }
 
     @Override
@@ -31,6 +44,49 @@ public class JoystickController extends AbstractController implements IJoystick 
                     currentVelocity = strength;
                     driveCar(angle, strength);
                 }
+            }
+        });
+    }
+
+    @Override
+    public void setCalibrateDisplay(TextView textView) {
+        mCalibrateDisplay = textView;
+        updateCalibrateDisplay();
+    }
+
+    private void updateCalibrateDisplay() {
+        if (mCalibrateDisplay != null) {
+            mCalibrateDisplay.setText(String.valueOf(mCalibrateSteering));
+        }
+    }
+
+    @Override
+    public void setCalibrateButtons(ImageButton leftButton, ImageButton rightButton) {
+        setCalibreateLeftButton(leftButton);
+        setCalibreateRightButton(rightButton);
+        updateCalibrateDisplay();
+    }
+
+    private void setCalibreateRightButton(ImageButton rightButton) {
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCalibrateSteering = mCalibrateSteering < 100 ?
+                        mCalibrateSteering + 5 :
+                        mCalibrateSteering;
+                updateCalibrateDisplay();
+            }
+        });
+    }
+
+    private void setCalibreateLeftButton(ImageButton leftButton) {
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCalibrateSteering = mCalibrateSteering > -100 ?
+                        mCalibrateSteering - 5 :
+                        mCalibrateSteering;
+                updateCalibrateDisplay();
             }
         });
     }
@@ -63,7 +119,9 @@ public class JoystickController extends AbstractController implements IJoystick 
      * @param velocity
      */
     private void driveCar(int angle, int velocity) {
-        int steer = checkData(JoystickCalculator.calcAngle(angle) * -1); // multiply with -1 to reverse steering
+        int steer = checkData(JoystickCalculator.calcAngle(angle) * -1);
+        steer = REVERSE_STEERING ? steer * -1 : steer;
+        steer = calculateCalibration(steer);
         int drive = checkData(JoystickCalculator.calcSpeed(angle, velocity));
         String data = WirelessInoConveret.convertData(steer, drive);
 
@@ -71,6 +129,21 @@ public class JoystickController extends AbstractController implements IJoystick 
         if (isCarCom(carCom)) {
             carCom.sendData(carCom.MANUAL_KEY, data);
         }
+    }
+
+    /**
+     * This method makes the car turn even. If the wheels are not placed in 0 position with
+     * value = 0 then the steering will be as bad in both directions.
+     * @param steering original steering value
+     * @return calculated value.
+     */
+    private int calculateCalibration(int steering) {
+        if (mCalibrateSteering == 0) {
+            return steering;
+        }
+
+        return mCalibrateSteering - ((steering * mCalibrateSteering) / 100 );
+
     }
 
     private int checkData(int value) {
