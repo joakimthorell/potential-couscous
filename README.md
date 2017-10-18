@@ -28,34 +28,25 @@ This is a repository for a software engineering project at Chalmers University o
 
 
 ### How to run the system
+To run the system follow [instructions](/Documents/howTo.md).
 
-To make the [MOPED](https://github.com/sics-sse/moped) run with our created files their are some dependencies.
+### Development
+<p align="center"><img src="/Documents/images/MOPED.jpg"></p>
 
-Install OpenCV on MOPED TCU. Follow instructions [here](https://github.com/felixnorden/moppepojkar/issues/38).
+1. Computer, MOPED and mobile device needs to be connected to the same hotspot.
+All data between devices is sent through local network. 
 
-It is also neccecary to delete the optos files.
-```sh
-$ cd
-$ rm -rf /something/way/to/optipos
-```
+2. To run the Main.py file you need to SSH into the MOPED from a computer. 
+See the [HowTo](/Documents/howTo.md) if needed. 
 
-Clone this repo to MOPED home directory.
-```sh
-$ git clone https://github.com/mattssonj/potential-couscous.git
-$ cd
-$ cp -a potential-couscous/scripts/main .
-```
+3. When Main.py is turned on you can connect your phone by using the CousCousDrive application.
+The app will change UI depending on the mode and sends data to the Main system.
+Make sure you are connected to the same network as p.1 pointed out. (`port 8888`needs to be open)
 
-Install the mobile app to Android 7.0 device. Use [apk](www.google.com)
+4. The Main.py system is built on Python2.7 and drives the car by sending data to [ecm socket](https://github.com/sics-sse/moped/tree/master/ecm-core/src/main/java) at `localhost port 9000`.
+System changes between 3 diffrent states, Manual, ACC, Platooning. 
 
-Start the car. SSH into TCU and run following commands
-```sh
-$ sudo modprobe bcm2835-v4l2
-$ python main/Main.py
-```
-Text should now appear in terminal. It's now time to connect the App to the Car.
-Press the bluetooth logo in upper right corner and fill in MOPEDs IP-address. 
-Press Connect and choose mode.
+5. The Main system collects data from the CAN-Bus. This data (Ultra Sonic Sensor) are then used to help calculate situations in platooning and ACC mode. 
 
 
 ### Contributors
