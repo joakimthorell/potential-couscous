@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.TubeSpeedometer;
 
@@ -36,6 +39,17 @@ public class JoystickFragment extends Fragment {
 
         setJoystickViewListener(view);
         setTubeSpeedometerListener(view);
+        setCalibrationButtons(view);
+        setCheckboxViewListener(view);
+    }
+
+    private void setCheckboxViewListener(View view) {
+        CheckBox checkBox = (CheckBox) view.findViewById(R.id.reverseBox);
+
+        if (mController != null) {
+            mController.setReverseBox(checkBox);
+        }
+        checkBox.setChecked(false);
     }
 
     private void setJoystickViewListener(View view) {
@@ -51,6 +65,18 @@ public class JoystickFragment extends Fragment {
 
         if (mController != null) {
             mController.setTubeSpeedometerListener(velocityMeter);
+        }
+    }
+
+    private void setCalibrationButtons(View view) {
+        ImageButton leftButton = (ImageButton) view.findViewById(R.id.manual_button_left);
+        ImageButton rightButton = (ImageButton) view.findViewById(R.id.manual_button_right);
+
+        TextView calibrationDisplay = (TextView) view.findViewById(R.id.manual_steering_cali);
+
+        if (mController != null) {
+            mController.setCalibrateButtons(leftButton, rightButton);
+            mController.setCalibrateDisplay(calibrationDisplay);
         }
     }
 

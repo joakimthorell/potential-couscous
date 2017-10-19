@@ -39,7 +39,7 @@ public class AngleCalculatorTest {
 
 
         // Trying max/min values in first and second quadrant
-        assertEquals(100, JoystickCalculator.calcAngle(0), DELTA);
+        assertEquals(0, JoystickCalculator.calcAngle(0), DELTA);
         assertEquals(0, JoystickCalculator.calcAngle(90), DELTA);
         assertEquals(0, JoystickCalculator.calcAngle(91), DELTA);
         assertEquals(0, JoystickCalculator.calcAngle(89), DELTA);

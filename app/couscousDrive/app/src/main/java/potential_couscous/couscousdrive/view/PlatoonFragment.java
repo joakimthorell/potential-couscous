@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.skyfishjy.library.RippleBackground;
@@ -34,16 +35,40 @@ public class PlatoonFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setTogglePlatoonImageView(view);
         setRippleBackgroundListener(view);
+        setPlatoonCalibrationButtons(view);
     }
 
     private void setRippleBackgroundListener(View view) {
         RippleBackground rippleBackground = (RippleBackground) view.findViewById(R.id.content);
         ImageView imageView = (ImageView) view.findViewById(R.id.centerImage);
 
-        if (mController != null) {
+        if (isController()) {
             mController.setRippleBackgroundListener(rippleBackground, imageView);
         }
+    }
+
+    private void setTogglePlatoonImageView(View view) {
+        ImageView playButton = (ImageView) view.findViewById(R.id.play_platoon);
+        ImageView stopButton = (ImageView) view.findViewById(R.id.stop_platoon);
+
+        if (isController()) {
+            mController.setTogglePlatoonImageViews(playButton, stopButton);
+        }
+    }
+
+    public void setPlatoonCalibrationButtons(View view) {
+        ImageButton left = (ImageButton) view.findViewById(R.id.platoon_button_left);
+        ImageButton right = (ImageButton) view.findViewById(R.id.platoon_button_right);
+
+        if (isController()) {
+            mController.setPlatoonButtonListeners(left, right);
+        }
+    }
+
+    private boolean isController() {
+        return mController != null;
     }
 
     public void setIController(IPlatoon controller) {

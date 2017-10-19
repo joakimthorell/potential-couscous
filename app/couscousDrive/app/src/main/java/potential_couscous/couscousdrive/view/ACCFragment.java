@@ -33,9 +33,11 @@ public class ACCFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         setACCButtonListeners(view);
-        //setACCTextViewListener(view);
         setACCSpeedMeters(view);
+        setSteerTextView(view);
+        setDriveTextView(view);
     }
 
     private void setACCButtonListeners(View view) {
@@ -44,22 +46,8 @@ public class ACCFragment extends Fragment {
         ImageButton up = (ImageButton) view.findViewById(R.id.up_button);
         ImageButton down = (ImageButton) view.findViewById(R.id.down_button);
 
-        if (mController != null) {
+        if (isController()) {
             mController.setACCImageButtonListeners(left, right, up, down);
-        }
-    }
-
-    /**
-     * TextView in center of arrow buttons. Not used, data is shown in speedmeter instead.
-     *
-     * @param view
-     */
-    private void setACCTextViewListener(View view) {
-        TextView textView = (TextView) view.findViewById(R.id.acc_textview);
-
-        if (mController != null) {
-            mController.setACCTextView(textView);
-            mController.setACCTextViewListener();
         }
     }
 
@@ -67,12 +55,32 @@ public class ACCFragment extends Fragment {
         TubeSpeedometer velocityMeter = (TubeSpeedometer) view.findViewById(R.id.velocity_meter);
         TubeSpeedometer angleMeter = (TubeSpeedometer) view.findViewById(R.id.angle_meter);
 
-        if (mController != null) {
+        if (isController()) {
             mController.setACCTubeSpeedometerListeners(velocityMeter, angleMeter);
         }
     }
 
     public void setIController(IACC controller) {
         mController = controller;
+    }
+
+    public void setSteerTextView(View view) {
+        TextView textView = (TextView) view.findViewById(R.id.steer_textview);
+
+        if (isController()) {
+            mController.setSteerTextView(textView);
+        }
+    }
+
+    public void setDriveTextView(View view) {
+        TextView textView = (TextView) view.findViewById(R.id.drive_textview);
+
+        if (isController()) {
+            mController.setDriveTextView(textView);
+        }
+    }
+
+    private boolean isController() {
+        return mController != null;
     }
 }

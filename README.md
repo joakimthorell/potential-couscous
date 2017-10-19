@@ -1,4 +1,4 @@
-# Software Engineering Project DAT255, Autumn 2017
+## Software Engineering Project DAT255, Autumn 2017
 
 
 ### Team
@@ -10,47 +10,59 @@ This is a repository for a software engineering project at Chalmers University o
 
 
 ### Documents
-
 * Deliverbles
     * [D1. Strategies for SCRUM](/Documents/Deliverables/D1_Stratergies_for_scrum.pdf)
     * [D2. Backlog](https://trello.com/b/gsIRwmhq/potential-couscous)
     * [D3. Half-time evaluation](/Documents/Deliverables/D3_HalfTime_Evaluation.pdf)
-* [Meeting protocols](https://github.com/mattssonj/potential-couscous/tree/master/Documents/Meeting%20Protocols) - All our meeting protocols during the weeks
-* [Retrospectives](https://github.com/mattssonj/potential-couscous/tree/master/Documents/Retrospectives) - Our sprint retrospectives
-
-
-
+    * D4. Presentation at Lindholmen
+    * D5. --- Coming Soon ---
+    * Extras
+      * [Vision](/Documents/Deliverables/Our_vision_statement.pdf) - Our vision
+      * [Contract](/Documents/GroupContract.pdf) - Group Contract
+      
+* [Meeting protocols](https://github.com/mattssonj/potential-couscous/tree/master/Documents/Meeting%20Protocols) - Weekly meeting protocols.
+* [Retrospectives](https://github.com/mattssonj/potential-couscous/tree/master/Documents/Retrospectives) - Weekly sprint retrospectives
 
 
 ### Code
    * [`/scripts`](/scripts/) - All code we developed to make the MOPED work as intended. 
-   * [`/app`](/app/) - Android application source code. For complete app download APK [here](www.google.com)
+   * [`/app`](/app/) - Android application source code. For complete app download APK [here](www.google.com). Make sure your device can run API 25 or higher.
 
 
 ### How to run the system
-To run the system follow [instructions](/Documents/howTo.md).
+Follow instructions: [instructions](/Documents/howTo.md).
+
 
 ### Development
 <p align="center"><img src="/Documents/images/MOPED.jpg"></p>
 
-1. Computer, MOPED and mobile device needs to be connected to the same hotspot.
+1. A Computer, the MOPED and a mobile device need to be connected to the same hotspot.
 All data between devices is sent through local network. 
 
-2. To run the Main.py file you need to SSH into the MOPED from a computer. 
-See the [HowTo](/Documents/howTo.md) if needed. 
+2. In order to run the Main.py file you need to connect to the MOPED using ssh command from your computer. 
+See the [How-To](/Documents/howTo.md). 
 
-3. When Main.py is turned on you can connect your phone by using the CousCousDrive application.
-The app will change UI depending on the mode and sends data to the Main system.
-Make sure you are connected to the same network as p.1 pointed out. (`port 8888`needs to be open)
+3. You can connect your phone to the MOPED when Main.py is running by using the CousCousDrive application[LÄNKAR TILL BILDER PÅ APP].
+The app sends data to CousCous Server, telling Main.py to run different scripts depending on mode. App will change UI depending on mode.
+Enter MOPED's ip-address (`port 8888`needs to be open) and make sure you are connected to the same network.
 
-4. The Main.py system is built on Python2.7 and drives the car by sending data to [ecm socket](https://github.com/sics-sse/moped/tree/master/ecm-core/src/main/java) at `localhost port 9000`.
-System changes between 3 diffrent states, Manual, ACC, Platooning. 
+4. The Main.py system is developed with Python 2.7. It runs the car by sending data to [ecm socket](https://github.com/sics-sse/moped/tree/master/ecm-core/src/main/java) at `localhost port 9000`.
+System changes between 3 diffrent states: Manual, ACC and Platooning.
 
-5. The Main system collects data from the CAN-Bus. This data (Ultra Sonic Sensor) are then used to help calculate situations in platooning and ACC mode. 
+5. The Main system collects data from the CAN-Bus. Data from the Ultra Sonic Sensor is used to execute Platooning and ACC mode.
+
+
+### External libraries
+Show and link to our external libraries, eg. OpenCV, maybe the graphical android libraries we used?
+
+
+### Gitinspector
+To evaluate how much code people have pushed to the repository we used [gitinspector](www.google.com).
+
+See [result](/Documents/gitinspector.md) TODO
 
 
 ### Contributors
-
 | Name | CID | GitHub |
 |------|-----|--------|
 |Alexandra Garrido Jaque|jaque|AlexAndraGarrido|
@@ -58,7 +70,7 @@ System changes between 3 diffrent states, Manual, ACC, Platooning.
 |Anton Hägermalm|anthage|antonhager|
 |Fredrik Viberg|vibergf|vibergf|
 |Jakob Erlandsson|erjakob|JakobErlandsson|
-|Jakob Wall|CID|jakwall|
+|Jakob Wall|jwall|jakwall|
 |Joakim Mattsson|joamatt|mattssonj|
 |Kevin Brunström|kevinbr|Kevinbrunstrom|
 |Philip Nord|nordp|nordp|
