@@ -10,23 +10,38 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class CarCom {
-    public final String ACC_KEY = "acckey";
-    public final String PLATOON_KEY = "platoonkey";
-    public final String MANUAL_KEY = "manualkey";
+    private static CarCom mCarCom;
+
+    public static final String ACC_KEY = "acckey";
+    public static final String PLATOON_KEY = "platoonkey";
+    public static final String MANUAL_KEY = "manualkey";
 
     private Socket mAutoSocket; // Couscous server socket
     private PrintWriter mAutoOut;
 
     /**
-     * This Constructor will initiate the Sockets and throws exception
-     * if not able to establish connection.
+     * This Constructor initiates the Socket.
      *
      * @param autoSocket
-     * @throws IOException
+     * @throws IOException if not able to establish connection
      */
-    public CarCom(Socket autoSocket) throws IOException {
+    private CarCom(Socket autoSocket) throws IOException {
         mAutoSocket = autoSocket;
         init();
+    }
+
+    public static CarCom getCarCom(Socket socket) throws IOException {
+        if (mCarCom == null) {
+            mCarCom = new CarCom(socket);
+        }
+        return mCarCom;
+    }
+
+    public static CarCom getCarCom() {
+        if (mCarCom != null) {
+            return mCarCom;
+        }
+        return null;
     }
 
     private void init() throws IOException {
@@ -34,7 +49,7 @@ public class CarCom {
                 new BufferedWriter(
                         new OutputStreamWriter(
                                 mAutoSocket.getOutputStream())), true);
-        System.out.println("autoOut complete");
+        //System.out.println("autoOut complete");
     }
 
     /**
@@ -76,24 +91,10 @@ public class CarCom {
      * @param data String data will be sent to car
      */
     public void sendData(String key, String data) {
-        System.out.println(data);
-
-        if (key.equals(ACC_KEY)) {
-            if (data != null) {
-                mAutoOut.println(data);
-                return;
-            }
-        }
-
-        if (key.equals(ACC_KEY) || key.equals(PLATOON_KEY)) {
+        if (data == null) {
             sendData(key);
-            return;
-        }
-
-        if (key.equals(MANUAL_KEY)) {
-            if (data != null) {
-                mAutoOut.println(data);
-            }
+        } else {
+            mAutoOut.println(data);
         }
     }
 

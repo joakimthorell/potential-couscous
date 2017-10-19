@@ -11,9 +11,9 @@ import com.github.anastr.speedviewlib.TubeSpeedometer;
 public interface IACC {
     void setACCImageButtonListeners(ImageButton left, ImageButton right, ImageButton up, ImageButton down);
 
-    void setACCTextView(TextView textView);
-
-    void setACCTextViewListener();
-
     void setACCTubeSpeedometerListeners(TubeSpeedometer velocityMeter, TubeSpeedometer angleMeter);
+
+    void setSteerTextView(TextView textView);
+
+    void setDriveTextView(TextView textView);
 }

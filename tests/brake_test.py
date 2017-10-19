@@ -4,6 +4,8 @@ from nav1 import whole4, pause, cont
 from driving import stop, drive, steer
 init()
 
+#Test mainly for finding out braking distances
+
 time.sleep(1)
 
 g.limitspeed = None

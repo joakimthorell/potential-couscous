@@ -2,16 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="potential_couscous.couscousdrive.view.ACCFragment">
 
     <com.github.anastr.speedviewlib.TubeSpeedometer
         android:id="@+id/velocity_meter"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:sv_highSpeedColor="@color/colorRED"
         app:sv_lowSpeedColor="@color/colorPRIMDARK"
@@ -20,99 +18,129 @@
         app:sv_mediumSpeedColor="@color/colorORANDARK"
         app:sv_mediumSpeedPercent="75"
         app:sv_speedTextColor="#00ffffff"
-        app:sv_speedometerMode="BOTTOM_RIGHT"
-        app:sv_textColor="#00ffffff"
-        app:sv_unitTextColor="#00ffffff" />
+        app:sv_speedometerMode="BOTTOM_LEFT"
+        app:sv_speedometerWidth="35dp"
+        app:sv_textColor="@android:color/transparent"
+        app:sv_unitTextColor="@android:color/transparent"
+        app:sv_withEffects3D="false" />
 
     <com.github.anastr.speedviewlib.TubeSpeedometer
         android:id="@+id/angle_meter"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:sv_highSpeedColor="@color/colorRED"
-        app:sv_lowSpeedColor="@color/colorPRIMDARK"
-        app:sv_lowSpeedPercent="30"
-        app:sv_maxSpeed="200"
-        app:sv_mediumSpeedColor="@color/colorORANDARK"
-        app:sv_mediumSpeedPercent="75"
-        app:sv_speedTextColor="#00ffffff"
-        app:sv_speedometerMode="BOTTOM_LEFT"
-        app:sv_textColor="#00ffffff"
-        app:sv_unitTextColor="#00ffffff" />
-
-    <ImageButton
-        android:id="@+id/left_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginRight="-4dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/acc_button_left"
-        android:scaleType="fitCenter"
-        app:layout_constraintRight_toLeftOf="@+id/up_button"
-        app:layout_constraintTop_toBottomOf="@+id/up_button"
-        app:srcCompat="@drawable/left_arrow_white" />
-
-    <ImageButton
-        android:id="@+id/up_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/acc_button_up"
-        android:scaleType="fitCenter"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/velocity_meter"
-        app:srcCompat="@drawable/up_arrow_white" />
-
-    <ImageButton
-        android:id="@+id/right_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="-4dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/acc_button_right"
-        android:scaleType="fitCenter"
-        app:layout_constraintLeft_toRightOf="@+id/up_button"
-        app:layout_constraintTop_toBottomOf="@+id/up_button"
-        app:srcCompat="@drawable/right_arrow_white" />
-
-    <ImageButton
-        android:id="@+id/down_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/acc_button_down"
-        android:maxHeight="120dp"
-        android:maxWidth="120dp"
-        android:scaleType="fitCenter"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/left_button"
-        app:layout_constraintTop_toBottomOf="@+id/left_button"
-        app:layout_constraintVertical_bias="0.511"
-        app:srcCompat="@drawable/down_arrow_white" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:sv_highSpeedColor="@android:color/transparent"
+        app:sv_indicator="LineIndicator"
+        app:sv_indicatorColor="@color/colorPRIMDARK"
+        app:sv_indicatorWidth="8dp"
+        app:sv_lowSpeedColor="@android:color/transparent"
+        app:sv_lowSpeedPercent="30"
+        app:sv_markColor="@android:color/transparent"
+        app:sv_maxSpeed="200"
+        app:sv_mediumSpeedColor="@android:color/transparent"
+        app:sv_mediumSpeedPercent="75"
+        app:sv_speedTextColor="@android:color/transparent"
+        app:sv_speedometerMode="BOTTOM_RIGHT"
+        app:sv_speedometerWidth="35dp"
+        app:sv_unitTextColor="@android:color/transparent"
+        app:sv_withEffects3D="false" />
 
     <TextView
-        android:id="@+id/acc_textview"
+        android:id="@+id/steer_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="118dp"
+        android:layout_marginTop="106dp"
+        android:rotation="-45"
+        android:text="0°"
         android:textAlignment="center"
-        android:textColor="@color/colorOrange"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/down_button"
-        app:layout_constraintLeft_toRightOf="@+id/left_button"
-        app:layout_constraintRight_toLeftOf="@+id/right_button"
-        app:layout_constraintTop_toBottomOf="@+id/up_button"
-        app:layout_constraintVertical_bias="0.508" />
+        android:textColor="@color/colorORANDARK"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/drive_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="118dp"
+        android:layout_marginTop="106dp"
+        android:rotation="45"
+        android:textAlignment="center"
+        android:textColor="@color/colorORANDARK"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/angle_meter"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:background="@drawable/acc_button_up"
+            android:maxHeight="100dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/up_arrow_white" />
+
+        <ImageButton
+            android:id="@+id/left_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:background="@drawable/acc_button_left"
+            android:maxHeight="100dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/left_arrow_white"
+            tools:layoutDirection="rtl" />
+
+        <ImageButton
+            android:id="@+id/right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:background="@drawable/acc_button_right"
+            android:maxHeight="100dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/right_arrow_white" />
+
+        <ImageButton
+            android:id="@+id/down_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_row="3"
+            android:layout_rowWeight="1"
+            android:background="@drawable/acc_button_down"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/down_arrow_white" />
+    </GridLayout>
 
 </android.support.constraint.ConstraintLayout>
