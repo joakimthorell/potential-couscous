@@ -48,17 +48,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif"
         android:text="-60"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintLeft_toRightOf="@+id/manual_button_left"
         app:layout_constraintRight_toLeftOf="@+id/manual_button_right"
-        app:layout_constraintTop_toBottomOf="@+id/reverseBox" />
+        tools:layout_editor_absoluteY="49dp" />
 
     <com.github.anastr.speedviewlib.TubeSpeedometer
         android:id="@+id/velocity_manual_meter"
@@ -99,15 +96,19 @@
         custom:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/reverseBox"
+        android:id="@+id/reverse_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="0dp"
-        android:text="Reverse?"
-        app:layout_constraintLeft_toRightOf="@+id/manual_button_left"
-        app:layout_constraintRight_toLeftOf="@+id/manual_button_right"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="8dp"
+        android:text="Reverse Steering"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/joystick_view" />
 
 </android.support.constraint.ConstraintLayout>

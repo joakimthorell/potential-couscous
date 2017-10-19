@@ -44,9 +44,9 @@ public class JoystickFragment extends Fragment {
     }
 
     private void setCheckboxViewListener(View view) {
-        CheckBox checkBox = (CheckBox) view.findViewById(R.id.reverseBox);
+        CheckBox checkBox = (CheckBox) view.findViewById(R.id.reverse_box);
 
-        if (mController != null) {
+        if (isController()) {
             mController.setReverseBox(checkBox);
         }
         checkBox.setChecked(false);
@@ -55,7 +55,7 @@ public class JoystickFragment extends Fragment {
     private void setJoystickViewListener(View view) {
         JoystickView joystickView = (JoystickView) view.findViewById(R.id.joystick_view);
 
-        if (mController != null) {
+        if (isController()) {
             mController.setJoystickViewListener(joystickView);
         }
     }
@@ -63,7 +63,7 @@ public class JoystickFragment extends Fragment {
     private void setTubeSpeedometerListener(View view) {
         TubeSpeedometer velocityMeter = (TubeSpeedometer) view.findViewById(R.id.velocity_manual_meter);
 
-        if (mController != null) {
+        if (isController()) {
             mController.setTubeSpeedometerListener(velocityMeter);
         }
     }
@@ -74,10 +74,14 @@ public class JoystickFragment extends Fragment {
 
         TextView calibrationDisplay = (TextView) view.findViewById(R.id.manual_steering_cali);
 
-        if (mController != null) {
+        if (isController()) {
             mController.setCalibrateButtons(leftButton, rightButton);
             mController.setCalibrateDisplay(calibrationDisplay);
         }
+    }
+
+    private boolean isController() {
+        return mController != null;
     }
 
     public void setIController(IJoystick controller) {

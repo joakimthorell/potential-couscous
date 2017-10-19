@@ -7,8 +7,8 @@
 
     <ImageButton
         android:id="@+id/platoon_button_right"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_column="3"
         android:layout_columnWeight="1"
         android:layout_marginBottom="32dp"
@@ -24,8 +24,8 @@
 
     <ImageButton
         android:id="@+id/platoon_button_left"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_column="1"
         android:layout_columnWeight="1"
         android:layout_marginBottom="32dp"

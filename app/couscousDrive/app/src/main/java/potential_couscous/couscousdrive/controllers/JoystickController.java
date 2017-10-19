@@ -18,16 +18,16 @@ import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 import potential_couscous.couscousdrive.view.IJoystick;
 
 public class JoystickController extends AbstractController implements IJoystick {
-
     private CheckBox mReverseSteering;
-    private int mCalibrateSteering;
-    private ToggleGroup mToggleGroup;
-    private volatile int currentVelocity;
     private TextView mCalibrateDisplay;
+    private ToggleGroup mToggleGroup;
+
+    private int mCalibrateSteering;
+    private int mCurrentVelocity;
 
     public JoystickController(ToggleGroup toggleGroup) {
         mToggleGroup = toggleGroup;
-        currentVelocity = 1;
+        mCurrentVelocity = 1;
         mCalibrateSteering = 0;
     }
 
@@ -37,7 +37,7 @@ public class JoystickController extends AbstractController implements IJoystick 
             @Override
             public void onMove(int angle, int strength) {
                 if (mToggleGroup.getCheckedId() == R.id.manual_button) {
-                    currentVelocity = strength;
+                    mCurrentVelocity = strength;
                     driveCar(angle, strength);
                 }
             }
@@ -97,18 +97,19 @@ public class JoystickController extends AbstractController implements IJoystick 
     @Override
     public void setTubeSpeedometerListener(TubeSpeedometer velocityMeter) {
         velocityMeter.setSpeedAt(5);//Speedmeter tends to get stuck otherwise
+
         velocityMeter.setOnSpeedChangeListener(new OnSpeedChangeListener() {
             private int lastVelocity = 100;//Random in order to differ from current
             private boolean once = true;
 
             @Override
             public void onSpeedChange(Gauge gauge, boolean isSpeedUp, boolean isByTremble) {
-                if (currentVelocity == 0 && once) {
+                if (mCurrentVelocity == 0 && once) {
                     gauge.realSpeedTo(5);
                     once = false;
-                } else if (currentVelocity != lastVelocity && currentVelocity > 0) {
-                    gauge.speedTo(currentVelocity, 900);
-                    lastVelocity = currentVelocity;
+                } else if (mCurrentVelocity != lastVelocity && mCurrentVelocity > 0) {
+                    gauge.speedTo(mCurrentVelocity, 900);
+                    lastVelocity = mCurrentVelocity;
                     once = true;
                 }
             }
@@ -122,10 +123,9 @@ public class JoystickController extends AbstractController implements IJoystick 
      * @param velocity
      */
     private void driveCar(int angle, int velocity) {
-        int steer = checkData(JoystickCalculator.calcAngle(angle) * -1);
-        steer = isReverse() ? steer * -1 : steer;
-        steer = calculateCalibration(steer);
+        int steer = calcSteer(JoystickCalculator.calcAngle(angle));
         int drive = checkData(JoystickCalculator.calcSpeed(angle, velocity));
+
         String data = WirelessInoConveret.convertData(steer, drive);
 
         CarCom carCom = CarCom.getCarCom();
@@ -139,9 +139,7 @@ public class JoystickController extends AbstractController implements IJoystick 
      * @param steeringValue
      */
     private void driveCar(int steeringValue) {
-        int steer = checkData(steeringValue);
-        steer = isReverse() ? steer * -1 : steer;
-        steer = calculateCalibration(steer);
+        int steer = calcSteer(steeringValue);
 
         String data =  WirelessInoConveret.convertData(steer, 0);
 
@@ -151,9 +149,15 @@ public class JoystickController extends AbstractController implements IJoystick 
         }
     }
 
+    private int calcSteer(int steeringValue) {
+        int steer = checkData(steeringValue);
+        steer = isReverse() ? steer * -1 : steer;
+        return calculateCalibration(steer);
+    }
+
     /**
-     * This method makes the car turn even. If the wheels are not placed in 0 position with
-     * value = 0 then the steering will be as bad in both directions.
+     * This method makes the car turn even. If the wheels aren't calibrated in 0 position,
+     * the steering will be as bad in both directions.
      * @param steering original steering value
      * @return calculated value.
      */
@@ -161,16 +165,11 @@ public class JoystickController extends AbstractController implements IJoystick 
         if (mCalibrateSteering == 0) {
             return steering;
         }
-
         return mCalibrateSteering - ((steering * mCalibrateSteering) / 100 );
-
     }
 
     private boolean isReverse() {
-        if (mReverseSteering != null) {
-            return mReverseSteering.isChecked();
-        }
-        return false;
+        return mReverseSteering != null && mReverseSteering.isChecked();
     }
 
     private int checkData(int value) {
