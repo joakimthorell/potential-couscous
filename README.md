@@ -2,7 +2,7 @@
 
 
 ### Team
-<img src="/Documents/images/Logo.2.0..png">
+<img src="/Documents/Images/Logo.2.0..png">
 
 
 ### Description
@@ -34,7 +34,7 @@ Follow instructions: [instructions](/Documents/howTo.md).
 
 
 ### Development
-<p align="center"><img src="/Documents/images/MOPED.jpg"></p>
+<p align="center"><img src="/Documents/Images/MOPED.jpg"></p>
 
 1. A Computer, the MOPED and a mobile device need to be connected to the same hotspot.
 All data between devices is sent through local network. 
@@ -53,7 +53,14 @@ System changes between 3 diffrent states: Manual, ACC and Platooning.
 
 
 ### External libraries
-Show and link to our external libraries, eg. OpenCV, maybe the graphical android libraries we used?
+In our project we only used a handfull of external libraries. Most of them are just graphical libraries to help the app look better but there is one more important one, [OpenCV](https://opencv.org). This library is used when platooning is activated to help us find an object to follow. 
+
+
+The rest of the libraries are used in the app, these are:
+- [VirtualJoystick](https://github.com/controlwear/virtual-joystick-android) - Used to create the Joystick.
+- [ToggleButtons](https://github.com/rcketscientist/ToggleButtons) - Creates the 3 buttons in the bottom.
+- [SpeedView](https://github.com/anastr/SpeedView) - Creates the speedometer around the Joystick.
+- [RippleBackground](https://github.com/skyfishjy/android-ripple-background) - Creates the rippled background when pressing Play in platoon mode.
 
 
 ### Gitinspector
