@@ -1,3 +1,5 @@
 ## Information from GitInspector
 
-#### here we will show the gitinspector outcome
+This is our groups Gitinspector.
+
+![Image](/Documents/Images/Gitinspector.jpg)
