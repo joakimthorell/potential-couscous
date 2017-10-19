@@ -16,6 +16,7 @@ public class PlatoonController extends AbstractController implements IPlatoon {
 
     private boolean isDriving;
     private int mSteer;
+    private static final int MAX_SPEED = 27;
 
     public PlatoonController() {
         mSteer = 0;
@@ -41,7 +42,7 @@ public class PlatoonController extends AbstractController implements IPlatoon {
                     }
 
                     if (isCarCom(carCom)) {
-                        carCom.sendData(carCom.PLATOON_KEY, WirelessInoConveret.convertData(mSteer, 40));
+                        carCom.sendData(carCom.PLATOON_KEY, WirelessInoConveret.convertData(mSteer, MAX_SPEED));
                         isDriving = true;
                     }
 
@@ -73,7 +74,7 @@ public class PlatoonController extends AbstractController implements IPlatoon {
                     mSteer -= 5;
                 }
                 if (isCarCom(carCom)) {
-                    int velocity = isDriving ? 40 : 0;
+                    int velocity = isDriving ? MAX_SPEED : 0;
                     carCom.sendData(carCom.PLATOON_KEY, WirelessInoConveret.convertData(mSteer, velocity));
                 }
             }
@@ -91,7 +92,7 @@ public class PlatoonController extends AbstractController implements IPlatoon {
                     mSteer += 5;
                 }
                 if (isCarCom(carCom)) {
-                    int velocity = isDriving ? 40 : 0;
+                    int velocity = isDriving ? MAX_SPEED : 0;
                     carCom.sendData(carCom.PLATOON_KEY, WirelessInoConveret.convertData(mSteer, velocity));
                 }
             }
