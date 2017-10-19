@@ -5,14 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.ToggleGroup;
 
 import potential_couscous.couscousdrive.R;
-import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.view.FragmentFactory;
 
 /**
  * Main controller responsible for toggle buttons, changing fragments.
  */
-public class MainController {
+public class MainController extends AbstractController {
     private IFragmentChanger mFragmentReplacer;
 
     private JoystickController mJoystickController;
@@ -26,7 +25,8 @@ public class MainController {
         toggleGroup.setOnCheckedChangeListener(new ToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ToggleGroup group, @IdRes int[] checkedId) {
-                CarCom carCom = MainActivity.getCarCom();
+                CarCom carCom = CarCom.getCarCom();
+
                 switch (toggleGroup.getCheckedId()) {
                     case (R.id.manual_button):
                         replaceFragment(FragmentFactory.createJoystickFragment(mJoystickController));
@@ -64,10 +64,6 @@ public class MainController {
         if (mFragmentReplacer != null) {
             mFragmentReplacer.replaceFragment(fragment);
         }
-    }
-
-    private boolean isCarCom(CarCom carCom) {
-        return carCom != null && carCom.isConnected();
     }
 
     public void setFragmentReplacer(IFragmentChanger fragmentReplacer) {

@@ -8,15 +8,14 @@ import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.TubeSpeedometer;
 import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
 
-import potential_couscous.couscousdrive.activities.MainActivity;
 import potential_couscous.couscousdrive.utils.CarCom;
 import potential_couscous.couscousdrive.utils.WirelessInoConveret;
 import potential_couscous.couscousdrive.view.IACC;
 
-//TODO Send data to server in all ButtonListeners()
+public class ACCController extends AbstractController implements IACC {
+    private TextView mSteer;
+    private TextView mDrive;
 
-public class ACCController implements IACC {
-    private TextView mTextView;
     private int mCurrentVelocity;
     private int mCurrentAngle;
 
@@ -29,8 +28,8 @@ public class ACCController implements IACC {
         String data = WirelessInoConveret.convertData(calcSteerValue(),
                 calcDriveValue());
 
-        CarCom carCom = MainActivity.getCarCom();
-        if (carCom != null && carCom.isConnected()) {
+        CarCom carCom = CarCom.getCarCom();
+        if (isCarCom(carCom)) {
             carCom.sendData(carCom.ACC_KEY, data);
         }
     }
@@ -43,35 +42,31 @@ public class ACCController implements IACC {
         return mCurrentVelocity;
     }
 
-    private void setText(String string) {
-        if (mTextView != null) {
-            mTextView.setText(string);
-        }
-    } //Currently not used...
-
     /**
      * Arrow button listeners, updating values for TubeSpeedometer values at the moment.
      *
      * @param leftButton
      */
-    private void setLeftButtonListener(ImageButton leftButton) {
+    private void setRightButtonListener(ImageButton leftButton) {
         leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mCurrentAngle > 0) {
-                    mCurrentAngle -= 10;
+                    mCurrentAngle -= 5;
+                    updateSteerValue();
                     sendData();
                 }
             }
         });
     }
 
-    private void setRightButtonListener(ImageButton rightButton) {
+    private void setLeftButtonListener(ImageButton rightButton) {
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mCurrentAngle < 200) {
-                    mCurrentAngle += 10;
+                    mCurrentAngle += 5;
+                    updateSteerValue();
                     sendData();
                 }
             }
@@ -84,6 +79,7 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentVelocity < 100) {
                     mCurrentVelocity += 5;
+                    updateDriveValue();
                     sendData();
                 }
             }
@@ -96,12 +92,24 @@ public class ACCController implements IACC {
             public void onClick(View v) {
                 if (mCurrentVelocity > 0) {
                     mCurrentVelocity -= 5;
+                    updateDriveValue();
                     sendData();
                 }
             }
         });
     }
 
+    private void updateSteerValue() {
+        if (mSteer != null) {
+            mSteer.setText(String.valueOf(100 - mCurrentAngle));
+        }
+    }
+
+    private void updateDriveValue() {
+        if (mDrive != null) {
+            mDrive.setText(String.valueOf(mCurrentVelocity));
+        }
+    }
 
     /**
      * Right anglemeter, set on default 100 representing steering 0.
@@ -158,18 +166,12 @@ public class ACCController implements IACC {
     }
 
     @Override
-    public void setACCTextView(TextView textView) {
-        mTextView = textView;
-    } //Currently not used...
+    public void setSteerTextView(TextView textView) {
+        mSteer = textView;
+    }
 
     @Override
-    public void setACCTextViewListener() {
-        if (mTextView != null) {
-            mTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });
-        }
-    } //Currently not used...
+    public void setDriveTextView(TextView textView) {
+        mDrive = textView;
+    }
 }

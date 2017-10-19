@@ -5,8 +5,8 @@
 package potential_couscous.couscousdrive.utils;
 
 public class JoystickCalculator {
-    public static int MAX_VALUE = 100;
-    public static int MIN_VALUE = -100;
+    public static final int MAX_VALUE = 100;
+    public static final int MIN_VALUE = -100;
 
     private JoystickCalculator() {
     }
