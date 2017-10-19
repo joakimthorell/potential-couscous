@@ -10,7 +10,7 @@ This is a repository for a software engineering project at Chalmers University o
 
 
 ### Documents
-* Deliverbles
+* Deliverables
     * [D1. Strategies for SCRUM](/Documents/Deliverables/D1_Stratergies_for_scrum.pdf)
     * [D2. Backlog](https://trello.com/b/gsIRwmhq/potential-couscous)
     * [D3. Half-time evaluation](/Documents/Deliverables/D3_HalfTime_Evaluation.pdf)
@@ -42,7 +42,7 @@ All data between devices is sent through local network.
 2. In order to run the [Main.py](/scripts/main/Main.py) file you need to connect to the MOPED using ssh command from your computer. 
 See the [How-To](/Documents/howTo.md). 
 
-3. You can connect your phone to the MOPED when Main.py is running by using the CousCousDrive application[LÄNKAR TILL BILDER PÅ APP].
+3. You can connect your phone to the MOPED when Main.py is running by using the CousCousDrive application([images](/Documents/appImages.md)).
 The app sends data to CousCous Server, telling Main.py to run different scripts depending on mode. App will change UI depending on mode.
 Enter MOPED's ip-address (`port 8888` needs to be open) and make sure you are connected to the same network.
 
@@ -62,7 +62,7 @@ The rest of the libraries are used in the app, these are:
 - [RippleBackground](https://github.com/skyfishjy/android-ripple-background) - Creates the rippled background when pressing Play in platoon mode.
 
 ### Gitinspector
-To evaluate how much code people have pushed to the repository we used [gitinspector](https://github.com/ejwa/gitinspector).
+To evaluate team effort we used the tool [Gitinspector](https://github.com/ejwa/gitinspector).
 
 See [result](/Documents/gitinspector.md)
 
