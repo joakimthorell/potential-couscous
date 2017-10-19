@@ -52,7 +52,7 @@ System changes between 3 diffrent states: Manual, ACC and Platooning.
 5. The [`/scripts/main`](/scripts/main/) system collects data from the CAN-Bus. Data from the Ultra Sonic Sensor is used to execute Platooning and ACC mode.
 
 ### External libraries
-In our project we only used a handfull of external libraries. Most of them are just graphical libraries to help the app look better but there is one more important one, [OpenCV](https://opencv.org). This library is used when platooning is activated to help us find an object to follow. 
+The external libraries that were used were mostly graphical in order to make the app more user friendly. The most important one [OpenCV](https://opencv.org) was used in order to execute platooning by helping the MOPED find an object to follow. 
 
 
 The rest of the libraries are used in the app, these are:
