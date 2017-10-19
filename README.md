@@ -64,9 +64,9 @@ The rest of the libraries are used in the app, these are:
 
 
 ### Gitinspector
-To evaluate how much code people have pushed to the repository we used [gitinspector](www.google.com).
+To evaluate how much code people have pushed to the repository we used [gitinspector](https://github.com/ejwa/gitinspector).
 
-See [result](/Documents/gitinspector.md) TODO
+See [result](/Documents/gitinspector.md)
 
 
 ### Contributors
