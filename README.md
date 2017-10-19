@@ -25,7 +25,8 @@ This is a repository for a software engineering project at Chalmers University o
 
 
 ### Code
-   * [`/scripts`](/scripts/) - All code we developed to make the MOPED work as intended. 
+   * [`/main`](/main/) - Contains the main program developed to make the MOPED work as intended. 
+   * [`/tests`](/tests/) - Contains different test scripts used to test both hardware and software.
    * [`/app`](/app/) - Android application source code. For complete app download APK [here](www.google.com). Make sure your device can run API 25 or higher.
 
 
