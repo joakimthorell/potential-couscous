@@ -39,18 +39,17 @@ Follow instructions: [instructions](/Documents/howTo.md).
 1. A Computer, the MOPED and a mobile device need to be connected to the same hotspot.
 All data between devices is sent through local network. 
 
-2. In order to run the Main.py file you need to connect to the MOPED using ssh command from your computer. 
+2. In order to run the [Main.py](/scripts/main/Main.py) file you need to connect to the MOPED using ssh command from your computer. 
 See the [How-To](/Documents/howTo.md). 
 
 3. You can connect your phone to the MOPED when Main.py is running by using the CousCousDrive application[LÄNKAR TILL BILDER PÅ APP].
 The app sends data to CousCous Server, telling Main.py to run different scripts depending on mode. App will change UI depending on mode.
-Enter MOPED's ip-address (`port 8888`needs to be open) and make sure you are connected to the same network.
+Enter MOPED's ip-address (`port 8888` needs to be open) and make sure you are connected to the same network.
 
-4. The Main.py system is developed with Python 2.7. It runs the car by sending data to [ecm socket](https://github.com/sics-sse/moped/tree/master/ecm-core/src/main/java) at `localhost port 9000`.
+4. The [Main.py](/scripts/main/Main.py) system is developed with Python 2.7. It runs the car by sending data to [ecm socket](https://github.com/sics-sse/moped/tree/master/ecm-core/src/main/java) at `localhost port 9000`.
 System changes between 3 diffrent states: Manual, ACC and Platooning.
 
-5. The Main system collects data from the CAN-Bus. Data from the Ultra Sonic Sensor is used to execute Platooning and ACC mode.
-
+5. The [`/scripts/main`](/scripts/main/) system collects data from the CAN-Bus. Data from the Ultra Sonic Sensor is used to execute Platooning and ACC mode.
 
 ### External libraries
 In our project we only used a handfull of external libraries. Most of them are just graphical libraries to help the app look better but there is one more important one, [OpenCV](https://opencv.org). This library is used when platooning is activated to help us find an object to follow. 
@@ -61,7 +60,6 @@ The rest of the libraries are used in the app, these are:
 - [ToggleButtons](https://github.com/rcketscientist/ToggleButtons) - Creates the 3 buttons in the bottom.
 - [SpeedView](https://github.com/anastr/SpeedView) - Creates the speedometer around the Joystick.
 - [RippleBackground](https://github.com/skyfishjy/android-ripple-background) - Creates the rippled background when pressing Play in platoon mode.
-
 
 ### Gitinspector
 To evaluate how much code people have pushed to the repository we used [gitinspector](https://github.com/ejwa/gitinspector).
