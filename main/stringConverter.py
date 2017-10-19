@@ -2,7 +2,7 @@
 #test this sript by running the stringConverterTest script
 
 def stringToVInt(vcuString):
-  return int(vcuString[2:5])
+  return int(vcuString[1:5])
 
 def stringToHInt(vcuString):
   return int(vcuString[6:])
@@ -12,6 +12,7 @@ def stringToHInt(vcuString):
 #where X is the number from 000 to 100
 def intToVString(vInt):
   string = ""
+  vInt = int(round(vInt, 0))
   if vInt < 0:
     if vInt > -10:
       string = "V-00" + str(vInt)[1:]
@@ -33,7 +34,9 @@ def intToVString(vInt):
 #where A is 0 for posetive and - for negative
 #where X is the number from 000 to 100
 def intToHString(hInt):
+  
   string = ""
+  hInt = int(round(hInt, 0))
   if hInt < 0:
     if hInt > -10:
       string = "H-00" + str(hInt)[1:]

@@ -1,11 +1,16 @@
 import socket
+#import threading
 import re
+import time
+import sys
 
 class SensorDataCollector:
 
     def __init__(self):
         self.canSocket = initializeCAN("can0")
         self.sensorData = 0.0
+        #threading.Thread(target=self.run, args=()).start()
+
         self.run()
 
     def run(self):
@@ -27,11 +32,15 @@ class SensorDataCollector:
                         m = re.search("([0-9]+) ([0-9]+)", part2s2)
                         if m:
                             self.sensorData = (int(part2s2.split()[1]) / 100)
+                            print(self.sensorData)
+                            sys.stdout.flush()
                         part2 = b""
                 part2 += data[9:]
 
+
     def get(self):
         return self.sensorData
+
 
 def initializeCAN(network):
     """
@@ -41,3 +50,5 @@ def initializeCAN(network):
     s = socket.socket(socket.AF_CAN, socket.SOCK_RAW, socket.CAN_RAW)
     s.bind((network,))
     return s
+
+SensorDataCollector()

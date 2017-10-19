@@ -7,11 +7,12 @@ class SensorHandler:
     method, then retrieve the filtered data using "get()". Recommended frequency of data input is 10hz.
     """
 
-    def __init__(self, maxValue, maxAccepted):
+    def __init__(self, maxValue, maxAccepted, highValuesToIgnore):
         self.numberOfHighValues = 0
         self.value = maxValue
         self.maxValue = maxValue
         self.maxAccepted = maxAccepted
+        self.highValuesToIgnore = highValuesToIgnore
 
     def put(self, value):
         if value < self.maxAccepted:
@@ -19,7 +20,7 @@ class SensorHandler:
             self.value = value
         else:
             self.numberOfHighValues += 1
-            if self.numberOfHighValues >= 10:  #Arbitrary number. Sending input at a high frequency will break this.
+            if self.numberOfHighValues >= self.highValuesToIgnore:  #Arbitrary number. Sending input at a high frequency will break this.
                 self.value = self.maxValue
 
     def get(self):

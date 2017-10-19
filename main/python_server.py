@@ -3,7 +3,7 @@
 '''
 
 import socket
-from _thread import *
+import threading
 
 HOST = '' #this will be device ip
 PORT = 8888
@@ -35,7 +35,7 @@ def listen_for_connections(socket, listener):
         print(('Connected with ' + addr[0] + ':' + str(addr[1])))
 
         # start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the fun
-        start_new_thread(clientthread, (conn, listener))
+        threading.Thread(target=clientthread, args=(conn, listener)).start()
 
 
 def start_server(listener):
@@ -51,4 +51,4 @@ def start_server(listener):
     # Start listening on socket
     s.listen(10)  # the number specifies nums of allowed failed connections before termination
     print('Socket now listening')
-    start_new_thread(listen_for_connections, (s, listener))
+    threading.Thread(target=listen_for_connections, args=(s, listener)).start()

@@ -1,6 +1,7 @@
 from stringConverter import *
 
 # test for the stringConVerter class, run this script and the last line should say "all success = True"
+# testing to see if the stringConverter converts strings and ints the way we intend for it to do
 
 print("0 should be V0000")
 print("intToVString(0) = " + intToVString(0))
@@ -81,9 +82,9 @@ test13 = "H-100" == intToHString(-100)
 print("Success = " + str(test13))
 print("------------------------")
 
+test14 = intToTotalString(94.909, 51.60012412423) == "V0095H0052"
 
-
-print("all success = " + str(test0 & test1 & test2 & test3 & test4 & test5 & test6 & test7 & test8 & test9 & test10 & test11 & test12 & test13))
+print("all success = " + str(test0 and test1 and test2 and test3 and test4 and test5 and test6 and test7 and test8 and test9 and test10 and test11 and test12 and test13 and test14))
 
 # print(test0)
 # print(test1)
@@ -99,3 +100,4 @@ print("all success = " + str(test0 & test1 & test2 & test3 & test4 & test5 & tes
 # print(test11)
 # print(test12)
 # print(test13)
+
