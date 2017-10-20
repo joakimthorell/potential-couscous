@@ -28,7 +28,7 @@ Make sure both MOPED and phone is connected to same network and port 8888 is ope
 
 Start the car. SSH into TCU and run following commands
 ```sh
-$ python main/Main.py
+$ python main/main.py
 ```
 
 Text should now appear in terminal. It's now time to connect the App to the Car.
