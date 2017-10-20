@@ -27,7 +27,7 @@ This is a repository for a software engineering project at Chalmers University o
 ### Code
    * [`/main`](/main/) - Contains the main program developed to make the MOPED work as intended. 
    * [`/tests`](/tests/) - Contains different test scripts used to test both hardware and software.
-   * [`/app`](/app/) - Android application source code. For complete app download APK [here](www.google.com). Make sure your device can run API 25 or higher.
+   * [`/app`](/app/) - Android application source code. For complete app download APK [here](https://github.com/mattssonj/potential-couscous/blob/master/app/apk/CousCousDrive3.5.apk?raw=true). Make sure your device can run API 25 or higher.
 
 
 ### How to run the system
