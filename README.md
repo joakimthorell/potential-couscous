@@ -25,8 +25,9 @@ This is a repository for a software engineering project at Chalmers University o
 
 
 ### Code
-   * [`/scripts`](/scripts/) - All code we developed to make the MOPED work as intended. 
-   * [`/app`](/app/) - Android application source code. For complete app download APK [here](www.google.com). Make sure your device can run API 25 or higher.
+   * [`/main`](/main/) - Contains the main program developed to make the MOPED work as intended. 
+   * [`/tests`](/tests/) - Contains different test scripts used to test both hardware and software.
+   * [`/app`](/app/) - Android application source code. For complete app download APK [here](https://github.com/mattssonj/potential-couscous/blob/master/app/apk/CousCousDrive3.5.apk?raw=true). Make sure your device can run API 25 or higher.
 
 
 ### How to run the system
@@ -39,17 +40,17 @@ Follow instructions: [instructions](/Documents/howTo.md).
 1. A Computer, the MOPED and a mobile device need to be connected to the same hotspot.
 All data between devices is sent through local network. 
 
-2. In order to run the [Main.py](/scripts/main/Main.py) file you need to connect to the MOPED using ssh command from your computer. 
+2. In order to run the [main.py](/main/main.py) file you need to connect to the MOPED using ssh command from your computer. 
 See the [How-To](/Documents/howTo.md). 
 
-3. You can connect your phone to the MOPED when Main.py is running by using the CousCousDrive application([images](/Documents/appImages.md)).
-The app sends data to CousCous Server, telling Main.py to run different scripts depending on mode. App will change UI depending on mode.
+3. You can connect your phone to the MOPED when main.py is running by using the CousCousDrive application([images](/Documents/appImages.md)).
+The app sends data to CousCous Server, telling main.py to run different scripts depending on mode. App will change UI depending on mode.
 Enter MOPED's ip-address (`port 8888` needs to be open) and make sure you are connected to the same network.
 
-4. The [Main.py](/scripts/main/Main.py) system is developed with Python 2.7. It runs the car by sending data to [ecm socket](https://github.com/sics-sse/moped/tree/master/ecm-core/src/main/java) at `localhost port 9000`.
+4. The [main.py](/main/main.py) system is developed with Python 2.7. It runs the car by sending data to [ecm socket](https://github.com/sics-sse/moped/tree/master/ecm-core/src/main/java) at `localhost port 9000`.
 System changes between 3 diffrent states: Manual, ACC and Platooning.
 
-5. The [`/scripts/main`](/scripts/main/) system collects data from the CAN-Bus. Data from the Ultra Sonic Sensor is used to execute Platooning and ACC mode.
+5. The [`/main`](/main/) system collects data from the CAN-Bus. Data from the Ultra Sonic Sensor is used to execute Platooning and ACC mode.
 
 ### External libraries
 The external libraries that were used were mostly graphical in order to make the app more user friendly. The most important one [OpenCV](https://opencv.org) was used in order to execute platooning by helping the MOPED find an object to follow. 

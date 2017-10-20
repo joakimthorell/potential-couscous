@@ -20,15 +20,15 @@ Clone this repo to MOPED home directory.
 ```sh
 $ cd
 $ git clone https://github.com/mattssonj/potential-couscous.git
-$ cp -a potential-couscous/scripts/main .
+$ cp -a potential-couscous/main .
 ```
 
-Install the mobile app to Android 7.0 device. Use [apk](www.google.com)
+Install the mobile app to Android 7.0 device. Use [apk](https://github.com/mattssonj/potential-couscous/blob/master/app/apk/CousCousDrive3.5.apk?raw=true)
 Make sure both MOPED and phone is connected to same network and port 8888 is open in firewall.
 
 Start the car. SSH into TCU and run following commands
 ```sh
-$ python main/Main.py
+$ python main/main.py
 ```
 
 Text should now appear in terminal. It's now time to connect the App to the Car.
