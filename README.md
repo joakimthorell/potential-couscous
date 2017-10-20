@@ -62,6 +62,9 @@ The rest of the libraries are used in the app, these are:
 - [SpeedView](https://github.com/anastr/SpeedView) - Creates the speedometer around the Joystick.
 - [RippleBackground](https://github.com/skyfishjy/android-ripple-background) - Creates the rippled background when pressing Play in platoon mode.
 
+### Code tests and quality insurance 
+During the development in this project we created a couple of tests for some of our code. We also performed some given tests eg. [FindBugs](http://findbugs.sourceforge.net) on our java files(Android app) and was presented to perform [PyLint](https://www.pylint.org) on our Python Code. Our written tests are placed in the [`/tests/`](/tests/) directory, more information can be found [here](/tests/Allmänna%20tester%20(Read%20this).pdf). Our FindBugs results can be seen [here](/Documents/codeTests.md) but to summarize there was one issue that we did not care about, read the result for more info. Regarding PyLint we choose not to perform these tests since it didnt feel necessary, exactly why can you read [here](/Documents/codeTests.md).
+
 ### Gitinspector
 To evaluate team effort we used the tool [Gitinspector](https://github.com/ejwa/gitinspector).
 
