@@ -1,8 +1,8 @@
 ### How to run the system
 
-Create a fresh SD-card with TCU kernel. To do this, follow instructions [here](https://moped.sics.se/wordpress/?page_id=328).
+Generate a SD-card with TCU kernel. Follow instructions [here](https://moped.sics.se/wordpress/?page_id=328).
 
-SSH into car to start start edit.
+Use SSH command to establish connection with the MOPED in order to start start editing.
 ```sh
 $ ssh pi@yourIP
 insert password > 'pi'
@@ -10,27 +10,27 @@ insert password > 'pi'
 
 Install OpenCV on MOPED TCU. Follow instructions [here](https://github.com/felixnorden/moppepojkar/issues/38).
 
-It is also neccecary to delete the optipos files.
+It's neccecary to delete the optipos files.
 ```sh
 $ cd
 $ sudo rm -rf ../../etc/init.d/.
 ```
 
-Clone this repo to MOPED home directory.
+Clone this repo to the MOPED home directory.
 ```sh
 $ cd
 $ git clone https://github.com/mattssonj/potential-couscous.git
 $ cp -a potential-couscous/main .
 ```
 
-Install the mobile app to Android 7.0 device. Use [apk](https://github.com/mattssonj/potential-couscous/blob/master/app/apk/CousCousDrive3.5.apk?raw=true)
-Make sure both MOPED and phone is connected to same network and port 8888 is open in firewall.
+Install the mobile app on an Android 7.0 device. Use [APK](https://github.com/mattssonj/potential-couscous/blob/master/app/apk/CousCousDrive3.5.apk?raw=true).
+Make sure MOPED and phone are connected to same network and port 8888 is open.
 
-Start the car. SSH into TCU and run following commands
+Start the MOPED. Use SSH command to connect with the TCU and run following commands:
 ```sh
 $ python main/main.py
 ```
 
-Text should now appear in terminal. It's now time to connect the App to the Car.
+Text should now appear in terminal. It's now time to connect the App to the MOPED.
 Press the bluetooth logo in upper right corner and fill in MOPEDs IP-address. 
-Press Connect and choose mode.
+Press "Connect" and select mode.
