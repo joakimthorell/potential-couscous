@@ -1,5 +1,4 @@
-## Information from GitInspector
+## GitInspector statistics
 
-This is our groups Gitinspector.
 
 ![Image](/Documents/Images/Gitinspector.jpg)
