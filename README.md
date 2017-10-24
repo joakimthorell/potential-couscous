@@ -43,7 +43,7 @@ All data between devices is sent through local network.
 2. In order to run the [main.py](/main/main.py) file you need to connect to the MOPED using ssh command from your computer. 
 See the [How-To](/Documents/howTo.md). 
 
-3. You can connect your phone to the MOPED when main.py is running by using the ([CousCousDrive](/Documents/appImages.md)) application.
+3. You can connect your phone to the MOPED when main.py is running by using the [CousCousDrive](/Documents/appImages.md) application.
 The app sends data to CousCous Server, telling main.py to run different scripts depending on mode. App will change UI depending on mode.
 Enter MOPED's ip-address (`port 8888` needs to be open) and make sure you are connected to the same network.
 
