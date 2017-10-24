@@ -25,16 +25,16 @@ This is a repository for a software engineering project at Chalmers University o
 
 
 ### Code
-   * [`/main`](/main/) - Contains the main program developed to make the MOPED work as intended. 
+   * [`/main`](/main/) - Contains the main program developed in order to make the MOPED work as intended. 
    * [`/tests`](/tests/) - Contains different test scripts used to test both hardware and software.
    * [`/app`](/app/) - Android application source code. For complete app download APK [here](https://github.com/mattssonj/potential-couscous/blob/master/app/apk/CousCousDrive3.5.apk?raw=true). Make sure your device can run API 25 or higher.
 
 
 ### How to run the system
-Follow instructions: [instructions](/Documents/howTo.md).
+Follow instructions [here](/Documents/howTo.md).
 
 
-### Development
+### Overview
 <p align="center"><img src="/Documents/Images/MOPED.jpg"></p>
 
 1. A Computer, the MOPED and a mobile device need to be connected to the same hotspot.
@@ -43,7 +43,7 @@ All data between devices is sent through local network.
 2. In order to run the [main.py](/main/main.py) file you need to connect to the MOPED using ssh command from your computer. 
 See the [How-To](/Documents/howTo.md). 
 
-3. You can connect your phone to the MOPED when main.py is running by using the CousCousDrive application([images](/Documents/appImages.md)).
+3. You can connect your phone to the MOPED when main.py is running by using the ([CousCousDrive](/Documents/appImages.md)) application.
 The app sends data to CousCous Server, telling main.py to run different scripts depending on mode. App will change UI depending on mode.
 Enter MOPED's ip-address (`port 8888` needs to be open) and make sure you are connected to the same network.
 
@@ -52,23 +52,23 @@ System changes between 3 diffrent states: Manual, ACC and Platooning.
 
 5. The [`/main`](/main/) system collects data from the CAN-Bus. Data from the Ultra Sonic Sensor is used to execute Platooning and ACC mode.
 
+
 ### External libraries
-The external libraries that were used were mostly graphical in order to make the app more user friendly. The most important one [OpenCV](https://opencv.org) was used in order to execute platooning by helping the MOPED find an object to follow. 
+[OpenCV](https://opencv.org) was used in order to execute platooning by helping the MOPED find an object to follow. Other external libraries that were used were mostly graphical in order to make the app more user friendly.
 
-
-The rest of the libraries are used in the app, these are:
+Android libraries:
 - [VirtualJoystick](https://github.com/controlwear/virtual-joystick-android) - Used to create the Joystick.
-- [ToggleButtons](https://github.com/rcketscientist/ToggleButtons) - Creates the 3 buttons in the bottom.
-- [SpeedView](https://github.com/anastr/SpeedView) - Creates the speedometer around the Joystick.
+- [ToggleButtons](https://github.com/rcketscientist/ToggleButtons) - Generates 3 buttons for different modes at the bottom view.
+- [SpeedView](https://github.com/anastr/SpeedView) - Builds speedometers found in manual and ACC mode.
 - [RippleBackground](https://github.com/skyfishjy/android-ripple-background) - Creates the rippled background when pressing Play in platoon mode.
 
+
 ### Code tests and quality insurance 
-During the development in this project we created a couple of tests for some of our code. We also performed some given tests eg. [FindBugs](http://findbugs.sourceforge.net) on our java files(Android app) and was presented to perform [PyLint](https://www.pylint.org) on our Python Code. Our written tests are placed in the [`/tests/`](/tests/) directory, more information can be found [here](/tests/Allmänna%20tester%20(Read%20this).pdf). Our FindBugs results can be seen [here](/Documents/codeTests.md) but to summarize there was one issue that we did not care about, read the result for more info. Regarding PyLint we choose not to perform these tests since it didnt feel necessary, exactly why can you read [here](/Documents/codeTests.md).
+During the development we created [`/tests/`](/tests/) for some of our code. Additional info can be found [here](/tests/Allmänna%20tester%20(Read%20this).pdf). We also performed some given tests eg. [FindBugs](http://findbugs.sourceforge.net) on our java files(Android application) and were presented to perform [PyLint](https://www.pylint.org) on our Python Code. The FindBugs results can be seen [here](/Documents/codeTests.md). In summary there was one inisignificant issue (read the results for more info). Regarding PyLint, we choose not to perform these tests since it wasn't a necessity (read [here](/Documents/codeTests.md) for further explanation).
+
 
 ### Gitinspector
-To evaluate team effort we used the tool [Gitinspector](https://github.com/ejwa/gitinspector).
-
-See [result](/Documents/gitinspector.md)
+[Gitinspector](https://github.com/ejwa/gitinspector) was used to measure the amount of code written by each team member. Bare in mind that most code was written pairwise, therefore these statistics are misleading. See [result](/Documents/gitinspector.md)
 
 
 ### Contributors
