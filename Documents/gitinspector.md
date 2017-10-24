@@ -1,4 +1,4 @@
 ## GitInspector statistics
 
 
-![Image](/Documents/Images/Gitinspector.jpg)
+![Image](/Documents/Images/gitinspector-update.jpg)
