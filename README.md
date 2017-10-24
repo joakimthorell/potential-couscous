@@ -75,7 +75,7 @@ During the development we created [`/tests/`](/tests/) for some of our code. Add
 | Name | CID | GitHub |
 |------|-----|--------|
 |Alexandra Garrido Jaque|jaque|AlexAndraGarrido|
-|Anne Keller|annkel|kelleranne|
+|Anne Keller|annekel|kelleranne|
 |Anton Hägermalm|anthage|antonhager|
 |Fredrik Viberg|vibergf|vibergf|
 |Jakob Erlandsson|erjakob|JakobErlandsson|
