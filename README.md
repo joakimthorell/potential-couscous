@@ -30,10 +30,6 @@ This is a repository for a software engineering project at Chalmers University o
    * [`/app`](/app/) - Android application source code. For complete app download APK [here](https://github.com/mattssonj/potential-couscous/blob/master/app/apk/CousCousDrive3.5.apk?raw=true). Make sure your device can run API 25 or higher.
 
 
-### How to run the system
-Follow instructions [here](/Documents/howTo.md).
-
-
 ### Overview
 <p align="center"><img src="/Documents/Images/MOPED.jpg"></p>
 
@@ -41,16 +37,20 @@ Follow instructions [here](/Documents/howTo.md).
 All data between devices is sent through local network. 
 
 2. In order to run the [main.py](/main/main.py) file you need to connect to the MOPED using ssh command from your computer. 
-See the [How-To](/Documents/howTo.md). 
+See the [How-To](/Documents/howTo.md).
 
 3. You can connect your phone to the MOPED when main.py is running by using the [CousCousDrive](/Documents/appImages.md) application.
-The app sends data to CousCous Server, telling main.py to run different scripts depending on mode. App will change UI depending on mode.
-Enter MOPED's ip-address (`port 8888` needs to be open) and make sure you are connected to the same network.
+The app sends data to CousCous [server](/main/python_server.py), telling main.py to execute different scripts and functions and generate desired output depending on mode. App will change UI depending on mode.
+Mobile device connects to MOPED by entering MOPED's ip-address (`port 8888` needs to be open).
 
 4. The [main.py](/main/main.py) system is developed with Python 2.7. It runs the car by sending data to [ecm socket](https://github.com/sics-sse/moped/tree/master/ecm-core/src/main/java) at `localhost port 9000`.
 System changes between 3 diffrent states: Manual, ACC and Platooning.
 
 5. The [`/main`](/main/) system collects data from the CAN-Bus. Data from the Ultra Sonic Sensor is used to execute Platooning and ACC mode.
+
+
+### How to run the system
+Follow instructions [here](/Documents/howTo.md).
 
 
 ### External libraries
