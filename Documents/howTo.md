@@ -1,6 +1,6 @@
 ### How to run the system
 
-Generate a SD-card with TCU kernel. Follow instructions [here](https://moped.sics.se/wordpress/?page_id=328).
+Generate a SD-card with TCU kernel by following instructions [here](https://moped.sics.se/wordpress/?page_id=328) and configuring TCU for a new hotspot. Follow instructions [here](https://moped.sics.se/?page_id=127).
 
 Use SSH command to establish connection with the MOPED in order to start start editing.
 ```sh
@@ -26,7 +26,7 @@ $ cp -a potential-couscous/main .
 Install the mobile app on an Android 7.0 device. Use [APK](https://github.com/mattssonj/potential-couscous/blob/master/app/apk/CousCousDrive3.5.apk?raw=true).
 Make sure MOPED and phone are connected to same network and port 8888 is open.
 
-Start the MOPED. Use SSH command to connect with the TCU and run following commands:
+Run following commands while connected to MOPED with SSH command:
 ```sh
 $ python main/main.py
 ```
