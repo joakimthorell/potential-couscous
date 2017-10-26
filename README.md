@@ -15,7 +15,7 @@ This is a repository for a software engineering project at Chalmers University o
     * [D2. Backlog](https://trello.com/b/gsIRwmhq/potential-couscous)
     * [D3. Half-time evaluation](/Documents/Deliverables/D3_HalfTime_Evaluation.pdf)
     * D4. Presentation at Lindholmen
-    * D5. --- Coming Soon ---
+    * [D.5 Report](/Documents/Deliverables/D5_Reflection_Report.pdf)
     * Extras
       * [Vision](/Documents/Deliverables/Our_vision_statement.pdf) - Our vision
       * [Contract](/Documents/GroupContract.pdf) - Group Contract
